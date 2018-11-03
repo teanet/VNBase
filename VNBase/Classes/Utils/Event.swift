@@ -1,0 +1,160 @@
+fileprivate struct LockWrapper {
+	fileprivate static let lockQueue = DispatchQueue(label: "com.grymmobile.vncommon.event.lockqueue")
+}
+
+internal final class EventHandler<TArgs>: Hashable {
+
+	internal weak var target: AnyObject?
+	internal var actions: [Event<TArgs>.Action]
+
+	private let uuid = UUID()
+
+	internal required init(target: AnyObject, action: @escaping Event<TArgs>.Action) {
+		self.actions = [action]
+		self.target = target
+	}
+
+	internal convenience init(tuple: Event<TArgs>.Element) {
+		self.init(target: tuple.target, action: tuple.action)
+	}
+
+	internal func add(action: @escaping Event<TArgs>.Action) {
+		self.actions.append(action)
+	}
+
+	internal var hashValue: Int {
+		return self.uuid.hashValue
+	}
+
+	internal static func ==(lhs: EventHandler, rhs: EventHandler) -> Bool {
+		return lhs.target === rhs.target
+	}
+
+}
+
+public class Event<TArgs> {
+
+	public typealias Action = (TArgs) -> Void
+	public typealias Element = (target: AnyObject, action: Action)
+
+	internal var handlers = Set<EventHandler<TArgs>>()
+
+	private let shouldReplayLast: Bool
+	private var lastValue: TArgs?
+
+	private var filter: ((TArgs) -> Bool)?
+
+	public init(shouldReplayLast: Bool = false) {
+		self.shouldReplayLast = shouldReplayLast
+	}
+
+	// MARK: - Public
+
+	public func add(_ target: AnyObject, action: @escaping Action) {
+		self.add(handler: (target: target, action: action))
+	}
+
+	public func filter(_ filter: @escaping ((TArgs) -> Bool)) -> Event<TArgs> {
+		self.filter = filter
+
+		return self
+	}
+
+	public func raise(_ args: TArgs) {
+		guard self.checkRaiseFilter(args: args) else { return }
+
+		if self.shouldReplayLast {
+			var prevLastValue: TArgs? = nil
+			LockWrapper.lockQueue.sync {
+				prevLastValue = self.lastValue
+				self.lastValue = args
+			}
+
+			// Отпустить старый объект можно только вне блокировки,
+			// в противном случае может быть потенциальный deadlock или crash
+			weak var _ = prevLastValue // чтобы избежать ворнинг `variable was written to but never read`
+			prevLastValue = nil
+		}
+
+		let handlers = LockWrapper.lockQueue.sync { return self.handlers }
+		for handler in handlers {
+			for action in handler.actions {
+				action(args)
+			}
+		}
+	}
+
+	public func add(handler: Element) {
+		LockWrapper.lockQueue.sync {
+			self.removeDeadHandlers()
+			var eventHandler = self.eventHandler(by: handler.target)
+			if eventHandler == nil {
+				eventHandler = EventHandler<TArgs>(tuple: handler)
+				self.handlers.insert(eventHandler!)
+			} else {
+				eventHandler?.add(action: handler.action)
+			}
+		}
+
+		if self.shouldReplayLast,
+			let lastValue = LockWrapper.lockQueue.sync(execute: { self.lastValue }) {
+			handler.action(lastValue)
+		}
+	}
+
+	public func remove(target: AnyObject) {
+		LockWrapper.lockQueue.sync {
+			let handlers = self.handlers
+			for handler in handlers {
+				if handler.target == nil || handler.target === target {
+					self.handlers.remove(handler)
+				}
+			}
+		}
+	}
+
+	// MARK: Operators
+
+	public static func +=(left: Event<TArgs>, right: Element) {
+		left.add(handler: right)
+	}
+
+	public static func -=(left: Event<TArgs>, right: AnyObject) {
+		left.remove(target: right)
+	}
+
+	// MARK: - Private
+
+	private func checkRaiseFilter(args: TArgs) -> Bool {
+		var result = false
+		if let filter = self.filter {
+			result = filter(args)
+		} else {
+			result = true
+		}
+
+		return result
+	}
+
+	private func removeDeadHandlers() {
+		let handlers = self.handlers
+		for handler in handlers {
+			if handler.target == nil {
+				self.handlers.remove(handler)
+			}
+		}
+	}
+
+	private func eventHandler(by target: AnyObject) -> EventHandler<TArgs>? {
+		var result: EventHandler<TArgs>?
+		let handlers = self.handlers
+		for handler in handlers {
+			if handler.target === target {
+				result = handler
+				break
+			}
+		}
+		return result
+	}
+
+}

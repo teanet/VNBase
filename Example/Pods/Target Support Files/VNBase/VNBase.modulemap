@@ -1,0 +1,6 @@
+framework module VNBase {
+  umbrella header "VNBase-umbrella.h"
+
+  export *
+  module * { export * }
+}

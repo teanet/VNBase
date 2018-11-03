@@ -1,0 +1,27 @@
+PODS:
+  - SnapKit (4.0.1)
+  - TLIndexPathTools (0.4.4)
+  - VNBase (0.1.0):
+    - SnapKit (~> 4.0.1)
+    - TLIndexPathTools (~> 0.4.4)
+
+DEPENDENCIES:
+  - VNBase (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+    - TLIndexPathTools
+
+EXTERNAL SOURCES:
+  VNBase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  TLIndexPathTools: 956bf0686bcd5e7dc8e2c408d28e7a312ec268a1
+  VNBase: 1ef9b3cf99bb8e61b4f566b2585423bf1bc29cf6
+
+PODFILE CHECKSUM: e3ae109b462140133931c3434d57f04a7cec2087
+
+COCOAPODS: 1.6.0.beta.1
