@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
 TODO: I should add some description later =)
                        DESC
 
-  s.homepage         = 'https://github.com/e.tyutyuev/VNBase'
+  s.homepage         = 'https://github.com/teanet/VNBase'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'e.tyutyuev' => 'e.tyutyuev@2gis.ru' }
+  s.author           = { 'teanet' => 'tea.net@me.com' }
   s.source           = { :git => 'https://github.com/teanet/VNBase.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/teanet'
 

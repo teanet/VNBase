@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  VNBase
-//
-//  Created by e.tyutyuev on 11/03/2018.
-//  Copyright (c) 2018 e.tyutyuev. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
