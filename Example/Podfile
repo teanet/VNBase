@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'VNBase_Example' do
+  pod 'VNBase', :path => '../'
+
+  target 'VNBase_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
