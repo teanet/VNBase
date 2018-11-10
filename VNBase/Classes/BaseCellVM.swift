@@ -30,7 +30,7 @@ open class BaseCellVM: BaseVM {
 	Связано с событием скрола ячейки в списке.
 	Может вызываться множество раз в течении жизненного цикла вьюмодели.
 	*/
-	internal func appear() {
+	open func appear() {
 		if !self.isAppearedFirstTime {
 			self.isAppearedFirstTime = true
 			self.appearFirstTime()
@@ -41,20 +41,20 @@ open class BaseCellVM: BaseVM {
 	Связано с событием скрола ячейки в списке.
 	Может вызываться множество раз в течении жизненного цикла вьюмодели.
 	*/
-	internal func disappear() {
+	open func disappear() {
 	}
 
 	/**
 	Связано с событием скрола ячейки в списке.
 	Вызывается только один раз, когда ячейка первый раз становится видима на экране.
 	*/
-	internal func appearFirstTime() {
+	open func appearFirstTime() {
 	}
 
-	internal func select() {
+	open func select() {
 	}
 
-	internal func commit(editingStyle: UITableViewCell.EditingStyle) {
+	open func commit(editingStyle: UITableViewCell.EditingStyle) {
 	}
 
 }

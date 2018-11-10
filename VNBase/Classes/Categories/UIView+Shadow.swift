@@ -1,31 +1,5 @@
 public extension UIView {
 
-	class var pixelSeparator: UIView {
-		let separator = UIView()
-		separator.backgroundColor = .separatorGray
-		separator.heightAnchor.constraint(equalToConstant: CGFloat.pixel).isActive = true
-
-		return separator
-	}
-
-	class var pointSeparator: UIView {
-		let separator = UIView()
-		separator.backgroundColor = .separatorGray
-		separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
-		return separator
-	}
-
-	class var blur: UIView {
-		let v = UIView()
-		if let filter = CIFilter(name:"CIGaussianBlur", parameters: [kCIInputRadiusKey: 7]) {
-			v.layer.backgroundColor = UIColor.promoBlue.cgColor
-			v.layer.opacity = 0.8
-			v.layer.backgroundFilters = [filter]
-		}
-		return v
-	}
-
 	public func addShadow(
 		color: UIColor? = nil,
 		offset: CGSize = CGSize(width: 0.0, height: -3.0),
@@ -56,16 +30,5 @@ public extension UIView {
         )
         layer.shadowPath = bezierPath.cgPath
     }
-
-//	public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-//		let maskPath = UIBezierPath(roundedRect: self.bounds,
-//									byRoundingCorners: corners,
-//									cornerRadii: CGSize(width: radius, height: radius))
-//		let maskLayer = CAShapeLayer()
-//		maskLayer.frame = self.bounds
-//		maskLayer.path = maskPath.cgPath
-//		self.layer.mask = maskLayer
-//		self.layer.masksToBounds = true
-//	}
 
 }

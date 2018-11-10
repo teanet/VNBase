@@ -1,6 +1,6 @@
-struct PushMessage {
+public struct PushMessage {
 
-	enum Action: String {
+	public enum Action: String {
 		case other
 		case requestPermission = "request_permission"
 	}
@@ -15,13 +15,13 @@ struct PushMessage {
 		static let itemId = "item_id"
 	}
 	private let data: [AnyHashable : Any]
-	let title: String?
-	let aps: [AnyHashable : Any]?
-	let message: String?
-	let action: Action
-	let itemId: Int?
+	public let title: String?
+	public let aps: [AnyHashable : Any]?
+	public let message: String?
+	public let action: Action
+	public let itemId: Int?
 
-	init(push: [AnyHashable : Any]) {
+	public init(push: [AnyHashable : Any]) {
 		self.data = push
 		self.aps = push[C.aps] as? [AnyHashable : Any]
 		if let alert = self.aps?[C.alert] as? String {

@@ -2,7 +2,7 @@ import Foundation
 
 open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChangedDelegate {
 
-	var viewModelObject: BaseVM? {
+	open var viewModelObject: BaseVM? {
 		didSet {
 			if oldValue?.didChangeDelegate === self {
 				oldValue?.didChangeDelegate = nil

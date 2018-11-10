@@ -11,7 +11,7 @@ open class BaseViewControllerVM: BaseVM {
 	Наследникам рекомендуется в этом методе реализовывать логику, которая должна быть выполнена один раз,
 	например, стартовать асинхронную загрузку данных.
 	*/
-	func load() {
+	open func load() {
 	}
 
 	/**
@@ -19,7 +19,7 @@ open class BaseViewControllerVM: BaseVM {
 	Наследникам рекомендуется в этом методе реализовывать логику, которая должна выполняться каждый раз при показе вьюконтроллера,
 	например, трекать аналитику показа экрана.
 	*/
-	func appear() {
+	open func appear() {
 	}
 
 	/**
@@ -27,27 +27,27 @@ open class BaseViewControllerVM: BaseVM {
 	Наследникам рекомендуется в этом методе реализовывать логику, которая должна выполняться после того, как вьюконтроллер
 	будет полностью показан.
 	*/
-	func didAppear() {
+	open func didAppear() {
 	}
 
 	/**
 	Связано с событием viewWillDisappear вьюконтроллера. Может вызываться множество раз в течении жизненного цикла вьюмодели.
 	*/
-	func disappear() {
+	open func disappear() {
 	}
 
 
 	/**
 	Вызывается, когда экран появляется в стеке навигации (то есть, его VC есть в UINavigationController.viewControllers).
 	*/
-	func appearInStack() {
+	open func appearInStack() {
 	}
 
 
 	/**
 	Вызывается, когда экран пропадает из стека навигации (то есть, в массиве UINavigationController.viewControllers нет его VC).
 	*/
-	func disappearInStack() {
+	open func disappearInStack() {
 	}
 
 
@@ -57,7 +57,7 @@ open class BaseViewControllerVM: BaseVM {
 	которое могло устареть, пока потоки приложения были приостановлены системой,
 	например, запросить новые сообщения с сервера, обновить счетчики, etc.
 	*/
-	func becomeActive() {
+	open func becomeActive() {
 	}
 
 
@@ -65,7 +65,7 @@ open class BaseViewControllerVM: BaseVM {
 	Связано с событием UIApplicationWillResignActive приложения. Может вызываться множество раз в течении жизненного цикла вьюмодели.
 	После вызова этого метода потоки приложения могут быть приостановлены системой.
 	*/
-	func resignActive() {
+	open func resignActive() {
 	}
 
 	@objc open func reload() {

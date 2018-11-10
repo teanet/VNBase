@@ -84,7 +84,7 @@ open class BaseTableViewVM: BaseVM {
 		})
 	}
 
-	internal var sectionsCount: Int {
+	public var sectionsCount: Int {
 		return self.dataModel.numberOfSections
 	}
 

@@ -61,7 +61,7 @@ public class BaseCollectionViewVM: BaseVM {
 		}
 	}
 
-	internal var sectionsCount: Int {
+	public var sectionsCount: Int {
 		return self.dataModel.numberOfSections
 	}
 

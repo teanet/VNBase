@@ -65,7 +65,7 @@ public extension UITableView {
 
 open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHaveHeight, IHaveViewModel, ViewModelChangedDelegate {
 
-	var viewModelObject: BaseVM? {
+	open var viewModelObject: BaseVM? {
 		didSet {
 			if oldValue?.didChangeDelegate === self {
 				oldValue?.didChangeDelegate = nil

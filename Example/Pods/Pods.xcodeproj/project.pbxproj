@@ -76,7 +76,6 @@
 		8F37EA5EF6FD558151C0915158AEC080 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095697D26063D87F0672FD9DF59330F6 /* QuartzCore.framework */; };
 		94F6A85B238EC604060A1AC8CFDD88EC /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECBEAA6D2EB912B1BEC40A8D1C88D /* ConstraintLayoutGuideDSL.swift */; };
 		953A8B3C02080B947780957EEF07E478 /* BaseCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA580BBEDD6EA6C0EF8BAABE71D9D16 /* BaseCellVM.swift */; };
-		95CB490321682DE63181974DEB4585F7 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122144F618AF8493B1AC7251685CBB02 /* UIColor+CustomColors.swift */; };
 		97CE188B96778A0F124663D4F08E3148 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690CD1FA2CA053AF2BAD1E289A9F1641 /* ConstraintView+Extensions.swift */; };
 		97CE5079730CE40D71DC1B4FA0A1FAB0 /* TLDynamicHeightLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C34EFE37DB65AB0F812E2DFB74A738 /* TLDynamicHeightLabelCell.m */; };
 		9BDF513B4FA0FABBAA188EBB665968EA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED42D8E2C5813F826D792FC66B5D10E /* Event.swift */; };
@@ -95,12 +94,10 @@
 		ABDA80D9ED7258A64359CED93A9B0CC2 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DAF5C156473B28B7FCE9CB832F6060 /* ConstraintConstantTarget.swift */; };
 		AC3400DE116645CBB51A207AD696873D /* Lazy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF4E02742D6CC4A0D4AA2D24F8547B /* Lazy.swift */; };
 		AC8DD241FE9D25A51134ABC9D682391C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E601AFB81C87AF9133BE98CEA5583CBD /* UIViewController.swift */; };
-		ACE5B9C28E1884686A620E0606D6C1C0 /* UIFont+CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A1A54543FE4FD9DF1DB7ACC90C649 /* UIFont+CustomFonts.swift */; };
 		B2F5D1C431B7F16FBA9EB4EE77EDF463 /* ScrollViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450579666DAB4CFFF9102678A5AB00D4 /* ScrollViewHelpers.swift */; };
 		B4D8840606CE461F2A0CFB95B902F261 /* TLIndexPathItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B29B581C233B81E00DA77A7C17A9BB /* TLIndexPathItem.m */; };
 		B8B462EDC9461C65587ED7B339C08C68 /* TLCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F04024FD3B8C1550EDAE357F31735D /* TLCollectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA183621AAB3A3CF2ABE11C2993A3B91 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A9ABB556D4839238672F94EAD73C6 /* ConstraintLayoutSupportDSL.swift */; };
-		BE732D08F3C589084CB49B0AAECB9C46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B2D6A467BE1C388F22EFDEB33754AE /* Constants.swift */; };
 		BFA0C9ED21A5D3B7381234F09D3F402F /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EBEF02021A2DD22A3B2B8547286BA /* ConstraintItem.swift */; };
 		BFF20C517A9876B13A4FE373C34E737D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA47B368C203366475DE493BD8353144 /* Foundation.framework */; };
 		C0308011140846E988C40A54E933F193 /* BaseTableViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E09FD9A50A6A94A8B4BB20A72126D23 /* BaseTableViewVM.swift */; };
@@ -120,7 +117,6 @@
 		D5FA57E7132F3E79615920D64D585108 /* UIDevice-Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD8AF00CE57A2AA2FCC06B029E69E5 /* UIDevice-Hardware.swift */; };
 		D6152B86CE1D81562F93473318ED2AAC /* MultilineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41539A21DFA74E1081304A2B47E0A9A /* MultilineLabel.swift */; };
 		D6429C0835792DB95A4D8DBB824248F0 /* TLNoResultsTableDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E762A58004C42DFF40B54BF47073D900 /* TLNoResultsTableDataModel.m */; };
-		D9968DF1E03B9CB826AA0EACDB304A9D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8846AABB4F72003354979ABAAAF49D5A /* UserDefaults.swift */; };
 		D9DE4C8295848888AEF9AD4679E9303F /* Pods-VNBase_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825A0A2C0B818A6648E94E595C6D663 /* Pods-VNBase_Tests-dummy.m */; };
 		DE0962FBDD8D3D743FD9BFAAA26D691A /* TLTreeTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EAAF946928F39D9BEF52D209F5ED24 /* TLTreeTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DFBED539B9DABFD9FC34701DEF05A0D6 /* TLCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF78CD98D63EA0FCBCB46AFB405944 /* TLCollectionViewController.m */; };
@@ -211,7 +207,6 @@
 		0F8D4D6BC02ADD124F5EB0E9EA19B683 /* VNBase-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VNBase-dummy.m"; sourceTree = "<group>"; };
 		0FEF496B3D20AE850456E9D56CD49A7D /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		12164C482B06BD3FBCEC3FC51975E2EC /* VNBase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VNBase-prefix.pch"; sourceTree = "<group>"; };
-		122144F618AF8493B1AC7251685CBB02 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		1623E9250135D2C2868E40BDAFFC1A79 /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
 		16831043CBC81827766ADC9D7CB8783F /* BaseTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseTableView.swift; path = VNBase/Classes/BaseTableView.swift; sourceTree = "<group>"; };
 		1825A0A2C0B818A6648E94E595C6D663 /* Pods-VNBase_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VNBase_Tests-dummy.m"; sourceTree = "<group>"; };
@@ -282,7 +277,6 @@
 		6D7802F25D31717589C699AF00DF5E23 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		6F5A916306E3D2E98E9C61195CD8F41C /* TLIndexPathTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TLIndexPathTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FECBEAA6D2EB912B1BEC40A8D1C88D /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
-		71B2D6A467BE1C388F22EFDEB33754AE /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = VNBase/Classes/Constants.swift; sourceTree = "<group>"; };
 		72423BEB0C7E61FBDA2610D8AED9FCB6 /* ViewModelChangedDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewModelChangedDelegate.swift; path = VNBase/Classes/ViewModelChangedDelegate.swift; sourceTree = "<group>"; };
 		72521A91B105D983E1265356A1ED9992 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConstraintPriority.swift; sourceTree = "<group>"; };
 		754F9B937247D7025FAB9550C44198B0 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
@@ -302,7 +296,6 @@
 		8336AF2CB8BBF744D72161956E8BB258 /* Pods-VNBase_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VNBase_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		84B29B581C233B81E00DA77A7C17A9BB /* TLIndexPathItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLIndexPathItem.m; path = "TLIndexPathTools/Data Model/TLIndexPathItem.m"; sourceTree = "<group>"; };
 		85A641E1961081E22630F399765C7413 /* Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		8846AABB4F72003354979ABAAAF49D5A /* UserDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		8896BC5868AD0C57B3F98EB754B0CD05 /* TLIndexPathTools-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TLIndexPathTools-umbrella.h"; sourceTree = "<group>"; };
 		8AB1A33E6F0E40ADD872A57BE6FBFBCF /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
 		8D5A334BE249655304C5CD30353646AC /* TLCollapsibleDataModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLCollapsibleDataModel.m; path = TLIndexPathTools/Extensions/Collapsible/TLCollapsibleDataModel.m; sourceTree = "<group>"; };
@@ -332,7 +325,6 @@
 		B0409AB4EBEC62388B7A9CC9EFD0C475 /* Aliases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		B061FEEF7C88562DD4BE3C6B61E65F9C /* TLIndexPathItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLIndexPathItem.h; path = "TLIndexPathTools/Data Model/TLIndexPathItem.h"; sourceTree = "<group>"; };
 		B1812B89D2AAD1C130D2B4225A10CA09 /* VNBase.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VNBase.modulemap; sourceTree = "<group>"; };
-		B49A1A54543FE4FD9DF1DB7ACC90C649 /* UIFont+CustomFonts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFonts.swift"; sourceTree = "<group>"; };
 		B4AE733D14DC1DB8F8FFC5CF5415D926 /* TLIndexPathSectionInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLIndexPathSectionInfo.m; path = "TLIndexPathTools/Data Model/TLIndexPathSectionInfo.m"; sourceTree = "<group>"; };
 		B4D1712BA593CADDB0510A3DA0DAABE5 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
 		B5030DF4556E005B0C8EA509B4A99B30 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,7 +502,6 @@
 				31373A815223D4022093B1162E712362 /* BaseXibCell.swift */,
 				B6D9DE6166FB5189077BD5C8ABBC5D51 /* BlockButton.swift */,
 				7890A08AC3B8D5D9747FBEF418D581D8 /* BlockSwitch.swift */,
-				71B2D6A467BE1C388F22EFDEB33754AE /* Constants.swift */,
 				D22C31776E459CD91453D91846113736 /* IHaveViewModel.swift */,
 				F41539A21DFA74E1081304A2B47E0A9A /* MultilineLabel.swift */,
 				0264E3ACA7657FB9742A9F5DBFAC01CE /* PushMessage.swift */,
@@ -650,15 +641,12 @@
 				58A067A06FA3F2DFD1469AEFCD42DD06 /* JSONDecoder+Static.swift */,
 				48902A0E8A62173778B8A79E654D8F07 /* String.swift */,
 				963030907D9415EFA04DED60BC7C19E5 /* UIAlertAction.swift */,
-				122144F618AF8493B1AC7251685CBB02 /* UIColor+CustomColors.swift */,
 				D973EE0FA6911B91F5E1522EF1779C0F /* UIEdgeInsets+Standart.swift */,
-				B49A1A54543FE4FD9DF1DB7ACC90C649 /* UIFont+CustomFonts.swift */,
 				EEA0E2CC41419FA8135DB742C702B948 /* UIImage+Color.swift */,
 				E1AF2AE4A6A4FC9866B59489AB561AA5 /* UINavigationBar.swift */,
 				C7CF6E9FE9BE434B9751BA809BBE225C /* UIView.swift */,
 				2100D7581870A358C4168A95C2BB64FC /* UIView+Shadow.swift */,
 				E601AFB81C87AF9133BE98CEA5583CBD /* UIViewController.swift */,
-				8846AABB4F72003354979ABAAAF49D5A /* UserDefaults.swift */,
 			);
 			name = Categories;
 			path = VNBase/Classes/Categories;
@@ -1006,7 +994,6 @@
 				6AD98F4BBE02F82955ADE4EFADAFAAA3 /* BlockButton.swift in Sources */,
 				7E760CCDE48FEAF4BF801DCD0B5368D4 /* BlockSwitch.swift in Sources */,
 				E96C49104DB7AF04F345B9CE42D79EBF /* CGFloat.swift in Sources */,
-				BE732D08F3C589084CB49B0AAECB9C46 /* Constants.swift in Sources */,
 				A783C401845BCFC1414A350DCC8C4A51 /* ConstraintPriority.swift in Sources */,
 				F78C47890603C891E70837D1344D9B45 /* DateFormatter.swift in Sources */,
 				9BDF513B4FA0FABBAA188EBB665968EA /* Event.swift in Sources */,
@@ -1023,16 +1010,13 @@
 				570C8E630E89F8B6B433A804D3C889A9 /* String.swift in Sources */,
 				579277C27DDDE96BDC8F8F34E8BE191F /* TableSectionVM.swift in Sources */,
 				5F31A7711718828C6189019BD5951282 /* UIAlertAction.swift in Sources */,
-				95CB490321682DE63181974DEB4585F7 /* UIColor+CustomColors.swift in Sources */,
 				D5FA57E7132F3E79615920D64D585108 /* UIDevice-Hardware.swift in Sources */,
 				F63E40A3466F13583D009640E86B5E29 /* UIEdgeInsets+Standart.swift in Sources */,
-				ACE5B9C28E1884686A620E0606D6C1C0 /* UIFont+CustomFonts.swift in Sources */,
 				78E48D3FA23218432066B427237C8B35 /* UIImage+Color.swift in Sources */,
 				2CCD7C1BF94105DF977F994C646D9062 /* UINavigationBar.swift in Sources */,
 				F154DD0AC4C53C6AA8EB02F305572B75 /* UIView+Shadow.swift in Sources */,
 				19373D2C77B3FA231B7E7067CB91FB61 /* UIView.swift in Sources */,
 				AC8DD241FE9D25A51134ABC9D682391C /* UIViewController.swift in Sources */,
-				D9968DF1E03B9CB826AA0EACDB304A9D /* UserDefaults.swift in Sources */,
 				F71E87DDDE5A5F2413C632FCD15491C3 /* ViewModelChangedDelegate.swift in Sources */,
 				1A6E5BA08684F1A98DB8C601E895821A /* VNBase-dummy.m in Sources */,
 			);

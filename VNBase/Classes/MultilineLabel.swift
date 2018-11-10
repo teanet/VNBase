@@ -19,7 +19,7 @@ open class MultilineLabel: UILabel {
 		return size
 	}
 
-	init() {
+	public init() {
 		super.init(frame: .zero)
 		self.numberOfLines = 0
 	}
