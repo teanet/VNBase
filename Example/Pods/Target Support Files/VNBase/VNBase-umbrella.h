@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "UIImage+DGSImageFromColor.h"
 
 FOUNDATION_EXPORT double VNBaseVersionNumber;
 FOUNDATION_EXPORT const unsigned char VNBaseVersionString[];

@@ -61,15 +61,14 @@ open class BaseTableViewVM: BaseVM {
 		}
 	}
 
-	public func loadNextPage() {
+	public func loadNextPage(reload: Bool = false) {
 
-		guard self.shouldLoadNextPage,
-			let prefetchBlock = self.prefetchBlock,
-			!self.isPrefetching else { return }
+		guard let prefetchBlock = self.prefetchBlock else { return }
+
+		if !reload && ( self.isPrefetching || !self.shouldLoadNextPage ) { return }
 
 		self.isPrefetching = true
-
-		if (self.rows.isEmpty) {
+		if (self.rows.isEmpty || reload) {
 			self.set(rows: [], addLoadingCell: true)
 		}
 
@@ -134,6 +133,11 @@ open class BaseTableViewVM: BaseVM {
 			item.commit(editingStyle: editingStyle)
 			self.onCommit?(item, editingStyle)
 		}
+	}
+
+	open func move(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		let cellVM = self.sections[sourceIndexPath.section].rows.remove(at: sourceIndexPath.row)
+		self.sections[destinationIndexPath.section].rows.insert(cellVM, at: destinationIndexPath.row)
 	}
 
 	private func set(rows: [BaseCellVM], addLoadingCell: Bool) {

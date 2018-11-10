@@ -4,22 +4,23 @@
 */
 open class BaseCellVM: BaseVM {
 
-	private var isAppearFirstTime = false
-	public static var reuseIdentifier: String {
-		return NSStringFromClass(self)
-	}
 	public internal(set) var isVisible: Bool = false
 	public internal(set) var isAppearedFirstTime: Bool = false
+
 	public internal(set) var isEditable: Bool = false
 	public internal(set) var editingActions: [UITableViewRowAction]?
-	public internal(set) var editingStyle: UITableViewCell.EditingStyle = .none
-	/**
+	public static var reuseIdentifier: String {
+		return NSStringFromClass(self)
+	}	/**
 	Уникальный идентификатор ячейки (разный для разных ячеек)
 	*/
 	public var reuseIdentifier: String {
 		return type(of: self).reuseIdentifier
 	}
 	@objc public let uniqueIdentifier: String
+	internal private(set) var isSelected: Bool = false
+	open var canMove: Bool { return false }
+	open var editingStyle: UITableViewCell.EditingStyle { return .none }
 
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString
@@ -52,6 +53,11 @@ open class BaseCellVM: BaseVM {
 	}
 
 	open func select() {
+		self.isSelected = true
+	}
+
+	open func deselect() {
+		self.isSelected = false
 	}
 
 	open func commit(editingStyle: UITableViewCell.EditingStyle) {

@@ -10,6 +10,7 @@ public protocol Registerable: AnyObject {
 
 public protocol IHaveHeight: AnyObject {
     static func internalHeight(with viewModel: BaseCellVM, width: CGFloat) -> CGFloat
+	static func internalEstimatedHeight(with viewModel: BaseCellVM) -> CGFloat
 }
 
 public protocol Sizeable {
@@ -78,8 +79,7 @@ open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHav
 
 	public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-		self.separatorInset = .zero
+		self.setNeedsUpdateConstraints()
 	}
 
 	@available(*, unavailable)
@@ -93,9 +93,17 @@ open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHav
 		guard let vm = viewModel as? TViewModel else { return UITableView.automaticDimension }
         return self.height(with: vm, width: width)
     }
+	public static func internalEstimatedHeight(with viewModel: BaseCellVM) -> CGFloat {
+		guard let vm = viewModel as? TViewModel else { return 100 }
+		return self.estimatedHeight(with: vm)
+	}
 
     open class func height(with viewModel: TViewModel, width: CGFloat) -> CGFloat {
 		return UITableView.automaticDimension
+	}
+
+	open class func estimatedHeight(with viewModel: TViewModel) -> CGFloat {
+		return 50
 	}
 
 	public static func identifier() -> String {

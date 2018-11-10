@@ -1,15 +1,17 @@
-var isUnitTest = false
+public class Testing {
+	public static var isUnitTest = false
+}
 
-func L10N(_ string: String) -> String {
-	if isUnitTest {
+public func L10N(_ string: String) -> String {
+	if Testing.isUnitTest {
 		return string
 	} else {
 		return NSLocalizedString(string, comment: "")
 	}
 }
 
-func L18N(_ format: String, value: Int) -> String {
-	if isUnitTest {
+public func L18N(_ format: String, value: Int) -> String {
+	if Testing.isUnitTest {
 		return format
 	} else {
 		let format = NSLocalizedString(format, comment: "")
@@ -17,7 +19,7 @@ func L18N(_ format: String, value: Int) -> String {
 	}
 }
 
-extension String {
+public extension String {
 
 	func l10n() -> String {
 		return L10N(self)

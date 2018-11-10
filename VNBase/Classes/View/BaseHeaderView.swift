@@ -29,7 +29,9 @@ public class BaseHeaderView<TViewModel: BaseHeaderViewVM>: UITableViewHeaderFoot
 		guard let vm = viewModel as? TViewModel else { return UITableView.automaticDimension }
 		return self.height(with: vm, width: width)
 	}
-
+	public static func internalEstimatedHeight(with viewModel: BaseCellVM) -> CGFloat {
+		return 44
+	}
 	open class func height(with viewModel: TViewModel, width: CGFloat) -> CGFloat {
 		return UITableView.automaticDimension
 	}

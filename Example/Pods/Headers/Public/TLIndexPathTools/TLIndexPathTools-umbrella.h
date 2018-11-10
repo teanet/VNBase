@@ -1,0 +1,1 @@
+/Users/teanet/Documents/projects/test/VNBase/VNBase/Example/Pods/Target Support Files/TLIndexPathTools/TLIndexPathTools-umbrella.h

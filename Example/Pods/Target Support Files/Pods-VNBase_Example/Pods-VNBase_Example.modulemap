@@ -1,4 +1,4 @@
-framework module Pods_VNBase_Example {
+module Pods_VNBase_Example {
   umbrella header "Pods-VNBase_Example-umbrella.h"
 
   export *

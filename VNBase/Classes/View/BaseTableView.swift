@@ -6,6 +6,7 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 
 	public var viewModel: BaseTableViewVM
 	public var isUpdateAnimated = false
+	public var updateAnimation = UITableView.RowAnimation.none
 
     private var identifierToCellMap = [String:IHaveHeight.Type]()
 
@@ -90,6 +91,10 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		
 		self.viewModel.didSelect(at: indexPath)
 	}
+	
+	public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		self.viewModel.item(at: indexPath)?.deselect()
+	}
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		if let cell = cell as? IHaveViewModel,
@@ -147,6 +152,12 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
         return cellClass.internalHeight(with: vm, width: tableView.frame.width)
     }
 
+	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+		guard let vm = self.viewModel.item(at: indexPath),
+			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return 100 }
+		return cellClass.internalEstimatedHeight(with: vm)
+	}
+
 	public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		let canEdit = self.viewModel.canEditRow(at: indexPath)
 		return canEdit
@@ -166,8 +177,6 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		self.viewModel.commit(editingStyle: editingStyle, for: indexPath)
 	}
 
-
-
 	// MARK: TLIndexPathControllerDelegate
 
 	public func controller(_ controller: TLIndexPathController, didUpdateDataModel updates: TLIndexPathUpdates) {
@@ -183,7 +192,7 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 			self.reloadData()
 			block()
 		} else {
-			updates.performBatchUpdates(on: self, with: .none) { finished in
+			updates.performBatchUpdates(on: self, with: self.updateAnimation) { finished in
 				block()
 			}
 		}

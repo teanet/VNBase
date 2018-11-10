@@ -1,8 +1,8 @@
 import TLIndexPathTools
 
-public class BaseCollectionViewVM: BaseVM {
+open class BaseCollectionViewVM: BaseVM {
 
-	public var sections: [TableSectionVM] {
+	open var sections: [TableSectionVM] {
 		willSet {
 			self.sections.forEach {
 				$0.onRowsChange = nil
@@ -25,7 +25,7 @@ public class BaseCollectionViewVM: BaseVM {
 	}
 	private var scheduledSections = [TableSectionVM]()
 
-	public var items: [BaseCellVM] {
+	open var items: [BaseCellVM] {
 		set {
 			self.set(items: newValue)
 		}

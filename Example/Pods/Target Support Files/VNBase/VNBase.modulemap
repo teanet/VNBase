@@ -1,4 +1,4 @@
-framework module VNBase {
+module VNBase {
   umbrella header "VNBase-umbrella.h"
 
   export *

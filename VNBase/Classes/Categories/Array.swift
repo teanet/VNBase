@@ -1,3 +1,18 @@
+public extension Array where Element: Equatable {
+
+	var isContainsSameElements: Bool {
+		guard self.count > 1 else { return false }
+		let first = self[0]
+		for index in 1..<self.count {
+			if self[index] != first {
+				return false
+			}
+		}
+		return true
+	}
+
+}
+
 public extension Array where Element : AnyObject {
 
 	public func indexByPointerComparing(of element: Element) -> Int? {

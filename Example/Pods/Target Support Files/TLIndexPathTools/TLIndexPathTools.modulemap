@@ -1,4 +1,4 @@
-framework module TLIndexPathTools {
+module TLIndexPathTools {
   umbrella header "TLIndexPathTools-umbrella.h"
 
   export *

@@ -46,6 +46,7 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	open override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.viewModel.appear()
+		self.updateNavigationBarStyleIfNeeded()
 	}
 
 	open override func viewDidAppear(_ animated: Bool) {
@@ -67,6 +68,19 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		}
 
 		super.updateViewConstraints()
+	}
+
+	open var navigationBarStyle: NavigationBarStyle? {
+		return nil
+	}
+
+	public func updateNavigationBarStyleIfNeeded() {
+		// Защита от childviewcontrollers
+		guard let nc = self.navigationController else { return }
+		guard nc.viewControllers.contains(self) else { return }
+		guard let style = self.navigationBarStyle else { return }
+
+		nc.navigationBar.apply(style)
 	}
 
 	open func createConstraints() {

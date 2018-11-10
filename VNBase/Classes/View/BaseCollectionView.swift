@@ -1,11 +1,11 @@
 import TLIndexPathTools
 
-open class BaseCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TLIndexPathControllerDelegate {
+open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TLIndexPathControllerDelegate {
 
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
-	public var viewModel: BaseCollectionViewVM {
+	public var viewModel: TViewModel {
 		didSet {
 			guard self.viewModel !== oldValue else { return }
 			oldValue.indexpathController.delegate = nil
@@ -26,7 +26,7 @@ open class BaseCollectionView: UICollectionView, UICollectionViewDelegate, UICol
 	}
 
 	public init(collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout(),
-				viewModel: BaseCollectionViewVM) {
+				viewModel: TViewModel) {
 		self.viewModel = viewModel
 		super.init(frame: .zero, collectionViewLayout: collectionViewLayout)
 		self.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kDefaultReuseIdentifier)
@@ -149,7 +149,7 @@ open class BaseCollectionView: UICollectionView, UICollectionViewDelegate, UICol
 		return cellClass.internalSize(with: vm, size: collectionView.frame.size)
 	}
 
-	public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+	open func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		// Поскольку на экране показывается меньше ячеек, чем может быть на самом деле
 		// (часть может находиться ниже экрана из-за особенностей работы панелей),
 		// мы не можем полагаться только на механизм willDisplay cell,

@@ -1,9 +1,19 @@
 open class BaseViewControllerVM: BaseVM {
 
+	public enum State {
+		case none
+		case willAppear
+		case didAppear
+		case willDissapear
+		case didDissapear
+	}
+
 	public var title: String?
 	public private(set) var isLoaded: Bool = false
 	public private(set) var isVisible: Bool = false
 	public private(set) var isActive: Bool = false
+	public private(set) var isAppearAtLeastOnce: Bool = false
+	public private(set) var viewModelState: State = .none
 	public let onLoading = Event<Bool>()
 
 	/**
