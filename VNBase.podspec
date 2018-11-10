@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'VNBase'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Simple MVVM helper'
   s.swift_version 	 = '4.2'
 # This description is used to generate tags and improve search results.
