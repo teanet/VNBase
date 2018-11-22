@@ -57,6 +57,10 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		super.viewWillDisappear(animated)
 		self.viewModel.disappear()
 	}
+	open override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		self.viewModel.didDisappear()
+	}
 
 	open override func updateViewConstraints() {
 
