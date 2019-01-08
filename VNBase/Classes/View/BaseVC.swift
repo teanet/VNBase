@@ -4,6 +4,18 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 
 	lazy var refresh = UIRefreshControl()
 
+	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .portrait
+	}
+
+	open var toInterfaceOrientation: UIInterfaceOrientation? {
+		return UIInterfaceOrientation.portrait
+	}
+
+	override open var shouldAutorotate: Bool {
+		return true
+	}
+
 	public let viewModel: TViewModel
 	open override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .default
@@ -47,6 +59,10 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		super.viewWillAppear(animated)
 		self.viewModel.appear()
 		self.updateNavigationBarStyleIfNeeded()
+
+		if let toInterfaceOrientation = self.toInterfaceOrientation {
+			UIDevice.current.setValue(toInterfaceOrientation.rawValue, forKey: "orientation")
+		}
 	}
 
 	open override func viewDidAppear(_ animated: Bool) {
@@ -88,7 +104,7 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	}
 
 	open func createConstraints() {
-		
+
 	}
 
 	open func updateConstraints() {
@@ -96,7 +112,7 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	}
 
 	open func viewModelChanged() {
-		
+
 	}
 
 }
