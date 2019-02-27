@@ -2,24 +2,13 @@ import Foundation
 
 open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewModelChangedDelegate {
 
-	lazy var refresh = UIRefreshControl()
-
-	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
-	}
-
-	open var toInterfaceOrientation: UIInterfaceOrientation? {
-		return UIInterfaceOrientation.portrait
-	}
-
-	override open var shouldAutorotate: Bool {
-		return true
-	}
+	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+	open var toInterfaceOrientation: UIInterfaceOrientation? { return .portrait }
+	open override var shouldAutorotate: Bool { return true }
+	open override var preferredStatusBarStyle: UIStatusBarStyle { return .default }
 
 	public let viewModel: TViewModel
-	open override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .default
-	}
+	public private(set) lazy var refresh = UIRefreshControl()
 
 	private var constraintsCreated = false
 
@@ -42,7 +31,6 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
-		self.viewModel.load()
 		self.view.backgroundColor = .white
 		self.refresh.addTarget(self.viewModel, action: #selector(self.viewModel.reload), for: .valueChanged)
 		self.viewModel.onLoading.add(self) { [weak self] (loading) in
@@ -52,6 +40,7 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 				self?.refresh.endRefreshing()
 			}
 		}
+		self.viewModel.load()
 		self.viewModelChanged()
 	}
 
@@ -79,7 +68,6 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	}
 
 	open override func updateViewConstraints() {
-
 		if !self.constraintsCreated {
 			self.createConstraints()
 			self.constraintsCreated = true

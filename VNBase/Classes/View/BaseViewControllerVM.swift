@@ -15,12 +15,17 @@ open class BaseViewControllerVM: BaseVM {
 	public private(set) var isAppearAtLeastOnce: Bool = false
 	public private(set) var viewModelState: State = .none
 	public let onLoading = Event<Bool>()
+	private var isAppearFirstTime = false
 
 	open func load() {
 	}
 
 	open func appear() {
 		self.viewModelState = .willAppear
+		if !self.isAppearFirstTime {
+			self.isAppearFirstTime = true
+			self.appearFirstTime()
+		}
 	}
 
 	open func didAppear() {
@@ -39,6 +44,9 @@ open class BaseViewControllerVM: BaseVM {
 	Вызывается, когда экран появляется в стеке навигации (то есть, его VC есть в UINavigationController.viewControllers).
 	*/
 	open func appearInStack() {
+	}
+
+	open func appearFirstTime() {
 	}
 
 

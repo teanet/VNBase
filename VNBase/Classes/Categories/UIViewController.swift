@@ -2,6 +2,16 @@ import SnapKit
 
 public extension UIViewController {
 
+	public var safeArea: UIEdgeInsets {
+		if #available(iOS 11.0, *) {
+			return self.view.safeAreaInsets
+		} else {
+			return .zero
+		}
+	}
+
+	public var viewHeight: CGFloat { return self.view.bounds.height }
+
 	public func topVC() -> UIViewController {
 		if let tabVC = self as? UITabBarController, let selectedViewController = tabVC.selectedViewController {
 			return selectedViewController.topVC()

@@ -201,29 +201,29 @@
 		1D855B03313F14D9E294B7CB212E2F38 /* TLCollectionViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLCollectionViewController.h; path = "TLIndexPathTools/View Controllers/TLCollectionViewController.h"; sourceTree = "<group>"; };
 		1DCE87DA3E7035259DFB40BC66322800 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Source/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
 		1E7595D741BBC45F6DCEF2FABF6C04C4 /* UITableView+ScrollOptimizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+ScrollOptimizer.h"; path = "TLIndexPathTools/Extensions/UITableView+ScrollOptimizer.h"; sourceTree = "<group>"; };
-		24390EFD555DD124430DFF9724065945 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		24390EFD555DD124430DFF9724065945 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2815CE81287495E00020498D73DB2BAF /* TLCollapsibleHeaderView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLCollapsibleHeaderView.m; path = TLIndexPathTools/Extensions/Collapsible/TLCollapsibleHeaderView.m; sourceTree = "<group>"; };
 		28D36346E9D1D74A4FAA00D9E34FD344 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		2A6F791E97854E9B7A93215CC3844B9A /* Lazy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Lazy.swift; sourceTree = "<group>"; };
 		2BA6075F097B9B9F6BCF940D359E21AC /* ScrollViewHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScrollViewHelpers.swift; sourceTree = "<group>"; };
 		2E8E6D6FF7763691677DF5B5AEAF6D6A /* VNBase-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VNBase-dummy.m"; sourceTree = "<group>"; };
-		2EBE2EE3F7A6EF90972F1A604A5352F0 /* libSnapKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSnapKit.a; path = libSnapKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		30FDA2BD1057D1173BD575D25EAB6F3A /* libVNBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libVNBase.a; path = libVNBase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EBE2EE3F7A6EF90972F1A604A5352F0 /* libSnapKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSnapKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FDA2BD1057D1173BD575D25EAB6F3A /* libVNBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVNBase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		331493EF33B7F4D959E0552F5E9B6A8B /* TLIndexPathTreeItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLIndexPathTreeItem.m; path = TLIndexPathTools/Extensions/Tree/TLIndexPathTreeItem.m; sourceTree = "<group>"; };
-		3849A588A776F5A5AEC40EDE8737FD52 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		3849A588A776F5A5AEC40EDE8737FD52 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		389D11C5E66440563A96617F270844E2 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		39D81ED2273D80880BA6A27EBD0012F9 /* BaseTableVM.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseTableVM.swift; sourceTree = "<group>"; };
 		3A0F6BADA9FB2E63FD661007C556293D /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
-		3ABF349B80CF4B545EDF3FA7A2748CF0 /* VNBase.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = VNBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3ABF349B80CF4B545EDF3FA7A2748CF0 /* VNBase.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = VNBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3F137F4250B426B0E76EAF9AEB673201 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
 		3F58CDC878D194C60FA1320F747AAA53 /* VNBase-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VNBase-umbrella.h"; sourceTree = "<group>"; };
 		3FB65376EFCDF650B879FC83EEA7A34F /* TLIndexPathSectionInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLIndexPathSectionInfo.m; path = "TLIndexPathTools/Data Model/TLIndexPathSectionInfo.m"; sourceTree = "<group>"; };
 		411ED35D57F75992854EB404F3DB7A09 /* TLIndexPathTools-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TLIndexPathTools-umbrella.h"; sourceTree = "<group>"; };
 		41491420D91993BD4EA2B7E7F7482A78 /* Pods-VNBase_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VNBase_Tests-dummy.m"; sourceTree = "<group>"; };
-		4225A6836A4C7F9A28284FBB0717AB85 /* libPods-VNBase_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-VNBase_Example.a"; path = "libPods-VNBase_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4225A6836A4C7F9A28284FBB0717AB85 /* libPods-VNBase_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNBase_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4287A3A9D5ABB5B83911077E7B62F633 /* TLCollapsibleDataModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLCollapsibleDataModel.h; path = TLIndexPathTools/Extensions/Collapsible/TLCollapsibleDataModel.h; sourceTree = "<group>"; };
 		44D9F9B6D470FB2585D0CB3B30AAB973 /* TLNoResultsTableDataModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLNoResultsTableDataModel.h; path = "TLIndexPathTools/Extensions/No Results/TLNoResultsTableDataModel.h"; sourceTree = "<group>"; };
-		4509190BFFE5B6F93AD31B21F4B510CC /* libTLIndexPathTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libTLIndexPathTools.a; path = libTLIndexPathTools.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4509190BFFE5B6F93AD31B21F4B510CC /* libTLIndexPathTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTLIndexPathTools.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		457B5AA2CD03095E43B3AA12CB9387EC /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4CCB604062816F0C1D72C89614177233 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConstraintPriority.swift; sourceTree = "<group>"; };
 		4F89AC78BA224F0906C0AFB5D532D581 /* TLIndexPathTools.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TLIndexPathTools.modulemap; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 		82BA92D69F7584F86824957C904B94A7 /* IOpenURLHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IOpenURLHandler.swift; sourceTree = "<group>"; };
 		82EDA57CBFF3EFD905D0AFE5165F74A3 /* BaseCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		832F74D6693F0022E81F118371350469 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
-		860083D2ACC7393F69ECC93F10DA4E69 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		860083D2ACC7393F69ECC93F10DA4E69 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A0ADC54AFFCFCCF7BE34A68F7E0DBA5 /* BaseView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		8BB63055A17A1931C12214E105D6CEA7 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Source/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
 		8F173D7307736574D68E385F5335C43E /* TLIndexPathUpdates.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TLIndexPathUpdates.m; path = "TLIndexPathTools/Data Model/TLIndexPathUpdates.m"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		F822A2D53A704DDB8EDE6A758D85CAC1 /* TLDynamicHeightLabelCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLDynamicHeightLabelCell.h; path = TLIndexPathTools/Extensions/TLDynamicHeightLabelCell.h; sourceTree = "<group>"; };
 		F9441E6D1CA081947D99AFD1CF9653AB /* TLTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLTableViewController.h; path = "TLIndexPathTools/View Controllers/TLTableViewController.h"; sourceTree = "<group>"; };
 		FE2D7DB6EC0AA52EB8C1549AF71D7232 /* TLCollapsibleTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TLCollapsibleTableViewController.h; path = TLIndexPathTools/Extensions/Collapsible/TLCollapsibleTableViewController.h; sourceTree = "<group>"; };
-		FF3D02FBC2484F2456710F2FA1E1DDFE /* libPods-VNBase_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-VNBase_Tests.a"; path = "libPods-VNBase_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF3D02FBC2484F2456710F2FA1E1DDFE /* libPods-VNBase_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNBase_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,7 +586,6 @@
 				935CD7575212AA085D0A67D7E427C208 /* UILayoutSupport+Extensions.swift */,
 				9D54FD157C12D356478379718CA6F9D6 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -633,7 +632,6 @@
 				C33DAC24DB0E3EB3A90FF633EF3261B5 /* UITableViewController+ScrollOptimizer.m */,
 				C70D30B650FB7B1A2B2A6DCCF83842A5 /* Support Files */,
 			);
-			name = TLIndexPathTools;
 			path = TLIndexPathTools;
 			sourceTree = "<group>";
 		};
@@ -1203,8 +1201,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
