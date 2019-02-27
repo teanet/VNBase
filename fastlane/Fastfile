@@ -8,8 +8,13 @@ platform :ios do
   lane :bump_version do |options|
 
     version = options[:version]
-
-    version_bump_podspec(version_number: version)
+    if version.to_s.empty?
+      version_bump_podspec(bump_type: "patch")
+      version = lane_context[SharedValues::PODSPEC_VERSION_NUMBER]
+    else
+      version_bump_podspec(version_number: version)  
+    end
+    
     git_commit(
       message: "Bump up version to #{version}",
       path: ["./*"]
