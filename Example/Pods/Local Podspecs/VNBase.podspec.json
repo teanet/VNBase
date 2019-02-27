@@ -1,6 +1,6 @@
 {
   "name": "VNBase",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "summary": "Simple MVVM helper",
   "swift_version": "4.2",
   "description": "TODO: I should add some description later =)",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/teanet/VNBase.git",
-    "tag": "0.1.1"
+    "tag": "0.2.4"
   },
   "social_media_url": "https://twitter.com/teanet",
   "platforms": {

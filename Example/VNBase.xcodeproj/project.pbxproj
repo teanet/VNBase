@@ -15,6 +15,9 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		86F78D912168C8DEE31B634E /* libPods-VNBase_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16385275590204AD2D328D /* libPods-VNBase_Tests.a */; };
+		CEC6C89522263DA100EF2DC8 /* TableDemoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6C89322263DA100EF2DC8 /* TableDemoVM.swift */; };
+		CEC6C89622263DA100EF2DC8 /* TableDemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6C89422263DA100EF2DC8 /* TableDemoVC.swift */; };
+		CEC6C89822263E5900EF2DC8 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6C89722263E5900EF2DC8 /* DemoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		8B979D3E7F2419AEBCD25186 /* VNBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = VNBase.podspec; path = ../VNBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B86607A0616BC82CF3DFFFE8 /* Pods-VNBase_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.debug.xcconfig"; path = "Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C1BE840864B27A958FE92BA5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		CEC6C89322263DA100EF2DC8 /* TableDemoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDemoVM.swift; sourceTree = "<group>"; };
+		CEC6C89422263DA100EF2DC8 /* TableDemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDemoVC.swift; sourceTree = "<group>"; };
+		CEC6C89722263E5900EF2DC8 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
 		EE32432A147F201C89760A08 /* Pods-VNBase_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Tests.debug.xcconfig"; path = "Target Support Files/Pods-VNBase_Tests/Pods-VNBase_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +121,9 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				CEC6C89422263DA100EF2DC8 /* TableDemoVC.swift */,
+				CEC6C89322263DA100EF2DC8 /* TableDemoVM.swift */,
+				CEC6C89722263E5900EF2DC8 /* DemoCell.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -311,8 +320,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC6C89522263DA100EF2DC8 /* TableDemoVM.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				CEC6C89622263DA100EF2DC8 /* TableDemoVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				CEC6C89822263E5900EF2DC8 /* DemoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

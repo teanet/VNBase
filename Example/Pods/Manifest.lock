@@ -1,7 +1,7 @@
 PODS:
   - SnapKit (4.0.1)
   - TLIndexPathTools (0.4.4)
-  - VNBase (0.1.1):
+  - VNBase (0.2.4):
     - SnapKit (~> 4.0.1)
     - TLIndexPathTools (~> 0.4.4)
 
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   TLIndexPathTools: 956bf0686bcd5e7dc8e2c408d28e7a312ec268a1
-  VNBase: 934c1deb02ed9ab3f2afccebc727f0af74b8c363
+  VNBase: a98504d7cbbc48845af7813b8c9db8e0171f83e2
 
 PODFILE CHECKSUM: 5aaf0d01b0a2fb9185668aa29bbe93963653ac6f
 
