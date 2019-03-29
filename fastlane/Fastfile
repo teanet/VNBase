@@ -23,7 +23,7 @@ platform :ios do
       tag: version
     )
     push_to_git_remote
-    pod_push
+    pod_push(swift_version: "4.2")
   end
 
 end
