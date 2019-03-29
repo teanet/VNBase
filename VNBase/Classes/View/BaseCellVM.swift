@@ -7,8 +7,8 @@ open class BaseCellVM: BaseVM {
 	public internal(set) var isVisible: Bool = false
 	public internal(set) var isAppearedFirstTime: Bool = false
 
-	public internal(set) var isEditable: Bool = false
-	public internal(set) var editingActions: [UITableViewRowAction]?
+	public var isEditable: Bool = false
+	public var editingActions: [UITableViewRowAction]?
 	public static var reuseIdentifier: String {
 		return NSStringFromClass(self)
 	}	/**
