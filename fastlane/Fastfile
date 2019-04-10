@@ -12,7 +12,7 @@ platform :ios do
 
     version = options[:version]
     if version.to_s.empty?
-      bump_type = options[:version]
+      bump_type = options[:bump_type]
       if bump_type.to_s.empty?
         version_bump_podspec(bump_type: "patch")
       else
