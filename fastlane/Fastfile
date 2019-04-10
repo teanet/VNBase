@@ -4,12 +4,20 @@ default_platform :ios
 
 platform :ios do
 
-  desc "Release new version"
+  lane :new_minor do 
+    bump_version(bump_type: "minor")
+  end
+
   lane :bump_version do |options|
 
     version = options[:version]
     if version.to_s.empty?
-      version_bump_podspec(bump_type: "patch")
+      bump_type = options[:version]
+      if bump_type.to_s.empty?
+        version_bump_podspec(bump_type: "patch")
+      else
+        version_bump_podspec(bump_type: bump_type)
+      end
       version = lane_context[SharedValues::PODSPEC_VERSION_NUMBER]
     else
       version_bump_podspec(version_number: version)  
