@@ -2,7 +2,7 @@ public extension UIImage {
 
 	/// Возвращает картинку нарисованную на прямоугольнике цвета color с заданным размером
 	/// Можно использовать прозрачный цвет или nil чтобы изменить размер картинки
-	public func onRect(colored color: UIColor? = nil, size: CGSize, filled: Bool = true) -> UIImage {
+	func onRect(colored color: UIColor? = nil, size: CGSize, filled: Bool = true) -> UIImage {
 
 		UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
 		guard let ctx = UIGraphicsGetCurrentContext() else { return self }
@@ -39,7 +39,7 @@ public extension UIImage {
 	}
 
 	/// Меняет размер картинки
-	public func resize(to size: CGSize) -> UIImage {
+	func resize(to size: CGSize) -> UIImage {
 
 		UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
 		guard let ctx = UIGraphicsGetCurrentContext() else { return self }
@@ -60,7 +60,7 @@ public extension UIImage {
 	}
 
 	/// Возвращает картинку нарисованную на кружке цвета color, диаметром
-	public func onCircle(colored color: UIColor?, diameter: CGFloat, filled: Bool = true) -> UIImage {
+	func onCircle(colored color: UIColor?, diameter: CGFloat, filled: Bool = true) -> UIImage {
 		guard let color = color else { return self }
 
 		let substrateSize = CGSize(width: diameter,
@@ -114,7 +114,7 @@ public extension UIImage {
 	}
 
 	/// Возвращает картинку–кружок с диаметром и цветом
-	@objc public static func circle(diameter: CGFloat, color: UIColor) -> UIImage {
+	@objc static func circle(diameter: CGFloat, color: UIColor) -> UIImage {
 		let circleSize = CGSize(width: diameter, height: diameter)
 		UIGraphicsBeginImageContextWithOptions(circleSize, false, 0)
 		let ctx = UIGraphicsGetCurrentContext()!
@@ -132,7 +132,7 @@ public extension UIImage {
 	}
 
 	/// Возвращает картинку, покрашенную в цвет color
-	@objc public func colorized(with color: UIColor?) -> UIImage {
+	@objc func colorized(with color: UIColor?) -> UIImage {
 		guard let color = color else { return self }
 
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
@@ -154,7 +154,7 @@ public extension UIImage {
 	}
 
 	/// Возвращает левую половинку от картинки
-	public func leftHalf() -> UIImage? {
+	func leftHalf() -> UIImage? {
 		guard let cgImage = self.cgImage else { return nil }
 
 		let newSize = CGSize(width: self.size.width * self.scale / 2.0,
@@ -168,7 +168,7 @@ public extension UIImage {
 	}
 
 	/// Рисует поверх картинки переданную в параметр картинку
-	public func withOverdraw(image: UIImage?) -> UIImage {
+	func withOverdraw(image: UIImage?) -> UIImage {
 		guard let image = image else { return self }
 
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
@@ -179,7 +179,7 @@ public extension UIImage {
 		return resultImage
 	}
 
-	public static func rectImage(colored color: UIColor) -> UIImage? {
+	static func rectImage(colored color: UIColor) -> UIImage? {
 		let size = CGSize(width: 20, height: 20)
 		UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
 		guard let ctx = UIGraphicsGetCurrentContext() else { return nil }

@@ -19,7 +19,7 @@ public protocol Sizeable {
 
 public extension UITableView {
 
-	public func register(cell: RegisterableClass) {
+	func register(cell: RegisterableClass) {
 		guard let cellClass = cell as? UITableViewCell.Type else {
 			assertionFailure("Can't register cell class \(String(describing: cell))")
 			return
@@ -33,7 +33,7 @@ public extension UITableView {
 		}
 	}
 
-	public func register(header: RegisterableClass) {
+	func register(header: RegisterableClass) {
 		guard let cellClass = header as? UITableViewHeaderFooterView.Type else {
 			assertionFailure("Can't register cell class \(String(describing: header))")
 			return
@@ -43,20 +43,20 @@ public extension UITableView {
 		self.register(cellClass, forHeaderFooterViewReuseIdentifier: identifier)
 	}
 
-	public func register(cells: RegisterableClass...) {
+	func register(cells: RegisterableClass...) {
 		self.register(cells: cells)
 	}
 
-	public func register(cells: [RegisterableClass]) {
+	func register(cells: [RegisterableClass]) {
 		for cell in cells {
 			self.register(cell: cell)
 		}
 	}
 
-	public func register(headers: RegisterableClass...) {
+	func register(headers: RegisterableClass...) {
 		self.register(headers: headers)
 	}
-	public func register(headers: [RegisterableClass]) {
+	func register(headers: [RegisterableClass]) {
 		for header in headers {
 			self.register(header: header)
 		}

@@ -1,4 +1,3 @@
-import TLIndexPathTools
 import Foundation
 
 open class BaseTableViewVM: BaseVM {
@@ -42,20 +41,20 @@ open class BaseTableViewVM: BaseVM {
 
 	internal private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
 	internal var isUpdating = false
-	internal let indexpathController: TLIndexPathController
+	internal let indexpathController: IndexPathController
 
 	public var prefetchBlock: DidFetchItemsBlock? = nil
 	private let loadingRow: BaseCellVM?
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
-		self.dataModel = TLIndexPathDataModel(sections: sections)
-		self.indexpathController = TLIndexPathController()
+		self.dataModel = IndexPathModel(sections: sections)
+		self.indexpathController = IndexPathController(dataModel: self.dataModel)
 		self.loadingRow = loadingRow
 		self.sections = sections
 		super.init()
 	}
 
-	internal var dataModel: TLIndexPathDataModel {
+	internal var dataModel: IndexPathModel {
 		didSet {
 			self.indexpathController.dataModel = self.dataModel
 		}
@@ -84,12 +83,11 @@ open class BaseTableViewVM: BaseVM {
 	}
 
 	public var sectionsCount: Int {
-		return self.dataModel.numberOfSections
+		return self.dataModel.sections.count
 	}
 
 	public func numberOfRows(in sectionIndex: Int) -> Int {
-		let numberOfRows = self.dataModel.numberOfRows(inSection: sectionIndex)
-		return numberOfRows == NSNotFound ? 0 : numberOfRows
+		return self.dataModel.numberOfItems(in: sectionIndex)
 	}
 
 	public func section(at index: Int) -> TableSectionVM? {
@@ -97,7 +95,7 @@ open class BaseTableViewVM: BaseVM {
 	}
 
 	public func item(at indexPath: IndexPath) -> BaseCellVM? {
-		return self.dataModel.item(at: indexPath) as? BaseCellVM
+		return self.dataModel.item(at: indexPath)
 	}
 
 	open func didSelect(at indexPath: IndexPath) {
@@ -145,7 +143,7 @@ open class BaseTableViewVM: BaseVM {
 		var rows = rows
 
 		if let loadingRow = self.loadingRow {
-			if let index = rows.index(of: loadingRow) {
+			if let index = rows.firstIndex(of: loadingRow) {
 				rows.remove(at: index)
 			}
 			if addLoadingCell {
@@ -157,19 +155,7 @@ open class BaseTableViewVM: BaseVM {
 	}
 
     private func updateDataModel() {
-        self.dataModel = TLIndexPathDataModel(sections: self.sections)
+        self.dataModel = IndexPathModel(sections: self.sections)
     }
 
 }
-
-fileprivate extension TLIndexPathDataModel {
-
-	fileprivate convenience init(sections: [TableSectionVM]) {
-		let sectionInfos = sections.map { section -> TLIndexPathSectionInfo in
-			return TLIndexPathSectionInfo(items: section.rows, name: section.uniqueIdentifier)
-		}
-		self.init(sectionInfos: sectionInfos, identifierKeyPath: #keyPath(BaseCellVM.uniqueIdentifier))
-	}
-
-}
-

@@ -3,13 +3,13 @@ import SnapKit
 
 public extension UIView {
 
-	public func addSubview(_ subview: UIView, withConstraints closure: (_ make: ConstraintMaker) -> Void) {
+	func addSubview(_ subview: UIView, withConstraints closure: (_ make: ConstraintMaker) -> Void) {
 		subview.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(subview)
 		subview.snp.makeConstraints(closure)
 	}
 
-	public func findSubview(_ predicate: (UIView?) -> Bool) -> UIView? {
+	func findSubview(_ predicate: (UIView?) -> Bool) -> UIView? {
 		if predicate(self) {
 			return self
 		}
@@ -21,7 +21,7 @@ public extension UIView {
 		return nil
 	}
 
-	public func findSubview<T: UIView>(_ type: T.Type) -> T? {
+	func findSubview<T: UIView>(_ type: T.Type) -> T? {
 		return self.findSubview { $0 is T } as? T
 	}
 

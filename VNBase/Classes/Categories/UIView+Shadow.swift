@@ -1,6 +1,6 @@
 public extension UIView {
 
-	public func addShadow(
+	func addShadow(
 		color: UIColor? = nil,
 		offset: CGSize = CGSize(width: 0.0, height: -3.0),
 		radius: CGFloat = 3.0,
@@ -13,7 +13,7 @@ public extension UIView {
 		self.layer.shadowOpacity = opacity
 	}
     
-    public func addCircleShadow(
+	func addCircleShadow(
         offset: CGSize = CGSize(width: 0, height: 1),
         radius: CGFloat = 1.0,
         opacity: Float = 0.25,

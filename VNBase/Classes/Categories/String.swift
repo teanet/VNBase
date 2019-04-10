@@ -22,12 +22,12 @@ extension String { // + HTML
 
 public extension String {
 
-	public var selfOrNilIfEmptyOrAllWhitespaces: String? {
+	var selfOrNilIfEmptyOrAllWhitespaces: String? {
 		let nilOrSelfString = String.isNilOrEmptyOrAllWhitespaces(string: self) ? nil : self
 		return nilOrSelfString
 	}
 
-	public static func isNilOrEmptyOrAllWhitespaces(string: String?) -> Bool {
+	static func isNilOrEmptyOrAllWhitespaces(string: String?) -> Bool {
 		guard let string = string,
 			!string.isEmpty,
 			// удаляем все пробелы
@@ -37,13 +37,13 @@ public extension String {
 		return false
 	}
 
-	public static func trim(string: String, lengthLimit: UInt) -> String {
+	static func trim(string: String, lengthLimit: UInt) -> String {
 		let suitableTextIndex = string.index(string.startIndex, offsetBy: Swift.min(string.count, Int(lengthLimit)))
 
 		return String(string.prefix(upTo: suitableTextIndex))
 	}
 
-	public func condenseWhitespace() -> String {
+	func condenseWhitespace() -> String {
 		return self.components(separatedBy: .whitespacesAndNewlines)
 			.filter { !$0.isEmpty }
 			.joined(separator: " ")
@@ -53,7 +53,7 @@ public extension String {
 
 public extension Optional where Wrapped == String {
 
-	public func isNilOrEmptyOrAllWhitespace() -> Bool {
+	func isNilOrEmptyOrAllWhitespace() -> Bool {
 		guard let string = self,
 			!string.isEmpty,
 			//удаляем все пробелы
@@ -63,7 +63,7 @@ public extension Optional where Wrapped == String {
 		return false
 	}
 
-	public func width(
+	func width(
 		constrainedHeight height: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -75,7 +75,7 @@ public extension Optional where Wrapped == String {
 		return value
 	}
 
-	public func height(
+	func height(
 		constrainedWidth width: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -87,7 +87,7 @@ public extension Optional where Wrapped == String {
 		return value
 	}
 
-	public func size(
+	func size(
 		constrainedSize size: CGSize,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -103,7 +103,7 @@ public extension Optional where Wrapped == String {
 
 public extension String {
 
-	public func width(
+	func width(
 		constrainedHeight height: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -119,7 +119,7 @@ public extension String {
 		return boundingBox.width
 	}
 
-	public func height(
+	func height(
 		constrainedWidth width: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -135,7 +135,7 @@ public extension String {
 		return boundingBox.height
 	}
 
-	public func size(
+	func size(
 		constrainedSize size: CGSize,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
@@ -156,22 +156,22 @@ public extension String {
 
 public extension String {
 
-	public static var space = " "
+	static var space = " "
 
-	public var first: String {
+	var first: String {
 		return String(self.prefix(1))
 	}
 
-	public var last: String {
+	var last: String {
 		return String(self.suffix(1))
 	}
 
-	public func uppercasedFirst() -> String {
+	func uppercasedFirst() -> String {
 		let chars = self.dropFirst()
 		return self.first.uppercased() + String(chars)
 	}
 
-	public func lowercasedFirst() -> String {
+	func lowercasedFirst() -> String {
 		let chars = self.dropFirst()
 		return self.first.lowercased() + String(chars)
 	}
@@ -179,7 +179,7 @@ public extension String {
 
 public extension String {
 
-	public func withExt(ext: String?, delimeter: String) -> String {
+	func withExt(ext: String?, delimeter: String) -> String {
 		guard let ext = ext else { return self }
 		return self + delimeter + ext
 	}
@@ -188,7 +188,7 @@ public extension String {
 
 public extension String {
 
-	public var isValidEmail: Bool {
+	var isValidEmail: Bool {
 		let emailRegEx = "[A-Z0-9a-zA-Яа-я._%+-]+@[A-Za-z0-9A-Яа-я.-]+\\.[A-Za-zA-Яа-я]{2,4}"
 		let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
 		let result = emailTest.evaluate(with: self)

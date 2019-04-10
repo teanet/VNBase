@@ -2,7 +2,7 @@ import SnapKit
 
 public extension UIViewController {
 
-	public var safeArea: UIEdgeInsets {
+	var safeArea: UIEdgeInsets {
 		if #available(iOS 11.0, *) {
 			return self.view.safeAreaInsets
 		} else {
@@ -10,9 +10,9 @@ public extension UIViewController {
 		}
 	}
 
-	public var viewHeight: CGFloat { return self.view.bounds.height }
+	var viewHeight: CGFloat { return self.view.bounds.height }
 
-	public func topVC() -> UIViewController {
+	func topVC() -> UIViewController {
 		if let tabVC = self as? UITabBarController, let selectedViewController = tabVC.selectedViewController {
 			return selectedViewController.topVC()
 		} else if let navVC = self as? UINavigationController, let visibleViewController = navVC.visibleViewController {
@@ -23,7 +23,7 @@ public extension UIViewController {
 		return self
 	}
 
-	public func dgs_add(vc: UIViewController, view: UIView, closure: ((_ make: ConstraintMaker) -> Void)? = nil) {
+	func dgs_add(vc: UIViewController, view: UIView, closure: ((_ make: ConstraintMaker) -> Void)? = nil) {
 		self.addChild(vc)
 		vc.view.frame = view.bounds
 		view.addSubview(vc.view)
@@ -37,7 +37,7 @@ public extension UIViewController {
 		vc.didMove(toParent: self)
 	}
 
-	public func dgs_addBelow(vc: UIViewController, belowView: UIView, closure: ((_ make: ConstraintMaker) -> Void)? = nil) {
+	func dgs_addBelow(vc: UIViewController, belowView: UIView, closure: ((_ make: ConstraintMaker) -> Void)? = nil) {
 		self.addChild(vc)
 		vc.view.frame = self.view.bounds
 		self.view.insertSubview(vc.view, belowSubview: belowView)
@@ -51,7 +51,7 @@ public extension UIViewController {
 		vc.didMove(toParent: self)
 	}
 
-	public func dgs_removeFromParent() {
+	func dgs_removeFromParent() {
 		self.willMove(toParent: nil)
 		if self.isViewLoaded {
 			self.view.removeFromSuperview()
@@ -59,7 +59,7 @@ public extension UIViewController {
 		self.removeFromParent()
 	}
 
-	public func setSwipeToBackEnabled(_ enabled: Bool) {
+	func setSwipeToBackEnabled(_ enabled: Bool) {
 		guard self.parent === self.navigationController else { return }
 		self.navigationController?.interactivePopGestureRecognizer?.isEnabled = enabled
 		self.navigationController?.interactivePopGestureRecognizer?.delegate = nil

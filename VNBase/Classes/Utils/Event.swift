@@ -22,8 +22,8 @@ internal final class EventHandler<TArgs>: Hashable {
 		self.actions.append(action)
 	}
 
-	internal var hashValue: Int {
-		return self.uuid.hashValue
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(self.uuid)
 	}
 
 	internal static func ==(lhs: EventHandler, rhs: EventHandler) -> Bool {

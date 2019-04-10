@@ -1,18 +1,18 @@
 public extension UICollectionView {
 
-	public func register(headerClasses classes: RegisterableClass...) {
+	func register(headerClasses classes: RegisterableClass...) {
 		self.register(headerClasses: classes)
 	}
 
-	public func register(headerClasses classes: [RegisterableClass]) {
+	func register(headerClasses classes: [RegisterableClass]) {
 		self.register(viewClasses: classes, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
 	}
 
-	public func register(footerClasses classes: RegisterableClass...) {
+	func register(footerClasses classes: RegisterableClass...) {
 		self.register(footerClasses: classes)
 	}
 
-	public func register(footerClasses classes: [RegisterableClass]) {
+	func register(footerClasses classes: [RegisterableClass]) {
 		self.register(viewClasses: classes, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter)
 	}
 

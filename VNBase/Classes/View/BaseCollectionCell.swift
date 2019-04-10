@@ -6,11 +6,11 @@ public protocol IHaveSize: AnyObject {
 
 public extension UICollectionView {
 
-	public func register(_ classes: RegisterableClass...) {
+	func register(_ classes: RegisterableClass...) {
 		self.registerClasses(classes)
 	}
 
-	public func registerClasses(_ classes: [RegisterableClass]) {
+	func registerClasses(_ classes: [RegisterableClass]) {
 		for regClass in classes {
 			guard let cellClass = regClass as? UICollectionViewCell.Type else {
 				assertionFailure("Can't register cell class \(String(describing: regClass))")

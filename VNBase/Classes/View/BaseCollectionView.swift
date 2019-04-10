@@ -1,6 +1,4 @@
-import TLIndexPathTools
-
-open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TLIndexPathControllerDelegate {
+open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
@@ -117,29 +115,6 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		}
 	}
 
-	// MARK: TLIndexPathControllerDelegate
-
-	public func controller(_ controller: TLIndexPathController, didUpdateDataModel updates: TLIndexPathUpdates) {
-
-		self.viewModel.isUpdating = true
-		let completion = { [weak self] in
-			guard let this = self else { return }
-
-			this.forUpdatingAction?()
-			this.viewModel.isUpdating = false
-			this.viewModel.onTableUpdated?()
-		}
-
-		if self.isDecelerating || !self.isUpdateAnimated {
-			self.reloadData()
-			completion()
-		} else {
-			updates.performBatchUpdates(on: self, completion: { (finished) in
-				completion()
-			})
-		}
-	}
-
 	// MARK: UICollectionViewDelegateFlowLayout
 
 	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -175,3 +150,27 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 }
 
 
+extension BaseCollectionView: IndexPathControllerDelegate {
+
+	func controller(_ controller: IndexPathController, didUpdateDataModel updates: IndexPathUpdates) {
+		self.viewModel.isUpdating = true
+		let completion = { [weak self] in
+			guard let this = self else { return }
+
+			this.forUpdatingAction?()
+			this.viewModel.isUpdating = false
+			this.viewModel.onTableUpdated?()
+		}
+
+		if self.isDecelerating || !self.isUpdateAnimated {
+			self.reloadData()
+			completion()
+		} else {
+			updates.performBatchUpdates(on: self, completion: { (finished) in
+				completion()
+			})
+		}
+
+	}
+
+}

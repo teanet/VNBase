@@ -1,24 +1,24 @@
 internal extension DateFormatter {
 
-	internal static var dMMMM: DateFormatter = {
+	static var dMMMM: DateFormatter = {
 		let df = DateFormatter()
 		df.dateFormat = "d MMMM"
 		return df
 	}()
 
-	internal static var dMMMMyyyy: DateFormatter = {
+	static var dMMMMyyyy: DateFormatter = {
 		let df = DateFormatter()
 		df.dateFormat = "d MMMM yyyy"
 		return df
 	}()
 
-	internal static var MMMM: DateFormatter = {
+	static var MMMM: DateFormatter = {
 		let df = DateFormatter()
 		df.dateFormat = "MMMM"
 		return df
 	}()
 
-	internal static var HHmmddMMyyyy: DateFormatter = {
+	static var HHmmddMMyyyy: DateFormatter = {
 		let df = DateFormatter()
 		df.dateFormat = "HH:mm dd/MM/yyyy"
 		return df

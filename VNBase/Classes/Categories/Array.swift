@@ -15,7 +15,7 @@ public extension Array where Element: Equatable {
 
 public extension Array where Element : AnyObject {
 
-	public func indexByPointerComparing(of element: Element) -> Int? {
+	func indexByPointerComparing(of element: Element) -> Int? {
 		var index: Int?
 
 		for (indexInArray, elementInArray) in self.enumerated() {
@@ -28,20 +28,20 @@ public extension Array where Element : AnyObject {
 		return index
 	}
 
-	public mutating func removeByPointerComparing(element: Element) {
+	mutating func removeByPointerComparing(element: Element) {
 		if let index = self.indexByPointerComparing(of: element) {
 			self.remove(at: index)
 		}
 	}
 
-    public mutating func removeByPointerComparing(elements: [Element]) {
+	mutating func removeByPointerComparing(elements: [Element]) {
         guard elements.count > 0 else { return }
         for element in elements {
             self.removeByPointerComparing(element: element)
         }
     }
 
-	public mutating func replace(at index: Int, with object: Element) {
+	mutating func replace(at index: Int, with object: Element) {
 		guard self.isIndexValid(index: index) else { return }
 
 		self[index] = object
@@ -55,24 +55,24 @@ public extension Array {
 		return (0 ..< 2 * self.count - 1).map { $0 % 2 == 0 ? self[$0/2] : separator }
 	}
 
-	public func isIndexValid(index: Int) -> Bool {
+	func isIndexValid(index: Int) -> Bool {
 		return index >= 0 && index < self.count
 	}
 
-	public func safeObject(at index: Int) -> Element? {
+	func safeObject(at index: Int) -> Element? {
 		guard self.isIndexValid(index: index) else { return nil }
 		return self[index]
 	}
 
-	public func groupBy<Key : Hashable, Item>(_ fn:(Item) -> Key) -> [Group<Key,Item>] {
+	func groupBy<Key : Hashable, Item>(_ fn:(Item) -> Key) -> [Group<Key,Item>] {
 		return self.groupBy(fn, matchWith: nil, valueAs: nil)
 	}
 
-	public func groupBy<Key : Hashable, Item>(_ fn:(Item) -> Key, matchWith:((Key,Key) -> Bool)?) -> [Group<Key,Item>] {
+	func groupBy<Key : Hashable, Item>(_ fn:(Item) -> Key, matchWith:((Key,Key) -> Bool)?) -> [Group<Key,Item>] {
 		return self.groupBy(fn, matchWith: matchWith, valueAs: nil)
 	}
 
-	public func groupBy<Key : Hashable, Item>(_ fn: (Item) -> Key,
+	func groupBy<Key : Hashable, Item>(_ fn: (Item) -> Key,
 	                    matchWith: ((Key,Key) -> Bool)?,
 	                    valueAs:   ((Item) -> Item)?) -> [Group<Key,Item>]
 	{
@@ -110,7 +110,7 @@ public extension Array {
 		return map.values.map { $0 as Group<Key,Item> }
 	}
 
-	public struct Group<Key,Item> {
+	struct Group<Key,Item> {
 
 		public let key: Key
 		public var items = [Item]()

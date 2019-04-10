@@ -1,6 +1,4 @@
-import TLIndexPathTools
-
-open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSource, TLIndexPathControllerDelegate {
+open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
 
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
@@ -177,10 +175,11 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		self.viewModel.commit(editingStyle: editingStyle, for: indexPath)
 	}
 
-	// MARK: TLIndexPathControllerDelegate
+}
 
-	public func controller(_ controller: TLIndexPathController, didUpdateDataModel updates: TLIndexPathUpdates) {
+extension BaseTableView: IndexPathControllerDelegate {
 
+	func controller(_ controller: IndexPathController, didUpdateDataModel updates: IndexPathUpdates) {
 		let block = { [weak self] in
 			guard let this = self else { return }
 
@@ -192,7 +191,7 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 			self.reloadData()
 			block()
 		} else {
-			updates.performBatchUpdates(on: self, with: self.updateAnimation) { finished in
+			updates.performBatchUpdates(on: self, animation: self.updateAnimation) { finished in
 				block()
 			}
 		}

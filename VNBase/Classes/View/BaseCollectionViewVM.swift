@@ -1,5 +1,3 @@
-import TLIndexPathTools
-
 open class BaseCollectionViewVM: BaseVM {
 
 	open var sections: [TableSectionVM] {
@@ -37,14 +35,14 @@ open class BaseCollectionViewVM: BaseVM {
 	public var onSelect: ((BaseCellVM) -> Void)?
 
 	internal var isUpdating = false
-	internal let indexpathController: TLIndexPathController
+	internal let indexpathController: IndexPathController
 	internal var onTableUpdated: VoidBlock?
 
 	private let loadingRow: BaseCellVM?
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
-		self.dataModel = TLIndexPathDataModel(sections: sections)
-		self.indexpathController = TLIndexPathController()
+		self.dataModel = IndexPathModel(sections: sections)
+		self.indexpathController = IndexPathController(dataModel: self.dataModel)
 		self.loadingRow = loadingRow
 		self.sections = sections
 		super.init()
@@ -55,19 +53,18 @@ open class BaseCollectionViewVM: BaseVM {
 		}
 	}
 
-	internal var dataModel: TLIndexPathDataModel {
+	internal var dataModel: IndexPathModel {
 		didSet {
 			self.indexpathController.dataModel = self.dataModel
 		}
 	}
 
 	public var sectionsCount: Int {
-		return self.dataModel.numberOfSections
+		return self.dataModel.sections.count
 	}
 
 	public func numberOfRows(in sectionIndex: Int) -> Int {
-		let numberOfRows = self.dataModel.numberOfRows(inSection: sectionIndex)
-		return numberOfRows == NSNotFound ? 0 : numberOfRows
+		return self.dataModel.numberOfItems(in: sectionIndex)
 	}
 
 	public func section(at index: Int) -> TableSectionVM? {
@@ -75,7 +72,7 @@ open class BaseCollectionViewVM: BaseVM {
 	}
 
 	public func item(at indexPath: IndexPath) -> BaseCellVM? {
-		return self.dataModel.item(at: indexPath) as? BaseCellVM
+		return self.dataModel.item(at: indexPath)
 	}
 
 	open func didSelect(at indexPath: IndexPath) {
@@ -86,7 +83,7 @@ open class BaseCollectionViewVM: BaseVM {
 	}
 
 	public func updateDataModel() {
-		self.dataModel = TLIndexPathDataModel(sections: self.sections)
+		self.dataModel = IndexPathModel(sections: self.sections)
 	}
 
 	private func set(items: [BaseCellVM]) {
@@ -96,15 +93,3 @@ open class BaseCollectionViewVM: BaseVM {
 	}
 
 }
-
-fileprivate extension TLIndexPathDataModel {
-
-	fileprivate convenience init(sections: [TableSectionVM]) {
-		let sectionInfos = sections.map { section -> TLIndexPathSectionInfo in
-			return TLIndexPathSectionInfo(items: section.rows, name: section.uniqueIdentifier)
-		}
-		self.init(sectionInfos: sectionInfos, identifierKeyPath: #keyPath(BaseCellVM.uniqueIdentifier))
-	}
-
-}
-

@@ -1,6 +1,6 @@
 internal extension CAMediaTimingFunction {
 
-	internal func value(at progress: Float) -> Float {
+	func value(at progress: Float) -> Float {
 		var a: [Float] = [0.0,0.0]
 		var b: [Float] = [0.0,0.0]
 		var c: [Float] = [0.0,0.0]
