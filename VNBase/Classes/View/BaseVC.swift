@@ -48,9 +48,10 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		super.viewWillAppear(animated)
 		self.viewModel.appear()
 		self.updateNavigationBarStyleIfNeeded()
-
+		self.navigationController?.setNavigationBarHidden(self.navigationBarStyle == nil, animated: animated)
 		if let toInterfaceOrientation = self.toInterfaceOrientation {
 			UIDevice.current.setValue(toInterfaceOrientation.rawValue, forKey: "orientation")
+			UIViewController.attemptRotationToDeviceOrientation()
 		}
 	}
 
@@ -79,6 +80,7 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	}
 
 	open var navigationBarStyle: NavigationBarStyle? {
+		assertionFailure("You should override this method")
 		return nil
 	}
 
