@@ -1,4 +1,4 @@
-public class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable {
+open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable {
 
 	public required init(rawValue: T) {
 		self.rawValue = rawValue
