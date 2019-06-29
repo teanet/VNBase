@@ -1,4 +1,4 @@
-open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable {
+open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable, CustomStringConvertible, CustomDebugStringConvertible {
 
 	public required init(rawValue: T) {
 		self.rawValue = rawValue
@@ -27,6 +27,14 @@ open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable {
 	public func encode(to encoder: Encoder) throws {
 		var container = encoder.singleValueContainer()
 		try container.encode(self.rawValue)
+	}
+
+	public var description: String {
+		return "\(self.rawValue)"
+	}
+
+	public var debugDescription: String {
+		return "\(self.rawValue)"
 	}
 
 }

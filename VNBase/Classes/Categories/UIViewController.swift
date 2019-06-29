@@ -23,6 +23,13 @@ public extension UIViewController {
 		return self
 	}
 
+	func topPresentedVC() -> UIViewController {
+		if let presentedVC = self.presentedViewController {
+			return presentedVC.topPresentedVC()
+		}
+		return self
+	}
+
 	func dgs_add(vc: UIViewController, view: UIView, closure: ((_ make: ConstraintMaker) -> Void)? = nil) {
 		self.addChild(vc)
 		vc.view.frame = view.bounds
