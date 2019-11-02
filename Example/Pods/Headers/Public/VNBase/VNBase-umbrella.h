@@ -1,1 +1,1 @@
-/Users/teanet/Documents/projects/VNBase/Example/Pods/Target Support Files/VNBase/VNBase-umbrella.h
+../../../Target Support Files/VNBase/VNBase-umbrella.h

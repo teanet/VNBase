@@ -1,13 +1,13 @@
 PODS:
   - SnapKit (4.2.0)
-  - VNBase (0.2.10):
+  - VNBase (0.3.7):
     - SnapKit (~> 4.2.0)
 
 DEPENDENCIES:
   - VNBase (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  VNBase: 6e7484c21ae83ba9ba06d4952acd5519dc643318
+  VNBase: c3eb8c02f71f93648658ec32002bc78ac94dd0ff
 
 PODFILE CHECKSUM: 7f7767978f2c06429b26a611db28e0abd0e18bcc
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.8.4

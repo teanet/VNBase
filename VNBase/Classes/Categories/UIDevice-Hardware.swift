@@ -1,5 +1,5 @@
-class UIDeviceHardware {
-	class func platformModelString() -> String {
+public struct UIDeviceHardware {
+	public static func platformModelString() -> String {
 		if let key = "hw.machine".cString(using: String.Encoding.utf8) {
 			var size: Int = 0
 			sysctlbyname(key, nil, &size, nil, 0)
@@ -11,35 +11,41 @@ class UIDeviceHardware {
 		return "Unknown"
 	}
 
-	class func platformString() -> String {
+	public static func platformString() -> String {
 		switch UIDeviceHardware.platformModelString() {
-			case "iPhone1,1":   return "iPhone 1G"
-			case "iPhone1,2":   return "iPhone 3G"
-			case "iPhone2,1":   return "iPhone 3GS"
-			case "iPhone3,1":   return "iPhone 4"
-			case "iPhone3,3":   return "VerizoniPhone 4"
-			case "iPhone4,1":   return "iPhone 4S"
-			case "iPhone5,1":   return "iPhone 5 (GSM)"
-			case "iPhone5,2":   return "iPhone 5 (GSM+CDMA)"
-			case "iPhone5,3":   return "iPhone 5c (GSM)"
-			case "iPhone5,4":   return "iPhone 5c (GSM+CDMA)"
-			case "iPhone6,1":   return "iPhone 5s (GSM)"
-			case "iPhone6,2":   return "iPhone 5s (GSM+CDMA)"
-			case "iPhone7,2":   return "iPhone 6"
-			case "iPhone7,1":   return "iPhone 6 Plus"
-			case "iPhone8,1"    : return "iPhone 6s"
-			case "iPhone8,2"    : return "iPhone 6s Plus"
-			case "iPhone8,4"    : return "iPhone SE"
-			case "iPhone9,1"    : return "iPhone 7"
-			case "iPhone9,2"    : return "iPhone 7 Plus"
-			case "iPhone9,3"    : return "iPhone 7"
-			case "iPhone9,4"    : return "iPhone 7 Plus"
-			case "iPhone10,1"    : return "iPhone 8"
-			case "iPhone10,4"    : return "iPhone 8"
-			case "iPhone10,2"    : return "iPhone 8 Plus"
-			case "iPhone10,5"    : return "iPhone 8 Plus"
-			case "iPhone10,3"    : return "iPhone X"
-			case "iPhone10,6"    : return "iPhone X"
+			case "iPhone1,1":   				return "iPhone 1G"
+			case "iPhone1,2":   				return "iPhone 3G"
+			case "iPhone2,1":   				return "iPhone 3GS"
+			case "iPhone3,1":   				return "iPhone 4"
+			case "iPhone3,3":   				return "VerizoniPhone 4"
+			case "iPhone4,1":   				return "iPhone 4S"
+			case "iPhone5,1":   				return "iPhone 5 (GSM)"
+			case "iPhone5,2":   				return "iPhone 5 (GSM+CDMA)"
+			case "iPhone5,3":   				return "iPhone 5c (GSM)"
+			case "iPhone5,4":   				return "iPhone 5c (GSM+CDMA)"
+			case "iPhone6,1":   				return "iPhone 5s (GSM)"
+			case "iPhone6,2":   				return "iPhone 5s (GSM+CDMA)"
+			case "iPhone7,2":   				return "iPhone 6"
+			case "iPhone7,1":   				return "iPhone 6 Plus"
+			case "iPhone8,1":	 				return "iPhone 6s"
+			case "iPhone8,2":	 				return "iPhone 6s Plus"
+			case "iPhone8,4":	 				return "iPhone SE"
+			case "iPhone9,1":	 				return "iPhone 7"
+			case "iPhone9,2":	 				return "iPhone 7 Plus"
+			case "iPhone9,3":	 				return "iPhone 7"
+			case "iPhone9,4":	 				return "iPhone 7 Plus"
+			case "iPhone10,1":	 				return "iPhone 8"
+			case "iPhone10,4":	 				return "iPhone 8"
+			case "iPhone10,2":	 				return "iPhone 8 Plus"
+			case "iPhone10,5":	 				return "iPhone 8 Plus"
+			case "iPhone10,3", "iPhone10,6": 	return "iPhone X"
+			case "iPhone11,2":                	return "iPhone XS"
+			case "iPhone11,4", "iPhone11,6":  	return "iPhone XS Max"
+			case "iPhone11,8":                	return "iPhone XR"
+			case "iPhone12,1":                	return "iPhone 11"
+			case "iPhone12,3":                	return "iPhone 11 Pro"
+			case "iPhone12,5":                	return "iPhone 11 Pro Max"
+
 			case "iPod1,1":     return "iPod Touch 1G"
 			case "iPod2,1":     return "iPod Touch 2G"
 			case "iPod3,1":     return "iPod Touch 3G"
