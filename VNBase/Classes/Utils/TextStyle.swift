@@ -1,10 +1,23 @@
 import UIKit
 
 public struct TextStyle {
-	public let font: UIFont
-	public let interLetterSpacing: CGFloat
+	public var font: UIFont
+	public var interLetterSpacing: CGFloat
 	public var color: UIColor
 	public var lineHeight: CGFloat = 0
+
+	public init(
+		font: UIFont,
+		color: UIColor = .white,
+		interLetterSpacing: CGFloat = 0,
+		lineHeight: CGFloat = 0
+	) {
+		self.font = font
+		self.color = color
+		self.interLetterSpacing = interLetterSpacing
+		self.lineHeight = lineHeight
+	}
+
 }
 
 public extension TextStyle {
