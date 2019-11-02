@@ -16,7 +16,7 @@ final class DemoCell: BaseCell<DemoCellVM> {
 
 final class DemoCellVM: BaseCellVM {
 
-	override func cellClass() -> UITableViewCell.Type? { DemoCell.self }
+	func cellClass() -> UITableViewCell.Type { DemoCell.self }
 	let index: Int
 	init(index: Int) {
 		self.index = index

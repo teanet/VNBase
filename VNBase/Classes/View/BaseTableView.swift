@@ -80,7 +80,9 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 
 		let reuseIdentifier = row?.reuseIdentifier ?? kDefaultReuseIdentifier
 		if self.identifierToCellClassMap[reuseIdentifier] == nil {
-			if let cellClass = row?.cellClass() {
+
+			let registerableCell: IRegisterableCell? = row
+			if let cellClass = registerableCell?.cellClass?() {
 				self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
 			} else {
 				assertionFailure("You should register cell")

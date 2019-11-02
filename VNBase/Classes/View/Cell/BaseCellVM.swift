@@ -5,7 +5,12 @@
 
 public class BaseCellId: Id<String> {}
 
-open class BaseCellVM: BaseVM {
+@objc public protocol IRegisterableCell: AnyObject {
+	/// You can override it to return cell class, no need register cell then
+	@objc optional func cellClass() -> UITableViewCell.Type
+}
+
+open class BaseCellVM: BaseVM, IRegisterableCell {
 
 	public internal(set) var isVisible: Bool = false
 	public internal(set) var isAppearedFirstTime: Bool = false
@@ -15,10 +20,7 @@ open class BaseCellVM: BaseVM {
 	public static var reuseIdentifier: String {
 		return NSStringFromClass(self)
 	}
-	/// You can override it to return cell class, no need register cell then
-	open func cellClass() -> UITableViewCell.Type? {
-		return nil
-	}
+
 	/**
 	Уникальный идентификатор ячейки (разный для разных ячеек)
 	*/
