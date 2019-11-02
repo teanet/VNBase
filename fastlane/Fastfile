@@ -5,10 +5,10 @@ default_platform :ios
 platform :ios do
 
   lane :new_minor do 
-    bump_version(bump_type: "minor")
+    rlz(bump_type: "minor")
   end
 
-  lane :bump_version do |options|
+  lane :rlz do |options|
 
     version = options[:version]
     if version.to_s.empty?
