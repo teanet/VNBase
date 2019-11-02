@@ -452,6 +452,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		735B55B8236DC09700A70686 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4400470886192AB469F450C84D051449 /* BaseCell.swift */,
+				B50BEF04188A9282C1D4967A4A508F98 /* BaseCellVM.swift */,
+				3819C2E1F0E81CA1C881F25CACA59F7D /* TableSectionVM.swift */,
+				447D46EDFD851211A3CE522F100627A3 /* BaseCollectionCell.swift */,
+				77CB8E4F7ED2A889082947C9554C791E /* BaseCollectionReusableView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		8F04DE55936B310FF79189443BD2918B /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,9 +484,7 @@
 		A314D161707C5F109E572A840B9788FD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4400470886192AB469F450C84D051449 /* BaseCell.swift */,
-				447D46EDFD851211A3CE522F100627A3 /* BaseCollectionCell.swift */,
-				77CB8E4F7ED2A889082947C9554C791E /* BaseCollectionReusableView.swift */,
+				735B55B8236DC09700A70686 /* Cell */,
 				787CFC8D6375EC40F5A8318F79D62D68 /* BaseCollectionView.swift */,
 				516E30720F4949335E925A1BB9D97DF3 /* BaseCollectionViewVM.swift */,
 				6CD4654BED2F764B2D7959CE45C51FCC /* BaseControl.swift */,
@@ -515,13 +525,11 @@
 		CC4350227971528818B7574F06AD2CC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B50BEF04188A9282C1D4967A4A508F98 /* BaseCellVM.swift */,
 				AFA0DD095F66495DF2BADA7E76AC685F /* BaseVM.swift */,
 				90C727087E59BC0A998E750E45153C95 /* Id.swift */,
 				D520A04BBB396F54C58C274BB40568AA /* IndexPathController.swift */,
 				72C1D3B8C3092096D1F04734DE6F91C5 /* IndexPathModel.swift */,
 				830BA1A6BD9DE92761ED053A6F453E9C /* IndexPathUpdates.swift */,
-				3819C2E1F0E81CA1C881F25CACA59F7D /* TableSectionVM.swift */,
 			);
 			name = Model;
 			path = VNBase/Classes/Model;

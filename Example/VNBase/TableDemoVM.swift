@@ -1,6 +1,6 @@
 import VNBase
 
-internal final class TableDemoVM: BaseTableVM {
+final class TableDemoVM: BaseTableVM {
 
 	let rows = [
 		DemoCellVM(index: 0),

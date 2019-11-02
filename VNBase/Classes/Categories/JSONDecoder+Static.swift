@@ -1,10 +1,10 @@
-internal extension JSONDecoder {
+extension JSONDecoder {
 
 	static let unwrap = JSONDecoder()
 
 }
 
-internal extension JSONEncoder {
+extension JSONEncoder {
 
 	static let wrap = JSONEncoder()
 

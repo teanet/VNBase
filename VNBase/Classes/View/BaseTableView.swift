@@ -6,7 +6,8 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 	public var isUpdateAnimated = false
 	public var updateAnimation = UITableView.RowAnimation.none
 
-    private var identifierToCellMap = [String:IHaveHeight.Type]()
+    private var identifierToCellMap = [String: IHaveHeight.Type]()
+	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
 
 	deinit {
 		self.delegate = nil
@@ -58,6 +59,9 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
         if let cellClass = cellClass as? IHaveHeight.Type {
             self.identifierToCellMap[identifier] = cellClass
         }
+        if let cellClass = cellClass as? UITableViewCell.Type {
+            self.identifierToCellClassMap[identifier] = cellClass
+        }
         super.register(cellClass, forCellReuseIdentifier: identifier)
     }
 
@@ -75,6 +79,13 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		let row = self.viewModel.item(at: indexPath)
 
 		let reuseIdentifier = row?.reuseIdentifier ?? kDefaultReuseIdentifier
+		if self.identifierToCellClassMap[reuseIdentifier] == nil {
+			if let cellClass = row?.cellClass() {
+				self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
+			} else {
+				assertionFailure("You should register cell")
+			}
+		}
 		let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row

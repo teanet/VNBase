@@ -1,4 +1,4 @@
-internal extension CAMediaTimingFunction {
+extension CAMediaTimingFunction {
 
 	func value(at progress: Float) -> Float {
 		var a: [Float] = [0.0,0.0]
@@ -18,15 +18,15 @@ internal extension CAMediaTimingFunction {
 
 }
 
-internal func cubicFunctionValue(a: Float, b: Float, c: Float, d: Float, x: Float) -> Float {
+func cubicFunctionValue(a: Float, b: Float, c: Float, d: Float, x: Float) -> Float {
 	return a*x*x*x + b*x*x + c*x + d
 }
 
-internal func cubicDerivativeValue(a: Float, b: Float, c: Float, d: Float, x: Float) -> Float {
+func cubicDerivativeValue(a: Float, b: Float, c: Float, d: Float, x: Float) -> Float {
 	return (3*a*x*x) + (2*b*x) + c
 }
 
-internal func rootOfCubic(a: Float, b: Float, c: Float, d: Float, startPoint: Float) -> Float {
+func rootOfCubic(a: Float, b: Float, c: Float, d: Float, startPoint: Float) -> Float {
 	var x = startPoint
 	var y: Int = 0
 	var lastX: Float = 1

@@ -2,23 +2,23 @@ fileprivate struct LockWrapper {
 	fileprivate static let lockQueue = DispatchQueue(label: "com.grymmobile.vncommon.event.lockqueue")
 }
 
-internal final class EventHandler<TArgs>: Hashable {
+final class EventHandler<TArgs>: Hashable {
 
-	internal weak var target: AnyObject?
-	internal var actions: [Event<TArgs>.Action]
+	weak var target: AnyObject?
+	var actions: [Event<TArgs>.Action]
 
 	private let uuid = UUID()
 
-	internal required init(target: AnyObject, action: @escaping Event<TArgs>.Action) {
+	required init(target: AnyObject, action: @escaping Event<TArgs>.Action) {
 		self.actions = [action]
 		self.target = target
 	}
 
-	internal convenience init(tuple: Event<TArgs>.Element) {
+	convenience init(tuple: Event<TArgs>.Element) {
 		self.init(target: tuple.target, action: tuple.action)
 	}
 
-	internal func add(action: @escaping Event<TArgs>.Action) {
+	func add(action: @escaping Event<TArgs>.Action) {
 		self.actions.append(action)
 	}
 
@@ -26,7 +26,7 @@ internal final class EventHandler<TArgs>: Hashable {
 		hasher.combine(self.uuid)
 	}
 
-	internal static func ==(lhs: EventHandler, rhs: EventHandler) -> Bool {
+	static func ==(lhs: EventHandler, rhs: EventHandler) -> Bool {
 		return lhs.target === rhs.target
 	}
 
@@ -37,7 +37,7 @@ public class Event<TArgs> {
 	public typealias Action = (TArgs) -> Void
 	public typealias Element = (target: AnyObject, action: Action)
 
-	internal var handlers = Set<EventHandler<TArgs>>()
+	var handlers = Set<EventHandler<TArgs>>()
 
 	private let shouldReplayLast: Bool
 	private var lastValue: TArgs?

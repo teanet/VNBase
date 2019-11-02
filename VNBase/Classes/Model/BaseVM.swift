@@ -3,7 +3,7 @@ open class BaseVM: NSObject {
 		return lhs === rhs
 	}
 
-	internal weak var didChangeDelegate: ViewModelChangedDelegate?
+	weak var didChangeDelegate: ViewModelChangedDelegate?
 
 	/**
 	Вызывается при изменении любого свойства вьюмодели.

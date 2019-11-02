@@ -1,5 +1,6 @@
 open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 
+	open override var navigationBarStyle: NavigationBarStyle? { nil }
 	public let tableView: BaseTableView
 	public var clearsSelectionOnViewWillAppear = true
 

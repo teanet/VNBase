@@ -39,9 +39,9 @@ open class BaseTableViewVM: BaseVM {
 	public var shouldLoadNextPage = true
 	public private(set) var isPrefetching = false
 
-	internal private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
-	internal var isUpdating = false
-	internal let indexpathController: IndexPathController
+	private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
+	var isUpdating = false
+	let indexpathController: IndexPathController
 
 	public var prefetchBlock: DidFetchItemsBlock? = nil
 	private let loadingRow: BaseCellVM?
@@ -54,7 +54,7 @@ open class BaseTableViewVM: BaseVM {
 		super.init()
 	}
 
-	internal var dataModel: IndexPathModel {
+	var dataModel: IndexPathModel {
 		didSet {
 			self.indexpathController.dataModel = self.dataModel
 		}

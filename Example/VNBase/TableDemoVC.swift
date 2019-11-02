@@ -1,14 +1,15 @@
 import VNBase
 
-internal final class TableDemoVC: BaseTableVC<TableDemoVM> {
+final class TableDemoVC: BaseTableVC<TableDemoVM> {
 
-	internal override func viewDidLoad() {
+	override var navigationBarStyle: NavigationBarStyle? { .init() }
+
+	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.setupRefreshControl()
 
 		self.tableView.isUpdateAnimated = true
 		self.tableView.updateAnimation = .fade
-		self.tableView.register(cell: DemoCell.self)
 
 		let segmentedControl = UISegmentedControl(items: self.viewModel.sections.enumerated().map({ "\($0.offset)" }))
 		segmentedControl.addTarget(self, action: #selector(self.change(_:)), for: .valueChanged)

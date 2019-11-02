@@ -1,6 +1,6 @@
 extension String { // + HTML
 
-	internal var html: NSAttributedString {
+	var html: NSAttributedString {
 		guard let data = self.data(using: .utf8) else { return NSAttributedString() }
 		do {
 			return try NSAttributedString(data: data, options: [
@@ -12,7 +12,7 @@ extension String { // + HTML
 		}
 	}
 
-	internal var trimmed: String
+	var trimmed: String
 	{
 		let trimmedString = self.trimmingCharacters(in: .whitespacesAndNewlines)
 		return trimmedString

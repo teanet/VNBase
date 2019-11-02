@@ -23,20 +23,20 @@
 		)
 	)
 
-	@objc public let tintColor: UIColor
-	@objc public let barTintColor: UIColor
+	@objc public let tintColor: UIColor?
+	@objc public let barTintColor: UIColor?
 	@objc public let translucent: Bool
 	@objc public let titleTextAttributes: [NSAttributedString.Key : Any]
 	@objc public let backgroundImage: UIImage?
 	@objc public let shadowImage: UIImage?
 
 	public init(
-		tintColor: UIColor,
-		barTintColor: UIColor,
-		translucent: Bool,
-		titleTextAttributes: [NSAttributedString.Key : Any],
+		tintColor: UIColor? = nil,
+		barTintColor: UIColor? = nil,
+		translucent: Bool = false,
+		titleTextAttributes: [NSAttributedString.Key : Any] = [:],
 		backgroundImage: UIImage? = nil,
-		shadowImage: UIImage? = UIImage()
+		shadowImage: UIImage? = nil
 	) {
 		self.tintColor = tintColor
 		self.barTintColor = barTintColor

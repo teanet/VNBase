@@ -14,7 +14,12 @@ open class BaseCellVM: BaseVM {
 	public var editingActions: [UITableViewRowAction]?
 	public static var reuseIdentifier: String {
 		return NSStringFromClass(self)
-	}	/**
+	}
+	/// You can override it to return cell class, no need register cell then
+	open func cellClass() -> UITableViewCell.Type? {
+		return nil
+	}
+	/**
 	Уникальный идентификатор ячейки (разный для разных ячеек)
 	*/
 	public var reuseIdentifier: String {
@@ -24,7 +29,7 @@ open class BaseCellVM: BaseVM {
 	open var canMove: Bool { return false }
 	open var editingStyle: UITableViewCell.EditingStyle { return .none }
 	let identifier: BaseCellId
-	internal private(set) var isSelected: Bool = false
+	private(set) var isSelected: Bool = false
 
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString

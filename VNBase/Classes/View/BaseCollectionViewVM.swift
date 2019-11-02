@@ -34,9 +34,9 @@ open class BaseCollectionViewVM: BaseVM {
 
 	public var onSelect: ((BaseCellVM) -> Void)?
 
-	internal var isUpdating = false
-	internal let indexpathController: IndexPathController
-	internal var onTableUpdated: VoidBlock?
+	var isUpdating = false
+	let indexpathController: IndexPathController
+	var onTableUpdated: VoidBlock?
 
 	private let loadingRow: BaseCellVM?
 
@@ -53,7 +53,7 @@ open class BaseCollectionViewVM: BaseVM {
 		}
 	}
 
-	internal var dataModel: IndexPathModel {
+	var dataModel: IndexPathModel {
 		didSet {
 			self.indexpathController.dataModel = self.dataModel
 		}

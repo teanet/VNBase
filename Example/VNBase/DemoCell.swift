@@ -1,10 +1,9 @@
 import VNBase
 
-internal final class DemoCell: BaseCell<DemoCellVM> {
+final class DemoCell: BaseCell<DemoCellVM> {
 
-	internal override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-
 	}
 
 	override func viewModelChanged() {
@@ -15,10 +14,11 @@ internal final class DemoCell: BaseCell<DemoCellVM> {
 
 }
 
-internal final class DemoCellVM: BaseCellVM {
+final class DemoCellVM: BaseCellVM {
 
+	override func cellClass() -> UITableViewCell.Type? { DemoCell.self }
 	let index: Int
-	internal init(index: Int) {
+	init(index: Int) {
 		self.index = index
 	}
 

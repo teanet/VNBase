@@ -10,10 +10,10 @@ open class TableSectionVM: Equatable {
 	public var title: String?
 	public var footer: String?
 	public let uniqueIdentifier: String
-	internal let identifier: TableSectionId
+	let identifier: TableSectionId
 	public var header: BaseHeaderViewVM?
 
-    internal var onRowsChange: VoidBlock?
+    var onRowsChange: VoidBlock?
 
 	public init(rows: [BaseCellVM] = [], header: BaseHeaderViewVM? = nil) {
 		self.rows = rows
