@@ -8,6 +8,7 @@ public class BaseCellId: Id<String> {}
 @objc public protocol IRegisterableCell: AnyObject {
 	/// You can override it to return cell class, no need register cell then
 	@objc optional func cellClass() -> UITableViewCell.Type
+	@objc optional func collectionCellClass() -> UICollectionViewCell.Type
 }
 
 open class BaseCellVM: BaseVM, IRegisterableCell {

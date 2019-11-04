@@ -17,6 +17,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	public var forUpdatingAction: VoidBlock?
 
 	private var identifierToCellMap = [ String: IHaveSize.Type ]()
+	private var identifierToCellClassMap = [String: UICollectionViewCell.Type]()
 
 	deinit {
 		self.delegate = nil
@@ -65,6 +66,9 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		if let cellClass = cellClass as? IHaveSize.Type {
 			self.identifierToCellMap[identifier] = cellClass
 		}
+        if let cellClass = cellClass as? UICollectionViewCell.Type {
+            self.identifierToCellClassMap[identifier] = cellClass
+        }
 		super.register(cellClass, forCellWithReuseIdentifier: identifier)
 	}
 
@@ -87,6 +91,15 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 			}
 			return reuseIdentifier
 		}()
+		if self.identifierToCellClassMap[reuseIdentifier] == nil {
+
+			let registerableCell: IRegisterableCell? = row
+			if let cellClass = registerableCell?.collectionCellClass?() {
+				self.register(cellClass, forCellWithReuseIdentifier: reuseIdentifier)
+			} else {
+				assertionFailure("You should register cell")
+			}
+		}
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row

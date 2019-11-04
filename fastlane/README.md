@@ -21,9 +21,9 @@ or alternatively using `brew cask install fastlane`
 fastlane ios new_minor
 ```
 
-### ios bump_version
+### ios rlz
 ```
-fastlane ios bump_version
+fastlane ios rlz
 ```
 
 
