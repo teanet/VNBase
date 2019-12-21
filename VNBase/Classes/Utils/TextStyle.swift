@@ -66,10 +66,39 @@ public extension TextStyle {
 
 
 public extension UIButton {
-	func apply(_ style: TextStyle, text: String, state: UIControl.State = .normal) {
-		let text = style.attributedString(text, textAlignment: .center)
+
+	func apply(
+		_ style: TextStyle,
+		text: String,
+		state: UIControl.State = .normal,
+		textAlignment: NSTextAlignment = .center
+	) {
+		let text = style.attributedString(text, textAlignment: textAlignment)
 		self.setAttributedTitle(text, for: state)
 	}
+
+	func apply(
+		text: String,
+		textAlignment: NSTextAlignment = .center,
+		normal: TextStyle,
+		highlighted: TextStyle? = nil,
+		disabled: TextStyle? = nil
+	) {
+		self.apply(normal, text: text, state: .normal, textAlignment: textAlignment)
+		self.apply(
+			highlighted ?? normal.with { $0.color = normal.color.withAlphaComponent(0.7) },
+			text: text,
+			state: .highlighted,
+			textAlignment: textAlignment
+		)
+		self.apply(
+			disabled ?? normal.with { $0.color = normal.color.withAlphaComponent(0.3) },
+			text: text,
+			state: .disabled,
+			textAlignment: textAlignment
+		)
+	}
+
 }
 
 public extension UILabel {
