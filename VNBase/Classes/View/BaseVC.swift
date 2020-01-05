@@ -49,7 +49,8 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		self.viewModel.appear()
 		self.updateNavigationBarStyleIfNeeded()
 		self.navigationController?.setNavigationBarHidden(self.navigationBarStyle == nil, animated: animated)
-		if let toInterfaceOrientation = self.toInterfaceOrientation {
+		if let toInterfaceOrientation = self.toInterfaceOrientation,
+			!self.supportedInterfaceOrientations.contains(UIApplication.shared.statusBarOrientation.mask) {
 			UIDevice.current.setValue(toInterfaceOrientation.rawValue, forKey: "orientation")
 			UIViewController.attemptRotationToDeviceOrientation()
 		}
@@ -93,16 +94,23 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		nc.navigationBar.apply(style)
 	}
 
-	open func createConstraints() {
+	open func createConstraints() {}
+	open func updateConstraints() {}
+	open func viewModelChanged() {}
 
-	}
+}
 
-	open func updateConstraints() {
+private extension UIInterfaceOrientation {
 
-	}
-
-	open func viewModelChanged() {
-
+	var mask: UIInterfaceOrientationMask {
+		switch self {
+			case .unknown: return []
+			case .portrait: return .portrait
+			case .portraitUpsideDown: return .portraitUpsideDown
+			case .landscapeLeft: return .landscapeLeft
+			case .landscapeRight: return .landscapeRight
+			@unknown default: return []
+		}
 	}
 
 }
