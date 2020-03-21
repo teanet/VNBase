@@ -150,7 +150,10 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		}
 	}
 
-	public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+	}
+
+	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 	}
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
