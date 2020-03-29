@@ -15,6 +15,9 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		733FCE99227ED9E80082E326 /* Id+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733FCE98227ED9E80082E326 /* Id+Example.swift */; };
+		73B25ECD2430ABB000D31A7D /* LandscapeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B25ECB2430ABB000D31A7D /* LandscapeVM.swift */; };
+		73B25ECE2430ABB000D31A7D /* LandscapeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B25ECC2430ABB000D31A7D /* LandscapeVC.swift */; };
+		73B25ED02430ADD100D31A7D /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B25ECF2430ADD100D31A7D /* NavigationController.swift */; };
 		86F78D912168C8DEE31B634E /* libPods-VNBase_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16385275590204AD2D328D /* libPods-VNBase_Tests.a */; };
 		CEC6C89522263DA100EF2DC8 /* TableDemoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6C89322263DA100EF2DC8 /* TableDemoVM.swift */; };
 		CEC6C89622263DA100EF2DC8 /* TableDemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6C89422263DA100EF2DC8 /* TableDemoVC.swift */; };
@@ -47,6 +50,9 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		733FCE98227ED9E80082E326 /* Id+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Id+Example.swift"; sourceTree = "<group>"; };
+		73B25ECB2430ABB000D31A7D /* LandscapeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeVM.swift; sourceTree = "<group>"; };
+		73B25ECC2430ABB000D31A7D /* LandscapeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeVC.swift; sourceTree = "<group>"; };
+		73B25ECF2430ADD100D31A7D /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7C16385275590204AD2D328D /* libPods-VNBase_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNBase_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B979D3E7F2419AEBCD25186 /* VNBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = VNBase.podspec; path = ../VNBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B86607A0616BC82CF3DFFFE8 /* Pods-VNBase_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.debug.xcconfig"; path = "Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +137,9 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				733FCE98227ED9E80082E326 /* Id+Example.swift */,
+				73B25ECB2430ABB000D31A7D /* LandscapeVM.swift */,
+				73B25ECC2430ABB000D31A7D /* LandscapeVC.swift */,
+				73B25ECF2430ADD100D31A7D /* NavigationController.swift */,
 			);
 			name = "Example for VNBase";
 			path = VNBase;
@@ -325,9 +334,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B25ECE2430ABB000D31A7D /* LandscapeVC.swift in Sources */,
 				CEC6C89522263DA100EF2DC8 /* TableDemoVM.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				CEC6C89622263DA100EF2DC8 /* TableDemoVC.swift in Sources */,
+				73B25ED02430ADD100D31A7D /* NavigationController.swift in Sources */,
+				73B25ECD2430ABB000D31A7D /* LandscapeVM.swift in Sources */,
 				733FCE99227ED9E80082E326 /* Id+Example.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				CEC6C89822263E5900EF2DC8 /* DemoCell.swift in Sources */,

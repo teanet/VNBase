@@ -2,10 +2,9 @@ import Foundation
 
 open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewModelChangedDelegate {
 
-	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
-	open var toInterfaceOrientation: UIInterfaceOrientation? { return .portrait }
-	open override var shouldAutorotate: Bool { return true }
-	open override var preferredStatusBarStyle: UIStatusBarStyle { return .default }
+	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
+	open override var shouldAutorotate: Bool { true }
+	open override var preferredStatusBarStyle: UIStatusBarStyle { .default }
 
 	public let viewModel: TViewModel
 	public private(set) lazy var refresh = UIRefreshControl()
@@ -49,11 +48,17 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		self.viewModel.appear()
 		self.updateNavigationBarStyleIfNeeded()
 		self.navigationController?.setNavigationBarHidden(self.navigationBarStyle == nil, animated: animated)
-		if let toInterfaceOrientation = self.toInterfaceOrientation,
-			!self.supportedInterfaceOrientations.contains(UIApplication.shared.statusBarOrientation.mask) {
-			UIDevice.current.setValue(toInterfaceOrientation.rawValue, forKey: "orientation")
+
+		assert(self.supportedInterfaceOrientations.contains(self.preferredInterfaceOrientationForPresentation.mask))
+
+		if !self.supportedInterfaceOrientations.contains(UIApplication.shared.statusBarOrientation.mask) {
+			UIDevice.current.rotate(
+				to: self.supportedInterfaceOrientations,
+				preferredInterfaceOrientation: self.preferredInterfaceOrientationForPresentation
+			)
 			UIViewController.attemptRotationToDeviceOrientation()
 		}
+
 	}
 
 	open override func viewDidAppear(_ animated: Bool) {
@@ -111,6 +116,55 @@ private extension UIInterfaceOrientation {
 			case .landscapeRight: return .landscapeRight
 			@unknown default: return []
 		}
+	}
+
+	var deviceOrientation: UIDeviceOrientation {
+		switch self {
+			case .unknown: return .unknown
+			case .portrait: return .portrait
+			case .portraitUpsideDown: return .portraitUpsideDown
+			case .landscapeLeft: return .landscapeLeft
+			case .landscapeRight: return .landscapeRight
+			@unknown default: return .unknown
+		}
+	}
+
+}
+
+extension UIDeviceOrientation {
+
+	func interfaceOrientation() -> UIInterfaceOrientation {
+		switch self {
+			case .portrait: return .portrait
+			case .portraitUpsideDown: return .portraitUpsideDown
+			case .landscapeLeft: return .landscapeLeft
+			case .landscapeRight: return .landscapeRight
+			case .unknown, .faceUp, .faceDown: return .unknown
+			@unknown default: return .unknown
+		}
+	}
+
+}
+
+extension UIDevice {
+
+	func rotate(
+		to mask: UIInterfaceOrientationMask,
+		preferredInterfaceOrientation: UIInterfaceOrientation
+	) {
+		let toInterfaceOrientation: UIInterfaceOrientation
+		let realOrientation = self.orientation.interfaceOrientation()
+
+		if self.orientation.isValidInterfaceOrientation && mask.contains(realOrientation.mask) {
+			toInterfaceOrientation = realOrientation
+		} else {
+			toInterfaceOrientation = preferredInterfaceOrientation
+		}
+
+		self.setValue(
+			toInterfaceOrientation.deviceOrientation.rawValue,
+			forKey: NSStringFromSelector(#selector(getter: self.orientation))
+		)
 	}
 
 }

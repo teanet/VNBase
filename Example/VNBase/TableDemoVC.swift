@@ -15,8 +15,10 @@ final class TableDemoVC: BaseTableVC<TableDemoVM> {
 		segmentedControl.addTarget(self, action: #selector(self.change(_:)), for: .valueChanged)
 		self.navigationItem.titleView = segmentedControl
 
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(self.add))
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(self.reload))
+		self.navigationItem.rightBarButtonItems = [
+			UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(self.reload)),
+			UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(self.add)),
+		]
 	}
 
 	@objc func change(_ sc: UISegmentedControl) {
