@@ -105,9 +105,9 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 
 }
 
-private extension UIInterfaceOrientation {
+public extension UIInterfaceOrientation {
 
-	var mask: UIInterfaceOrientationMask {
+	internal var mask: UIInterfaceOrientationMask {
 		switch self {
 			case .unknown: return []
 			case .portrait: return .portrait
@@ -118,30 +118,16 @@ private extension UIInterfaceOrientation {
 		}
 	}
 
-	var deviceOrientation: UIDeviceOrientation {
-		switch self {
-			case .unknown: return .unknown
-			case .portrait: return .portrait
-			case .portraitUpsideDown: return .portraitUpsideDown
-			case .landscapeLeft: return .landscapeLeft
-			case .landscapeRight: return .landscapeRight
-			@unknown default: return .unknown
-		}
+	func deviceOrientation() -> UIDeviceOrientation {
+		return UIDeviceOrientation(rawValue: self.rawValue) ?? .unknown
 	}
 
 }
 
-extension UIDeviceOrientation {
+public extension UIDeviceOrientation {
 
 	func interfaceOrientation() -> UIInterfaceOrientation {
-		switch self {
-			case .portrait: return .portrait
-			case .portraitUpsideDown: return .portraitUpsideDown
-			case .landscapeLeft: return .landscapeLeft
-			case .landscapeRight: return .landscapeRight
-			case .unknown, .faceUp, .faceDown: return .unknown
-			@unknown default: return .unknown
-		}
+		return UIInterfaceOrientation(rawValue: self.rawValue) ?? .unknown
 	}
 
 }
@@ -162,7 +148,7 @@ extension UIDevice {
 		}
 
 		self.setValue(
-			toInterfaceOrientation.deviceOrientation.rawValue,
+			toInterfaceOrientation.deviceOrientation().rawValue,
 			forKey: NSStringFromSelector(#selector(getter: self.orientation))
 		)
 	}

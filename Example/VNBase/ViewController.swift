@@ -9,8 +9,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
 		self.navigationItem.rightBarButtonItems = [
-			UIBarButtonItem.init(title: "Table", style: .plain, target: self, action: #selector(self.tableTap)),
-			UIBarButtonItem.init(title: "Rotate", style: .plain, target: self, action: #selector(self.rotateTap)),
+			UIBarButtonItem(title: "Table", style: .plain, target: self, action: #selector(self.tableTap)),
+			UIBarButtonItem(title: "Rotate", style: .plain, target: self, action: #selector(self.rotateTap)),
 		]
     }
 
