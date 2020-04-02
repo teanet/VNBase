@@ -150,12 +150,6 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		}
 	}
 
-	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-	}
-
-	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-	}
-
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let vm = self.viewModel.item(at: indexPath),
 			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return UITableView.automaticDimension }
@@ -190,6 +184,10 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 	public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		self.viewModel.commit(editingStyle: editingStyle, for: indexPath)
 	}
+
+	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
+	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
+	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
 
 }
 

@@ -160,11 +160,9 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		// ячейка видна юзеру на 50%. Если в будущем эта логика будет разной, вынесем.
 	}
 
-	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-	}
-
-	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-	}
+	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
+	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
+	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
 
 }
 
