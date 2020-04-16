@@ -51,6 +51,7 @@
 		735F4BEA236D96CB00FADCAA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BE9236D96CB00FADCAA /* UIImageView.swift */; };
 		735F4BEC236D978100FADCAA /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BEB236D978100FADCAA /* UIStackView.swift */; };
 		735F4BEE236D97FD00FADCAA /* BaseTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BED236D97FD00FADCAA /* BaseTransition.swift */; };
+		738AEC3F24488B76001CABDC /* BasePushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738AEC3E24488B76001CABDC /* BasePushHandler.swift */; };
 		76B4DE0B91DBD43FC7A558C42C75EF19 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787CFC8D6375EC40F5A8318F79D62D68 /* BaseCollectionView.swift */; };
 		76E298C1425B88F3FD5446F3CBD86199 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55535EA5A8B7D3340EAB2713B1CC73 /* ConstraintConfig.swift */; };
 		790EC702B66F58C35E4491F47666580E /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8651F6FBCE4CB6B8AE6E49ADFA7DB /* ConstraintMultiplierTarget.swift */; };
@@ -199,6 +200,7 @@
 		735F4BE9236D96CB00FADCAA /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		735F4BEB236D978100FADCAA /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		735F4BED236D97FD00FADCAA /* BaseTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransition.swift; sourceTree = "<group>"; };
+		738AEC3E24488B76001CABDC /* BasePushHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePushHandler.swift; sourceTree = "<group>"; };
 		74A60A817CE2F4C59694C60F19A593D4 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
 		755CE2FA07D101C512D54585675856CE /* Pods-VNBase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VNBase_Example.release.xcconfig"; sourceTree = "<group>"; };
 		776F27E07FF04C6AF649986726B24A71 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
@@ -422,7 +424,6 @@
 				68C9BF775A6E57EB2AFB252521547EE4 /* Event.swift */,
 				BB705FDF5BF95A8DF521D77FE2101A63 /* Lazy.swift */,
 				84C025C84FCFB5EBD3D74C8A1C698DF6 /* Localization.swift */,
-				031BF86CAB9D58CC7C723D67D24BA78D /* PushMessage.swift */,
 				735F4BE3236D93CD00FADCAA /* TextStyle.swift */,
 			);
 			name = Utils;
@@ -432,6 +433,7 @@
 		3BFDCEFEE66BC3E794784094E012C196 /* VNBase */ = {
 			isa = PBXGroup;
 			children = (
+				738AEC3D24488B5D001CABDC /* Services */,
 				14E4CEBA643649BB8DD7BE1614DA04EB /* Categories */,
 				CC4350227971528818B7574F06AD2CC4 /* Model */,
 				21077A301FBD66B1B31A80E21F72A5AA /* Pod */,
@@ -462,6 +464,16 @@
 				77CB8E4F7ED2A889082947C9554C791E /* BaseCollectionReusableView.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		738AEC3D24488B5D001CABDC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				031BF86CAB9D58CC7C723D67D24BA78D /* PushMessage.swift */,
+				738AEC3E24488B76001CABDC /* BasePushHandler.swift */,
+			);
+			name = Services;
+			path = VNBase/Classes/Services;
 			sourceTree = "<group>";
 		};
 		8F04DE55936B310FF79189443BD2918B /* Development Pods */ = {
@@ -812,6 +824,7 @@
 				6BEC5135F1FD33FDA7BA9CA8A2AC4F81 /* DateFormatter.swift in Sources */,
 				9F3804B6667B233FC3799DDFB41486DB /* Event.swift in Sources */,
 				EACA3280281B9488CA5EDFBD0B6F01E4 /* FileManager+ApplicationSettings.swift in Sources */,
+				738AEC3F24488B76001CABDC /* BasePushHandler.swift in Sources */,
 				976CD404061A8420FA0F59800ACA07A3 /* Id.swift in Sources */,
 				64A10780B4AC15368DE204FB6CB1867A /* IDispatcher.swift in Sources */,
 				92F40B84CD903549329B68609838FE7C /* IHaveNavigationBarStyle.swift in Sources */,

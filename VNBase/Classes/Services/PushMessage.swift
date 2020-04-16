@@ -1,25 +1,16 @@
 public struct PushMessage {
 
-	public enum Action: String {
-		case other
-		case requestPermission = "request_permission"
-	}
-
-	private struct C {
+	public enum C {
 		static let aps = "aps"
 		static let alert = "alert"
 		static let title = "title"
 		static let body = "body"
 		static let badge = "badge"
-		static let action = "action"
-		static let itemId = "item_id"
 	}
-	private let data: [AnyHashable : Any]
+	public let data: [AnyHashable : Any]
 	public let title: String?
 	public let aps: [AnyHashable : Any]?
 	public let message: String?
-	public let action: Action
-	public let itemId: Int?
 
 	public init(push: [AnyHashable : Any]) {
 		self.data = push
@@ -34,12 +25,6 @@ public struct PushMessage {
 			self.title = nil
 			self.message = nil
 		}
-		if let action = push[C.action] as? String {
-			self.action = Action(rawValue: action) ?? .other
-		} else {
-			self.action = .other
-		}
-		self.itemId = push[C.itemId] as? Int
 	}
 
 }
