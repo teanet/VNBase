@@ -2,8 +2,9 @@ public protocol IBackgroundPushHandler {
 	func handle(message: PushMessage, completion: @escaping (UIBackgroundFetchResult) -> Void)
 }
 
-public protocol INotificationResponseHandler {
+@objc public protocol INotificationResponseHandler {
 	func handle(response: UNNotificationResponse, completion: @escaping () -> Void)
+	@objc optional func willPresentNotification(_ notification: UNNotification)
 }
 
 public protocol IPushHandlersProvider: AnyObject {
@@ -79,6 +80,10 @@ extension BasePushHandler: UNUserNotificationCenterDelegate {
 		willPresent notification: UNNotification,
 		withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
 	) {
+		let handlers = self.provider?.notificationResponseHandlers() ?? []
+		for handler in handlers {
+			handler.willPresentNotification?(notification)
+		}
 		let options = self.shouldShowMessage(for: notification)
 		completionHandler(options)
 	}
