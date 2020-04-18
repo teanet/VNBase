@@ -51,6 +51,7 @@
 		735F4BEA236D96CB00FADCAA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BE9236D96CB00FADCAA /* UIImageView.swift */; };
 		735F4BEC236D978100FADCAA /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BEB236D978100FADCAA /* UIStackView.swift */; };
 		735F4BEE236D97FD00FADCAA /* BaseTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BED236D97FD00FADCAA /* BaseTransition.swift */; };
+		73898A86244B4DD1008B3CB9 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73898A85244B4DD1008B3CB9 /* Data.swift */; };
 		738AEC3F24488B76001CABDC /* BasePushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738AEC3E24488B76001CABDC /* BasePushHandler.swift */; };
 		76B4DE0B91DBD43FC7A558C42C75EF19 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787CFC8D6375EC40F5A8318F79D62D68 /* BaseCollectionView.swift */; };
 		76E298C1425B88F3FD5446F3CBD86199 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55535EA5A8B7D3340EAB2713B1CC73 /* ConstraintConfig.swift */; };
@@ -200,6 +201,7 @@
 		735F4BE9236D96CB00FADCAA /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		735F4BEB236D978100FADCAA /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		735F4BED236D97FD00FADCAA /* BaseTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransition.swift; sourceTree = "<group>"; };
+		73898A85244B4DD1008B3CB9 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		738AEC3E24488B76001CABDC /* BasePushHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePushHandler.swift; sourceTree = "<group>"; };
 		74A60A817CE2F4C59694C60F19A593D4 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
 		755CE2FA07D101C512D54585675856CE /* Pods-VNBase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VNBase_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				1534949CE5099B9A8D5E13EA08C3723C /* UIViewController.swift */,
 				735F4BE9236D96CB00FADCAA /* UIImageView.swift */,
 				735F4BEB236D978100FADCAA /* UIStackView.swift */,
+				73898A85244B4DD1008B3CB9 /* Data.swift */,
 			);
 			name = Categories;
 			path = VNBase/Classes/Categories;
@@ -824,6 +827,7 @@
 				6BEC5135F1FD33FDA7BA9CA8A2AC4F81 /* DateFormatter.swift in Sources */,
 				9F3804B6667B233FC3799DDFB41486DB /* Event.swift in Sources */,
 				EACA3280281B9488CA5EDFBD0B6F01E4 /* FileManager+ApplicationSettings.swift in Sources */,
+				73898A86244B4DD1008B3CB9 /* Data.swift in Sources */,
 				738AEC3F24488B76001CABDC /* BasePushHandler.swift in Sources */,
 				976CD404061A8420FA0F59800ACA07A3 /* Id.swift in Sources */,
 				64A10780B4AC15368DE204FB6CB1867A /* IDispatcher.swift in Sources */,
