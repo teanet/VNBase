@@ -52,6 +52,7 @@
 		735F4BEC236D978100FADCAA /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BEB236D978100FADCAA /* UIStackView.swift */; };
 		735F4BEE236D97FD00FADCAA /* BaseTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F4BED236D97FD00FADCAA /* BaseTransition.swift */; };
 		73898A86244B4DD1008B3CB9 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73898A85244B4DD1008B3CB9 /* Data.swift */; };
+		73898A88244D4FC4008B3CB9 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73898A87244D4FC4008B3CB9 /* BaseRouter.swift */; };
 		738AEC3F24488B76001CABDC /* BasePushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738AEC3E24488B76001CABDC /* BasePushHandler.swift */; };
 		76B4DE0B91DBD43FC7A558C42C75EF19 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787CFC8D6375EC40F5A8318F79D62D68 /* BaseCollectionView.swift */; };
 		76E298C1425B88F3FD5446F3CBD86199 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55535EA5A8B7D3340EAB2713B1CC73 /* ConstraintConfig.swift */; };
@@ -202,6 +203,7 @@
 		735F4BEB236D978100FADCAA /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		735F4BED236D97FD00FADCAA /* BaseTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransition.swift; sourceTree = "<group>"; };
 		73898A85244B4DD1008B3CB9 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		73898A87244D4FC4008B3CB9 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		738AEC3E24488B76001CABDC /* BasePushHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePushHandler.swift; sourceTree = "<group>"; };
 		74A60A817CE2F4C59694C60F19A593D4 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
 		755CE2FA07D101C512D54585675856CE /* Pods-VNBase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VNBase_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			children = (
 				031BF86CAB9D58CC7C723D67D24BA78D /* PushMessage.swift */,
 				738AEC3E24488B76001CABDC /* BasePushHandler.swift */,
+				73898A87244D4FC4008B3CB9 /* BaseRouter.swift */,
 			);
 			name = Services;
 			path = VNBase/Classes/Services;
@@ -808,6 +811,7 @@
 				76B4DE0B91DBD43FC7A558C42C75EF19 /* BaseCollectionView.swift in Sources */,
 				7A6601E316A87AD975AF1A2CE849DFF8 /* BaseCollectionViewVM.swift in Sources */,
 				7EF5909C98F91C45BE65201FD0CE2BA7 /* BaseControl.swift in Sources */,
+				73898A88244D4FC4008B3CB9 /* BaseRouter.swift in Sources */,
 				FAD88C710C7BF559D35B6E704D7A1C90 /* BaseHeaderView.swift in Sources */,
 				F09B3D7549AC0791242F6780512D4663 /* BaseTableVC.swift in Sources */,
 				0A076FC62B320DE45C5DA77BE241BE0E /* BaseTableView.swift in Sources */,
