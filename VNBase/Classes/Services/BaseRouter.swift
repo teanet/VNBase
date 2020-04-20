@@ -1,22 +1,10 @@
-open class BaseRouter {
+public enum PushConfig {
+	case push
+	case replaceCurrent
+	case popToRoot
+}
 
-	public enum PushConfig {
-		case push
-		case replaceCurrent
-		case popToRoot
-	}
-
-	open var nc: UINavigationController {
-		fatalError("Override me please")
-	}
-
-	public func pop(animated: Bool = true) {
-		self.nc.popViewController(animated: animated)
-	}
-
-	public func popToRoot(animated: Bool = true) {
-		self.nc.popToRootViewController(animated: animated)
-	}
+open class BaseRouter: NSObject {
 
 	public func showAlert(
 		title: String? = nil,
@@ -35,51 +23,65 @@ open class BaseRouter {
 		self.present(ac)
 	}
 
-	public func push(_ vc: UIViewController, animated: Bool = true, config: PushConfig = .push) {
-		self.runOnMainThread { [weak self] in
-			switch config {
-				case .push:
-					self?.nc.pushViewController(vc, animated: animated)
-				case .replaceCurrent:
-					self?._replaceCurrent(vc, animated: animated)
-				case .popToRoot:
-					self?._popToRoot(vc, animated: animated)
-			}
+	public func present(
+		_ vc: UIViewController,
+		style: UIModalPresentationStyle = .fullScreen,
+		animated: Bool = true,
+		completion: VoidBlock? = nil
+	) {
+		vc.modalPresentationStyle = style
+		guard let atVc = self.topPresentedVC() else {
+			assertionFailure(); return
+		}
+		Thread.runOnMain {
+			atVc.present(vc, animated: animated, completion: completion)
 		}
 	}
 
-	public func present(_ vc: UIViewController, animated: Bool = true, completion: VoidBlock? = nil) {
-		self.runOnMainThread { [weak self] in
-			self?.topVC()?.present(vc, animated: animated, completion: completion)
+	public func dismiss(animated: Bool = true, _ completion: VoidBlock? = nil) {
+		let topVC = self.topPresentedVC()
+		if let presentingViewController = topVC?.presentingViewController {
+			presentingViewController.dismiss(animated: animated, completion: completion)
+		} else {
+			completion?()
 		}
 	}
 
 	//	MARK: - Private
 
 	private func topVC() -> UIViewController? {
-		UIApplication.shared.delegate?.window??.rootViewController?.topVC()
+		UIApplication.shared.keyWindow?.rootViewController?.topVC()
+	}
+
+	private func topPresentedVC() -> UIViewController? {
+		UIApplication.shared.keyWindow?.rootViewController?.topPresentedVC()
+	}
+}
+
+public extension UINavigationController {
+
+	func push(_ vc: UIViewController, animated: Bool = true, config: PushConfig = .push) {
+		switch config {
+			case .push:
+				self.pushViewController(vc, animated: animated)
+			case .replaceCurrent:
+				self._replaceCurrent(vc, animated: animated)
+			case .popToRoot:
+				self._popToRoot(vc, animated: animated)
+		}
 	}
 
 	private func _replaceCurrent(_ vc: UIViewController, animated: Bool) {
-		var vcs = self.nc.viewControllers
+		var vcs = self.viewControllers
 		vcs.removeLast()
 		vcs.append(vc)
-		self.nc.setViewControllers(vcs, animated: animated)
+		self.setViewControllers(vcs, animated: animated)
 	}
 
 	private func _popToRoot(_ vc: UIViewController, animated: Bool) {
-		var vcs = Array(self.nc.viewControllers.prefix(1))
+		var vcs = Array(self.viewControllers.prefix(1))
 		vcs.append(vc)
-		self.nc.setViewControllers(vcs, animated: animated)
-	}
-
-	private func runOnMainThread(block: @escaping VoidBlock) {
-		if Thread.isMainThread {
-			block()
-		} else {
-			assert(false, "Method should be called only on the Main Thread")
-			DispatchQueue.main.async(execute: block)
-		}
+		self.setViewControllers(vcs, animated: animated)
 	}
 
 }
