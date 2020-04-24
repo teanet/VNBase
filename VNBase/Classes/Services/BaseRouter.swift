@@ -47,7 +47,7 @@ open class BaseRouter: NSObject {
 		}
 	}
 
-	//	MARK: - Private
+	// MARK: - Private
 
 	private func topVC() -> UIViewController? {
 		UIApplication.shared.keyWindow?.rootViewController?.topVC()

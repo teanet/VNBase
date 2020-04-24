@@ -34,9 +34,8 @@ func rootOfCubic(a: Float, b: Float, c: Float, d: Float, startPoint: Float) -> F
 	let kApproximationTolerance: Float = 0.0000001
 	while y <= kMaximumSteps && abs(lastX - x) > kApproximationTolerance {
 		lastX = x
-		x = x - cubicFunctionValue(a: a, b: b, c: c, d: d, x: x) / cubicDerivativeValue(a: a, b: b, c: c, d: d, x: x)
+		x -= cubicFunctionValue(a: a, b: b, c: c, d: d, x: x) / cubicDerivativeValue(a: a, b: b, c: c, d: d, x: x)
 		y += 1
 	}
 	return x
 }
-

@@ -36,9 +36,9 @@
 
 /* Begin PBXFileReference section */
 		26BA86DF1E6576A04880BB50 /* libPods-VNBase_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNBase_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BCAD585EE2A29A027817FF1 /* Pods-VNBase_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Tests.release.xcconfig"; path = "Target Support Files/Pods-VNBase_Tests/Pods-VNBase_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		2BCAD585EE2A29A027817FF1 /* Pods-VNBase_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Tests.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-VNBase_Tests/Pods-VNBase_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F8A2F38E918AE2765B9378C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		5BDBC81DEE86598BC7541359 /* Pods-VNBase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.release.xcconfig"; path = "Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.release.xcconfig"; sourceTree = "<group>"; };
+		5BDBC81DEE86598BC7541359 /* Pods-VNBase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* VNBase_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VNBase_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,12 +55,12 @@
 		73B25ECF2430ADD100D31A7D /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7C16385275590204AD2D328D /* libPods-VNBase_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNBase_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B979D3E7F2419AEBCD25186 /* VNBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = VNBase.podspec; path = ../VNBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B86607A0616BC82CF3DFFFE8 /* Pods-VNBase_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.debug.xcconfig"; path = "Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		B86607A0616BC82CF3DFFFE8 /* Pods-VNBase_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Example.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-VNBase_Example/Pods-VNBase_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C1BE840864B27A958FE92BA5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CEC6C89322263DA100EF2DC8 /* TableDemoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDemoVM.swift; sourceTree = "<group>"; };
 		CEC6C89422263DA100EF2DC8 /* TableDemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDemoVC.swift; sourceTree = "<group>"; };
 		CEC6C89722263E5900EF2DC8 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
-		EE32432A147F201C89760A08 /* Pods-VNBase_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Tests.debug.xcconfig"; path = "Target Support Files/Pods-VNBase_Tests/Pods-VNBase_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		EE32432A147F201C89760A08 /* Pods-VNBase_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNBase_Tests.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-VNBase_Tests/Pods-VNBase_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +191,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
+				7394DCE92452850E00D820A4 /* Lint */,
 			);
 			buildRules = (
 			);
@@ -304,6 +305,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		7394DCE92452850E00D820A4 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"../VNBase\"\necho $PWD\n${PODS_ROOT}/SwiftLint/swiftlint lint\n\n";
 		};
 		EC0CEF9BE481A2E4C4C4DF70 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -1,5 +1,6 @@
 open class BaseVM: NSObject {
-	public static func ==(lhs: BaseVM, rhs: BaseVM) -> Bool {
+	// swiftlint:disable:next nsobject_prefer_isequal
+	public static func == (lhs: BaseVM, rhs: BaseVM) -> Bool {
 		return lhs === rhs
 	}
 

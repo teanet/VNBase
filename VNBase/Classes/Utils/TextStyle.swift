@@ -22,7 +22,7 @@ public struct TextStyle {
 
 public extension TextStyle {
 
-	func with(_ populator: (inout TextStyle) throws -> ()) rethrows -> TextStyle {
+	func with(_ populator: (inout TextStyle) throws -> Void) rethrows -> TextStyle {
 		var style = self
 		try populator(&style)
 		return style
@@ -63,7 +63,6 @@ public extension TextStyle {
 	}
 
 }
-
 
 public extension UIButton {
 
@@ -128,7 +127,7 @@ public extension UILabel {
 			let paragraphStyle = NSMutableParagraphStyle()
 			paragraphStyle.lineSpacing = lineSpacing
 			label.attributedText = NSAttributedString(string: text, attributes: [
-				NSAttributedString.Key.paragraphStyle : paragraphStyle
+				NSAttributedString.Key.paragraphStyle : paragraphStyle,
 			])
 		} else {
 			label.text = text

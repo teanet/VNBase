@@ -34,7 +34,7 @@ open class BaseTableViewVM: BaseVM {
 	public typealias DidFetchItemsBlock = ((( @escaping ([BaseCellVM], Bool) -> Void)) -> Void)
 	public var isAutoPrefetchEnabled = false
 	public var onSelect: ((BaseCellVM) -> Void)?
-	public var onCommit: ((BaseCellVM, UITableViewCell.EditingStyle) -> Void)? = nil
+	public var onCommit: ((BaseCellVM, UITableViewCell.EditingStyle) -> Void)?
 
 	public var shouldLoadNextPage = true
 	public private(set) var isPrefetching = false
@@ -43,7 +43,7 @@ open class BaseTableViewVM: BaseVM {
 	var isUpdating = false
 	let indexpathController: IndexPathController
 
-	public var prefetchBlock: DidFetchItemsBlock? = nil
+	public var prefetchBlock: DidFetchItemsBlock?
 	private let loadingRow: BaseCellVM?
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
@@ -67,7 +67,7 @@ open class BaseTableViewVM: BaseVM {
 		if !reload && ( self.isPrefetching || !self.shouldLoadNextPage ) { return }
 
 		self.isPrefetching = true
-		if (self.rows.isEmpty || reload) {
+		if self.rows.isEmpty || reload {
 			self.set(rows: [], addLoadingCell: true)
 		}
 

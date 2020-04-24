@@ -1,4 +1,7 @@
-open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView,
+	UICollectionViewDelegate,
+	UICollectionViewDataSource,
+	UICollectionViewDelegateFlowLayout {
 
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
@@ -24,8 +27,10 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		self.dataSource = nil
 	}
 
-	public init(collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout(),
-				viewModel: TViewModel) {
+	public init(
+		collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout(),
+		viewModel: TViewModel
+	) {
 		self.viewModel = viewModel
 		super.init(frame: .zero, collectionViewLayout: collectionViewLayout)
 		self.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kDefaultReuseIdentifier)
@@ -166,7 +171,6 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 }
 
-
 extension BaseCollectionView: IndexPathControllerDelegate {
 
 	func controller(_ controller: IndexPathController, didUpdateDataModel updates: IndexPathUpdates) {
@@ -183,7 +187,7 @@ extension BaseCollectionView: IndexPathControllerDelegate {
 			self.reloadData()
 			completion()
 		} else {
-			updates.performBatchUpdates(on: self, completion: { (finished) in
+			updates.performBatchUpdates(on: self, completion: { _ in
 				completion()
 			})
 		}

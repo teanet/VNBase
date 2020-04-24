@@ -5,15 +5,14 @@ extension String { // + HTML
 		do {
 			return try NSAttributedString(data: data, options: [
 				.documentType: NSAttributedString.DocumentType.html,
-				.characterEncoding: String.Encoding.utf8.rawValue
+				.characterEncoding: String.Encoding.utf8.rawValue,
 			], documentAttributes: nil)
 		} catch {
 			return NSAttributedString()
 		}
 	}
 
-	var trimmed: String
-	{
+	var trimmed: String {
 		let trimmedString = self.trimmingCharacters(in: .whitespacesAndNewlines)
 		return trimmedString
 	}
@@ -145,7 +144,7 @@ public extension String {
 			with: size,
 			options: drawingOptions,
 			attributes: [
-				.font: font
+				.font: font,
 			],
 			context: nil
 		)
@@ -197,4 +196,3 @@ public extension String {
 	}
 
 }
-

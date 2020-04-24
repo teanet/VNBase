@@ -24,7 +24,7 @@ public extension UITableView {
 			assertionFailure("Can't register cell class \(String(describing: cell))")
 			return
 		}
-		
+
 		let identifier = cell.identifier()
 		if let nib = cell.nib() {
 			self.register(nib, forCellReuseIdentifier: identifier)
@@ -88,7 +88,7 @@ open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHav
 	}
 
 	private var constraintsCreated = false
-	
+
     public static func internalHeight(with viewModel: BaseCellVM, width: CGFloat) -> CGFloat {
 		guard let vm = viewModel as? TViewModel else { return UITableView.automaticDimension }
         return self.height(with: vm, width: width)

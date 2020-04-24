@@ -30,5 +30,3 @@ open class TableSectionVM: Equatable {
     }
 
 }
-
-

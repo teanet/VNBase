@@ -8,7 +8,6 @@ final class LandscapeVC: BaseVC<LandscapeVM> {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 	}
 
 }

@@ -31,5 +31,5 @@ open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModel
 
 	open func viewModelChanged() {
 	}
-	
+
 }

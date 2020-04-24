@@ -31,6 +31,7 @@ class IndexPathUpdates {
 		// Deleted sections
 		for sectionId in oldSectionNames {
 			if !updatedSectionNames.contains(sectionId) {
+				// swiftlint:disable:next force_cast
 				deletedSectionIds.append(sectionId as! TableSectionId)
 				workingSectionNames.remove(sectionId)
 			}
@@ -44,11 +45,13 @@ class IndexPathUpdates {
 				if index != expectedIndex {
 					// only need to explicitly move sections that are misplaced
 					// in the working set.
+					// swiftlint:disable:next force_cast
 					movedSectionIds.append(sectionId as! TableSectionId)
 					workingSectionNames.remove(sectionId)
 					workingSectionNames.insert(sectionId, at: index)
 				}
 			} else {
+				// swiftlint:disable:next force_cast
 				insertedSectionIds.append(sectionId as! TableSectionId)
 				workingSectionNames.insert(sectionId, at: index)
 			}
@@ -104,7 +107,14 @@ class IndexPathUpdates {
 
 		}
 
-		self.hasChanges = movedSectionIds.count + insertedSectionIds.count + deletedSectionIds.count + movedItems.count + insertedItems.count + deletedItems.count + modifiedItems.count > 0
+		self.hasChanges =
+			movedSectionIds.count +
+			insertedSectionIds.count +
+			deletedSectionIds.count +
+			movedItems.count +
+			insertedItems.count +
+			deletedItems.count +
+			modifiedItems.count > 0
 		self.insertedSectionIds = insertedSectionIds
 		self.deletedSectionIds = deletedSectionIds
 		self.movedSectionIds = movedSectionIds
@@ -124,7 +134,6 @@ class IndexPathUpdates {
 		CATransaction.begin()
 		CATransaction.setCompletionBlock {
 			if !self.modifiedItems.isEmpty && self.updateModifiedItems, let updated = self.updated {
-
 
 				if let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows {
 					let indexPaths = self.modifiedItems.compactMap({ updated.indexPathById[$0.identifier] })
@@ -292,7 +301,7 @@ class IndexPathUpdates {
 					}
 				}
 			}
-		}) { (finished) in
+		}, completion: { (finished) in
 
 			// Doing this in the batch updates can result in poor looking animation when
 			// an item is moving and reloading at the same time. The resulting animation
@@ -304,7 +313,7 @@ class IndexPathUpdates {
 			}
 
 			completion?(finished)
-		}
+		})
 	}
 
 }

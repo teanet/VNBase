@@ -1,4 +1,4 @@
-fileprivate struct LockWrapper {
+private struct LockWrapper {
 	fileprivate static let lockQueue = DispatchQueue(label: "com.grymmobile.vncommon.event.lockqueue")
 }
 
@@ -26,7 +26,7 @@ final class EventHandler<TArgs>: Hashable {
 		hasher.combine(self.uuid)
 	}
 
-	static func ==(lhs: EventHandler, rhs: EventHandler) -> Bool {
+	static func == (lhs: EventHandler, rhs: EventHandler) -> Bool {
 		return lhs.target === rhs.target
 	}
 
@@ -64,7 +64,7 @@ public class Event<TArgs> {
 		guard self.checkRaiseFilter(args: args) else { return }
 
 		if self.shouldReplayLast {
-			var prevLastValue: TArgs? = nil
+			var prevLastValue: TArgs?
 			LockWrapper.lockQueue.sync {
 				prevLastValue = self.lastValue
 				self.lastValue = args
@@ -115,11 +115,11 @@ public class Event<TArgs> {
 
 	// MARK: Operators
 
-	public static func +=(left: Event<TArgs>, right: Element) {
+	public static func += (left: Event<TArgs>, right: Element) {
 		left.add(handler: right)
 	}
 
-	public static func -=(left: Event<TArgs>, right: AnyObject) {
+	public static func -= (left: Event<TArgs>, right: AnyObject) {
 		left.remove(target: right)
 	}
 
@@ -138,10 +138,8 @@ public class Event<TArgs> {
 
 	private func removeDeadHandlers() {
 		let handlers = self.handlers
-		for handler in handlers {
-			if handler.target == nil {
-				self.handlers.remove(handler)
-			}
+		for handler in handlers where handler.target == nil {
+			self.handlers.remove(handler)
 		}
 	}
 
@@ -149,6 +147,7 @@ public class Event<TArgs> {
 		var result: EventHandler<TArgs>?
 		let handlers = self.handlers
 		for handler in handlers {
+			// swiftlint:disable:next for_where
 			if handler.target === target {
 				result = handler
 				break

@@ -24,7 +24,7 @@ public extension UIImage {
 
 		// Переворачиваем контекст в нужную систему координат (флипаем иконку по y)
 		ctx.translateBy(x: 0.0, y: size.height)
-		ctx.scaleBy(x: 1.0, y: -1.0);
+		ctx.scaleBy(x: 1.0, y: -1.0)
 
 		let x = ((size.width - self.size.width) * 0.5).rounded(.down)
 		let y = ((size.height - self.size.height) * 0.5).rounded(.down)
@@ -47,7 +47,7 @@ public extension UIImage {
 
 		// Переворачиваем контекст в нужную систему координат (флипаем иконку по y)
 		ctx.translateBy(x: 0.0, y: size.height)
-		ctx.scaleBy(x: 1.0, y: -1.0);
+		ctx.scaleBy(x: 1.0, y: -1.0)
 
 		ctx.draw(self.cgImage!, in: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
 
@@ -95,13 +95,13 @@ public extension UIImage {
 
 		// Переворачиваем контекст в нужную систему координат (флипаем иконку по y)
 		ctx.translateBy(x: 0.0, y: substrateSize.height)
-		ctx.scaleBy(x: 1.0, y: -1.0);
+		ctx.scaleBy(x: 1.0, y: -1.0)
 
 		ctx.draw(self.cgImage!, in: overlayRect)
 
 		// И обратно ради хорощего тона
 		ctx.translateBy(x: 0.0, y: -overlayRect.size.height)
-		ctx.scaleBy(x: 1.0, y: -1.0);
+		ctx.scaleBy(x: 1.0, y: -1.0)
 
 		ctx.restoreGState()
 

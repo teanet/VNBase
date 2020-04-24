@@ -56,7 +56,7 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 			}
 		}
 		let refresh = self.refresh
-		self.contentOffsetObservation = self.tableView.observe(\.contentOffset) { [weak self] (tableView, value) in
+		self.contentOffsetObservation = self.tableView.observe(\.contentOffset) { [weak self] (tableView, _) in
 			if tableView.contentOffset.y < -110, !refresh.isRefreshing, self?.toggleRefresh == false {
 				self?.toggleRefresh = true
 				refresh.beginRefreshing()

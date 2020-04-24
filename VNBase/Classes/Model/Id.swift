@@ -1,4 +1,9 @@
-open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable, CustomStringConvertible, CustomDebugStringConvertible {
+open class Id<T: Hashable&Codable>:
+	RawRepresentable,
+	Hashable,
+	Codable,
+	CustomStringConvertible,
+	CustomDebugStringConvertible {
 
 	public required init(rawValue: T) {
 		self.rawValue = rawValue
@@ -10,11 +15,11 @@ open class Id<T: Hashable&Codable>: RawRepresentable, Hashable, Codable, CustomS
 
 	public typealias RawValue = T
 
-	public var hashValue: Int {
-		return self.rawValue.hashValue
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(self.rawValue.hashValue)
 	}
 
-	public static func ==(lhs: Id, rhs: Id) -> Bool {
+	public static func == (lhs: Id, rhs: Id) -> Bool {
 		return lhs.rawValue == rhs.rawValue
 	}
 

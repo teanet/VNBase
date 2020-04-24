@@ -68,7 +68,11 @@ open class BaseCollectionViewCell<TViewModel : BaseCellVM> : CollectionViewCell<
 }
 
 // САМАЯ базовая ячейка, которая может быть создана как из ксиба, так и с ручным лейаутом
-open class CollectionViewCell<TViewModel : BaseCellVM> : UICollectionViewCell, IHaveViewModel, ViewModelChangedDelegate, Registerable, IHaveSize {
+open class CollectionViewCell<TViewModel : BaseCellVM> : UICollectionViewCell,
+	IHaveViewModel,
+	ViewModelChangedDelegate,
+	Registerable,
+	IHaveSize {
 
 	private var constraintsCreated = false
 

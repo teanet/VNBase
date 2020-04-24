@@ -72,18 +72,21 @@ public extension Array {
 		return self.groupBy(fn, matchWith: matchWith, valueAs: nil)
 	}
 
-	func groupBy<Key : Hashable, Item>(_ fn: (Item) -> Key,
-	                    matchWith: ((Key,Key) -> Bool)?,
-	                    valueAs:   ((Item) -> Item)?) -> [Group<Key,Item>]
-	{
-		var map = Dictionary<Key, Group<Key,Item>>()
+	func groupBy<Key: Hashable, Item>(
+		_ fn: (Item) -> Key,
+		matchWith: ((Key,Key) -> Bool)?,
+		valueAs: ((Item) -> Item)?
+	) -> [Group<Key,Item>] {
+
+		var map = [Key: Group<Key,Item>]()
 		for x in self {
+			// swiftlint:disable:next force_cast
 			var element = x as! Item
 			let val = fn(element)
 
 			var key = val as Key
 
-			if (matchWith != nil) {
+			if matchWith != nil {
 				for k in map.keys {
 					if matchWith!(val, k) {
 						key = k

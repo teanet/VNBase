@@ -99,10 +99,10 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		
+
 		self.viewModel.didSelect(at: indexPath)
 	}
-	
+
 	public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 		self.viewModel.item(at: indexPath)?.deselect()
 	}
@@ -205,11 +205,10 @@ extension BaseTableView: IndexPathControllerDelegate {
 			self.reloadData()
 			block()
 		} else {
-			updates.performBatchUpdates(on: self, animation: self.updateAnimation) { finished in
+			updates.performBatchUpdates(on: self, animation: self.updateAnimation) { _ in
 				block()
 			}
 		}
 	}
 
 }
-

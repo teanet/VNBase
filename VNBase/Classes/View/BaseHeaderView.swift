@@ -1,7 +1,11 @@
 public class BaseHeaderViewVM: BaseCellVM {
 }
 
-public class BaseHeaderView<TViewModel: BaseHeaderViewVM>: UITableViewHeaderFooterView, Registerable, IHaveHeight, ViewModelChangedDelegate, IHaveViewModel {
+public class BaseHeaderView<TViewModel: BaseHeaderViewVM>: UITableViewHeaderFooterView,
+	Registerable,
+	IHaveHeight,
+	ViewModelChangedDelegate,
+	IHaveViewModel {
 
 	@available(*, unavailable)
 	public required init?(coder aDecoder: NSCoder) {

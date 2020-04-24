@@ -27,7 +27,10 @@ public extension UICollectionView {
 	}
 }
 
-open class BaseCollectionReusableView<TViewModel: BaseCellVM>: UICollectionReusableView, IHaveViewModel, Registerable, ViewModelChangedDelegate {
+open class BaseCollectionReusableView<TViewModel: BaseCellVM>: UICollectionReusableView,
+	IHaveViewModel,
+	Registerable,
+	ViewModelChangedDelegate {
 
 	public static func nib() -> UINib? {
 		return nil

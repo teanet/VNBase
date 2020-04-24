@@ -26,7 +26,7 @@ open class BaseTransition: NSObject, UIViewControllerAnimatedTransitioning {
 		let containerView = transitionContext.containerView
 		fromViewController.view.frame = transitionContext.initialFrame(for: fromViewController)
 		fromViewController.view.layoutIfNeeded()
-		if (self.operation == .push) {
+		if self.operation == .push {
 			containerView.addSubview(toViewController.view)
 		} else {
 			containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)

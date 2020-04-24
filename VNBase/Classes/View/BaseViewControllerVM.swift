@@ -49,13 +49,11 @@ open class BaseViewControllerVM: BaseVM {
 	open func appearFirstTime() {
 	}
 
-
 	/**
 	Вызывается, когда экран пропадает из стека навигации (то есть, в массиве UINavigationController.viewControllers нет его VC).
 	*/
 	open func disappearInStack() {
 	}
-
 
 	/**
 	Связано с событием UIApplicationDidBecomeActive приложения. Может вызываться множество раз в течении жизненного цикла вьюмодели.
@@ -65,7 +63,6 @@ open class BaseViewControllerVM: BaseVM {
 	*/
 	open func becomeActive() {
 	}
-
 
 	/**
 	Связано с событием UIApplicationWillResignActive приложения. Может вызываться множество раз в течении жизненного цикла вьюмодели.

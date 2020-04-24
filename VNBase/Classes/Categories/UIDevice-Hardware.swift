@@ -97,5 +97,5 @@ public struct UIDeviceHardware {
 			default:            return "Unknown iOS"
 		}
 	}
-	
+
 }
