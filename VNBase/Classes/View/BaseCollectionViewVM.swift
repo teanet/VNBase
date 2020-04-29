@@ -82,6 +82,12 @@ open class BaseCollectionViewVM: BaseVM {
 		}
 	}
 
+	open func didDeselect(at indexPath: IndexPath) {
+		if let item = self.item(at: indexPath) {
+			item.deselect()
+		}
+	}
+
 	public func updateDataModel() {
 		self.dataModel = IndexPathModel(sections: self.sections)
 	}

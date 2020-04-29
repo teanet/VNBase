@@ -112,10 +112,14 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		return cell
 	}
 
-	// MARK: UITableViewDelegate
+	// MARK: UICollectionViewDelegate
 
 	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
+	}
+
+	public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		self.viewModel.didDeselect(at: indexPath)
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -15,6 +15,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 
 	public internal(set) var isVisible: Bool = false
 	public internal(set) var isAppearedFirstTime: Bool = false
+	public private(set) var isSelected: Bool = false
 
 	public var isEditable: Bool = false
 	public var editingActions: [UITableViewRowAction]?
@@ -32,7 +33,6 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open var canMove: Bool { return false }
 	open var editingStyle: UITableViewCell.EditingStyle { return .none }
 	let identifier: BaseCellId
-	private(set) var isSelected: Bool = false
 
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString
