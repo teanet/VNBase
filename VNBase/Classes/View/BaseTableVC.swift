@@ -21,12 +21,16 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 		super.init(viewModel: viewModel)
 	}
 
+	open override func loadView() {
+		super.loadView()
+		self.view.addSubview(self.tableView)
+	}
+
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
 		self.tableView.frame = self.view.bounds
 		self.tableView.autoresizingMask = [ .flexibleHeight, .flexibleWidth ]
-		self.view.addSubview(self.tableView)
 	}
 
 	open override func viewWillAppear(_ animated: Bool) {

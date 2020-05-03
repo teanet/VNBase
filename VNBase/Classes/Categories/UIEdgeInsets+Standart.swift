@@ -3,8 +3,9 @@ import UIKit
 public extension UIEdgeInsets {
 
 	static var dgs_invisibleSeparator: UIEdgeInsets {
-		return UIEdgeInsets(top: 0, left: 10000,
-		                    bottom: 0, right: -10000)
+		return UIEdgeInsets(
+			top: 0, left: 10000, bottom: 0, right: -10000
+		)
 	}
 
 	static var dgs_standartSeparator: UIEdgeInsets {

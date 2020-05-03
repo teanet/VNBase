@@ -13,7 +13,7 @@ open class TableSectionVM: Equatable {
 	let identifier: TableSectionId
 	public var header: BaseHeaderViewVM?
 
-    var onRowsChange: VoidBlock?
+	var onRowsChange: VoidBlock?
 
 	public init(rows: [BaseCellVM] = [], header: BaseHeaderViewVM? = nil) {
 		self.rows = rows
@@ -22,11 +22,11 @@ open class TableSectionVM: Equatable {
 		self.identifier = TableSectionId(self.uniqueIdentifier)
 	}
 
-    open func set(rows: [BaseCellVM], updateTableView: Bool) {
-        self.rows = rows
-        if updateTableView {
-            self.onRowsChange?()
-        }
-    }
+	open func set(rows: [BaseCellVM], updateTableView: Bool) {
+		self.rows = rows
+		if updateTableView {
+			self.onRowsChange?()
+		}
+	}
 
 }

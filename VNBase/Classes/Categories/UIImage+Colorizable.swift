@@ -63,8 +63,7 @@ public extension UIImage {
 	func onCircle(colored color: UIColor?, diameter: CGFloat, filled: Bool = true) -> UIImage {
 		guard let color = color else { return self }
 
-		let substrateSize = CGSize(width: diameter,
-		                           height: diameter)
+		let substrateSize = CGSize(width: diameter, height: diameter)
 
 		// Рисуем кружок нужного цвета
 		UIGraphicsBeginImageContextWithOptions(substrateSize, false, UIScreen.main.scale)
@@ -79,18 +78,22 @@ public extension UIImage {
 		// Если кружок не закрашенный, просто обводим его линией нужного цвета с поправкой на толщину линии
 		if !filled {
 			let strokeWidth: CGFloat = 1.0
-			let strokeRect = CGRect(x: rect.origin.x + strokeWidth / 2.0,
-			                        y: rect.origin.y + strokeWidth / 2.0,
-			                        width: rect.width - strokeWidth,
-			                        height: rect.height - strokeWidth)
+			let strokeRect = CGRect(
+				x: rect.origin.x + strokeWidth / 2.0,
+				y: rect.origin.y + strokeWidth / 2.0,
+				width: rect.width - strokeWidth,
+				height: rect.height - strokeWidth
+			)
 			ctx.setStrokeColor(color.cgColor)
 			ctx.setLineWidth(1.0)
 			ctx.strokeEllipse(in: strokeRect)
 		}
 
 		// Поверх кружка рисуем иконку по центру кружка
-		let overlayOrigin = CGPoint.init(x: substrateSize.width / 2.0 - self.size.width / 2.0,
-		                                 y: substrateSize.height / 2.0 - self.size.height / 2.0)
+		let overlayOrigin = CGPoint(
+			x: substrateSize.width / 2.0 - self.size.width / 2.0,
+			y: substrateSize.height / 2.0 - self.size.height / 2.0
+		)
 		let overlayRect = CGRect.init(origin: overlayOrigin, size: self.size)
 
 		// Переворачиваем контекст в нужную систему координат (флипаем иконку по y)
@@ -157,14 +160,18 @@ public extension UIImage {
 	func leftHalf() -> UIImage? {
 		guard let cgImage = self.cgImage else { return nil }
 
-		let newSize = CGSize(width: self.size.width * self.scale / 2.0,
-		                     height: self.size.height * self.scale)
+		let newSize = CGSize(
+			width: self.size.width * self.scale / 2.0,
+			height: self.size.height * self.scale
+		)
 		let newBounds = CGRect(origin: .zero, size: newSize)
 
 		guard let croppedCGImage = cgImage.cropping(to: newBounds) else { return nil }
-		return UIImage.init(cgImage: croppedCGImage,
-		                    scale: self.scale,
-		                    orientation: .up)
+		return UIImage(
+			cgImage: croppedCGImage,
+			scale: self.scale,
+			orientation: .up
+		)
 	}
 
 	/// Рисует поверх картинки переданную в параметр картинку

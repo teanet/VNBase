@@ -45,7 +45,6 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	}
 
 	open func viewModelChanged() {
-
 	}
 
 	public func registerXib(classes: [RegisterableClass]) {
@@ -71,9 +70,9 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		if let cellClass = cellClass as? IHaveSize.Type {
 			self.identifierToCellMap[identifier] = cellClass
 		}
-        if let cellClass = cellClass as? UICollectionViewCell.Type {
-            self.identifierToCellClassMap[identifier] = cellClass
-        }
+		if let cellClass = cellClass as? UICollectionViewCell.Type {
+			self.identifierToCellClassMap[identifier] = cellClass
+		}
 		super.register(cellClass, forCellWithReuseIdentifier: identifier)
 	}
 

@@ -6,7 +6,7 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 	public var isUpdateAnimated = false
 	public var updateAnimation = UITableView.RowAnimation.none
 
-    private var identifierToCellMap = [String: IHaveHeight.Type]()
+	private var identifierToCellMap = [String: IHaveHeight.Type]()
 	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
 
 	deinit {
@@ -55,15 +55,15 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		super.register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
 	}
 
-    open override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
-        if let cellClass = cellClass as? IHaveHeight.Type {
-            self.identifierToCellMap[identifier] = cellClass
-        }
-        if let cellClass = cellClass as? UITableViewCell.Type {
-            self.identifierToCellClassMap[identifier] = cellClass
-        }
-        super.register(cellClass, forCellReuseIdentifier: identifier)
-    }
+	open override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+		if let cellClass = cellClass as? IHaveHeight.Type {
+			self.identifierToCellMap[identifier] = cellClass
+		}
+		if let cellClass = cellClass as? UITableViewCell.Type {
+			self.identifierToCellClassMap[identifier] = cellClass
+		}
+		super.register(cellClass, forCellReuseIdentifier: identifier)
+	}
 
 	// MARK: UITableViewDataSource
 
@@ -150,15 +150,18 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		}
 	}
 
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let vm = self.viewModel.item(at: indexPath),
-			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return UITableView.automaticDimension }
+	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		guard
+			let vm = self.viewModel.item(at: indexPath),
+			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else {
+				return UITableView.automaticDimension
+			}
 		var width = tableView.frame.width
 		if #available(iOS 11.0, *) {
 			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
 		}
-        return cellClass.internalHeight(with: vm, width: tableView.frame.width)
-    }
+		return cellClass.internalHeight(with: vm, width: tableView.frame.width)
+	}
 
 	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		guard let vm = self.viewModel.item(at: indexPath),

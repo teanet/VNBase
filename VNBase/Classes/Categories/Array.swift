@@ -35,11 +35,11 @@ public extension Array where Element : AnyObject {
 	}
 
 	mutating func removeByPointerComparing(elements: [Element]) {
-        guard elements.count > 0 else { return }
-        for element in elements {
-            self.removeByPointerComparing(element: element)
-        }
-    }
+		guard elements.count > 0 else { return }
+		for element in elements {
+			self.removeByPointerComparing(element: element)
+		}
+	}
 
 	mutating func replace(at index: Int, with object: Element) {
 		guard self.isIndexValid(index: index) else { return }

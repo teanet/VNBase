@@ -3,11 +3,11 @@ import Foundation
 open class BaseTableViewVM: BaseVM {
 
 	public var sections: [TableSectionVM] {
-        willSet {
-            self.sections.forEach { $0.onRowsChange = nil }
-        }
+		willSet {
+			self.sections.forEach { $0.onRowsChange = nil }
+		}
 		didSet {
-            self.sections.forEach {
+			self.sections.forEach {
 				$0.onRowsChange = {
 					[weak self] in
 					self?.updateDataModel()
@@ -15,10 +15,12 @@ open class BaseTableViewVM: BaseVM {
 			}
 			self.isUpdating = true
 			if let rows = self.sections.last?.rows {
-				self.indexPathToStartLoading = IndexPath(row: max(rows.count - 3, 0),
-				                                         section: self.sections.count - 1)
+				self.indexPathToStartLoading = IndexPath(
+					row: max(rows.count - 3, 0),
+					section: self.sections.count - 1
+				)
 			}
-            self.updateDataModel()
+			self.updateDataModel()
 		}
 	}
 
@@ -154,8 +156,8 @@ open class BaseTableViewVM: BaseVM {
 		self.sections = [ section ]
 	}
 
-    private func updateDataModel() {
-        self.dataModel = IndexPathModel(sections: self.sections)
-    }
+	private func updateDataModel() {
+		self.dataModel = IndexPathModel(sections: self.sections)
+	}
 
 }

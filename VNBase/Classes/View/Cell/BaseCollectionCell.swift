@@ -17,12 +17,12 @@ public extension UICollectionView {
 				continue
 			}
 
-            let identifier = regClass.identifier()
-            if let nib = regClass.nib() {
-                self.register(nib, forCellWithReuseIdentifier: identifier)
-            } else {
-           		self.register(cellClass, forCellWithReuseIdentifier: identifier)
-            }
+			let identifier = regClass.identifier()
+			if let nib = regClass.nib() {
+				self.register(nib, forCellWithReuseIdentifier: identifier)
+			} else {
+				self.register(cellClass, forCellWithReuseIdentifier: identifier)
+			}
 		}
 	}
 
@@ -31,39 +31,39 @@ public extension UICollectionView {
 // Базовая ячейка для создания ее из ксиба
 open class BaseCollectionViewXibCell<TViewModel : BaseCellVM> : CollectionViewCell<TViewModel> {
 
-    open override class func nib() -> UINib? {
-        let bundle = Bundle.main
-        let name = "\(self)"
-        let nib = UINib(
-            nibName: name,
-            bundle: bundle
-        )
+	open override class func nib() -> UINib? {
+		let bundle = Bundle.main
+		let name = "\(self)"
+		let nib = UINib(
+			nibName: name,
+			bundle: bundle
+		)
 
-        return nib
-    }
+		return nib
+	}
 
-    @available(*, unavailable)
-    public override init(frame: CGRect) {
-        fatalError("use init?(coder: NSCoder)")
-    }
+	@available(*, unavailable)
+	public override init(frame: CGRect) {
+		fatalError("use init?(coder: NSCoder)")
+	}
 
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
 
 }
 
 // Базовая ячейка для создания ее с ручным лейаутом
 open class BaseCollectionViewCell<TViewModel : BaseCellVM> : CollectionViewCell<TViewModel> {
 
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+	}
 
-    @available(*, unavailable)
-    public required init?(coder aDecoder: NSCoder) {
+	@available(*, unavailable)
+	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-    }
+	}
 
 }
 
@@ -87,43 +87,43 @@ open class CollectionViewCell<TViewModel : BaseCellVM> : UICollectionViewCell,
 		return CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
 	}
 
-    open class func nib() -> UINib? {
-        return nil
-    }
+	open class func nib() -> UINib? {
+		return nil
+	}
 
-    public static func identifier() -> String {
-        return TViewModel.reuseIdentifier
-    }
+	public static func identifier() -> String {
+		return TViewModel.reuseIdentifier
+	}
 
-    public var viewModelObject: BaseVM? {
-        didSet {
+	public var viewModelObject: BaseVM? {
+		didSet {
 			if oldValue?.didChangeDelegate === self {
 				oldValue?.didChangeDelegate = nil
 			}
-            self.viewModelObject?.didChangeDelegate = self
+			self.viewModelObject?.didChangeDelegate = self
 
-            self.viewModelChanged()
-        }
-    }
+			self.viewModelChanged()
+		}
+	}
 
-    public var viewModel: TViewModel? {
-        get {
-            return self.viewModelObject as? TViewModel
-        }
-        set {
-            self.viewModelObject = newValue
-        }
-    }
+	public var viewModel: TViewModel? {
+		get {
+			return self.viewModelObject as? TViewModel
+		}
+		set {
+			self.viewModelObject = newValue
+		}
+	}
 
-    open func viewModelChanged() {}
+	open func viewModelChanged() {}
 
-    // MARK: override
+	// MARK: override
 
-    open override func prepareForReuse() {
-        super.prepareForReuse()
+	open override func prepareForReuse() {
+		super.prepareForReuse()
 
-        self.viewModel = nil
-    }
+		self.viewModel = nil
+	}
 
 	open override func updateConstraints() {
 
