@@ -6,7 +6,17 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
-	public let viewModel: TViewModel
+	public var viewModel: TViewModel {
+		didSet {
+			guard self.viewModel !== oldValue else { return }
+			oldValue.indexpathController.delegate = nil
+			oldValue.collectionDelegate = nil
+			self.viewModel.indexpathController.delegate = self
+			self.viewModel.collectionDelegate = self
+			self.viewModel.updateDataModel()
+			self.viewModelChanged()
+		}
+	}
 	public var isUpdateAnimated = false
 	public var shouldDeselectRowAutomatically = true
 	public var cellSize: CGSize = CGSize(width: 100, height: 100)

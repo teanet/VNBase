@@ -65,8 +65,12 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open func appearFirstTime() {
 	}
 
-	open func select(
-		animated: Bool = false,
+	open func select() {
+		self.customSelect(animated: false)
+	}
+
+	open func customSelect(
+		animated: Bool,
 		scrollPosition: UITableView.ScrollPosition = .none,
 		collectionScrollPosition: UICollectionView.ScrollPosition = []
 	) {
