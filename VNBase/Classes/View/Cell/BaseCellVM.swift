@@ -19,9 +19,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 
 	public var isEditable: Bool = false
 	public var editingActions: [UITableViewRowAction]?
-	public static var reuseIdentifier: String {
-		return NSStringFromClass(self)
-	}
+	public static var reuseIdentifier: String { NSStringFromClass(self) }
 
 	/**
 	Уникальный идентификатор ячейки (разный для разных ячеек)
@@ -31,8 +29,9 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	}
 	@objc public let uniqueIdentifier: String
 	open var canMove: Bool { return false }
-	open var editingStyle: UITableViewCell.EditingStyle { return .none }
+	open var editingStyle: UITableViewCell.EditingStyle { .none }
 	let identifier: BaseCellId
+	weak var tableDelegate: BaseCellVMTableDelegate?
 
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString
@@ -65,15 +64,32 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open func appearFirstTime() {
 	}
 
-	open func select() {
-		self.isSelected = true
+	open func select(animated: Bool = false, scrollPosition: UITableView.ScrollPosition = .none) {
+		if !self.isSelected {
+			self.isSelected = true
+			self.tableDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: scrollPosition)
+		}
 	}
 
-	open func deselect() {
-		self.isSelected = false
+	open func deselect(animated: Bool = false) {
+		if self.isSelected {
+			self.isSelected = false
+			self.tableDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: .none)
+		}
 	}
 
 	open func commit(editingStyle: UITableViewCell.EditingStyle) {
 	}
+
+}
+
+protocol BaseCellVMTableDelegate: AnyObject {
+
+	func cell(
+		_ cell: BaseCellVM,
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UITableView.ScrollPosition
+	)
 
 }

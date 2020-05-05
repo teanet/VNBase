@@ -66,6 +66,8 @@ public extension UITableView {
 
 open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHaveHeight, IHaveViewModel, ViewModelChangedDelegate {
 
+	open override class var requiresConstraintBasedLayout: Bool { true }
+
 	open var viewModelObject: BaseVM? {
 		didSet {
 			if oldValue?.didChangeDelegate === self {
@@ -79,7 +81,6 @@ open class BaseCell<TViewModel: BaseCellVM>: UITableViewCell, Registerable, IHav
 
 	public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		self.setNeedsUpdateConstraints()
 	}
 
 	@available(*, unavailable)

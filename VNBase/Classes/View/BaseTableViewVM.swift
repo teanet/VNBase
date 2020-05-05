@@ -4,7 +4,10 @@ open class BaseTableViewVM: BaseVM {
 
 	public var sections: [TableSectionVM] {
 		willSet {
-			self.sections.forEach { $0.onRowsChange = nil }
+			self.sections.forEach {
+				$0.onRowsChange = nil
+				$0.rows.forEach { $0.tableDelegate = nil }
+			}
 		}
 		didSet {
 			self.sections.forEach {
@@ -12,6 +15,7 @@ open class BaseTableViewVM: BaseVM {
 					[weak self] in
 					self?.updateDataModel()
 				}
+				$0.rows.forEach { $0.tableDelegate = self }
 			}
 			self.isUpdating = true
 			if let rows = self.sections.last?.rows {
@@ -44,7 +48,7 @@ open class BaseTableViewVM: BaseVM {
 	private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
 	var isUpdating = false
 	let indexpathController: IndexPathController
-
+	weak var tableDelegate: BaseTableViewVMDelegate?
 	public var prefetchBlock: DidFetchItemsBlock?
 	private let loadingRow: BaseCellVM?
 
@@ -159,5 +163,32 @@ open class BaseTableViewVM: BaseVM {
 	private func updateDataModel() {
 		self.dataModel = IndexPathModel(sections: self.sections)
 	}
+
+}
+
+extension BaseTableViewVM: BaseCellVMTableDelegate {
+
+	func cell(_ cell: BaseCellVM, didChangeSelection isSelected: Bool, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
+		guard let indexPath = self.dataModel.indexPaths(for: [cell]).first else {
+			assertionFailure(""); return
+		}
+		self.tableDelegate?.tableViewVM(
+			didChangeSelection: isSelected,
+			animated: animated,
+			scrollPosition: scrollPosition,
+			at: indexPath
+		)
+	}
+
+}
+
+protocol BaseTableViewVMDelegate: AnyObject {
+
+	func tableViewVM(
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UITableView.ScrollPosition,
+		at indexPath: IndexPath
+	)
 
 }

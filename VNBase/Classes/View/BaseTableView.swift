@@ -1,9 +1,10 @@
-open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+open class BaseTableView: UITableView {
 
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
-	public var viewModel: BaseTableViewVM
+	public let viewModel: BaseTableViewVM
 	public var isUpdateAnimated = false
+	public var shouldDeselectRowAutomaticly = true
 	public var updateAnimation = UITableView.RowAnimation.none
 
 	private var identifierToCellMap = [String: IHaveHeight.Type]()
@@ -25,7 +26,9 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		self.cellLayoutMarginsFollowReadableWidth = false
 		self.delegate = self
 		self.dataSource = self
+		self.allowsMultipleSelection = false
 		self.viewModel.indexpathController.delegate = self
+		self.viewModel.tableDelegate = self
 	}
 
 	@available(*, unavailable)
@@ -65,7 +68,9 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		super.register(cellClass, forCellReuseIdentifier: identifier)
 	}
 
-	// MARK: UITableViewDataSource
+}
+
+extension BaseTableView: UITableViewDataSource {
 
 	public func numberOfSections(in tableView: UITableView) -> Int {
 		return self.viewModel.sectionsCount
@@ -92,14 +97,24 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row
 		}
+		if let vm = row {
+			if vm.isSelected {
+				tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+			} else {
+				tableView.deselectRow(at: indexPath, animated: false)
+			}
+		}
 		return cell
 	}
 
-	// MARK: UITableViewDelegate
+}
+
+extension BaseTableView: UITableViewDelegate {
 
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
-
+		if self.shouldDeselectRowAutomaticly {
+			tableView.deselectRow(at: indexPath, animated: true)
+		}
 		self.viewModel.didSelect(at: indexPath)
 	}
 
@@ -191,7 +206,6 @@ open class BaseTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
 	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
 	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
 	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
-
 }
 
 extension BaseTableView: IndexPathControllerDelegate {
@@ -211,6 +225,23 @@ extension BaseTableView: IndexPathControllerDelegate {
 			updates.performBatchUpdates(on: self, animation: self.updateAnimation) { _ in
 				block()
 			}
+		}
+	}
+
+}
+
+extension BaseTableView: BaseTableViewVMDelegate {
+
+	func tableViewVM(
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UITableView.ScrollPosition,
+		at indexPath: IndexPath
+	) {
+		if isSelected {
+			self.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+		} else {
+			self.deselectRow(at: indexPath, animated: animated)
 		}
 	}
 

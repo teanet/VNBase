@@ -20,6 +20,7 @@ final class DemoCellVM: BaseCellVM {
 	let index: Int
 	init(index: Int) {
 		self.index = index
+		super.init()
 	}
 
 }
