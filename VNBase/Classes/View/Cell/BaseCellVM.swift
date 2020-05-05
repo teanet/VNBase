@@ -32,6 +32,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open var editingStyle: UITableViewCell.EditingStyle { .none }
 	let identifier: BaseCellId
 	weak var tableDelegate: BaseCellVMTableDelegate?
+	weak var collectionDelegate: BaseCellVMCollectionDelegate?
 
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString
@@ -64,10 +65,15 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open func appearFirstTime() {
 	}
 
-	open func select(animated: Bool = false, scrollPosition: UITableView.ScrollPosition = .none) {
+	open func select(
+		animated: Bool = false,
+		scrollPosition: UITableView.ScrollPosition = .none,
+		collectionScrollPosition: UICollectionView.ScrollPosition = []
+	) {
 		if !self.isSelected {
 			self.isSelected = true
 			self.tableDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: scrollPosition)
+			self.collectionDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: collectionScrollPosition)
 		}
 	}
 
@@ -75,6 +81,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 		if self.isSelected {
 			self.isSelected = false
 			self.tableDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: .none)
+			self.collectionDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: [])
 		}
 	}
 
@@ -90,6 +97,17 @@ protocol BaseCellVMTableDelegate: AnyObject {
 		didChangeSelection isSelected: Bool,
 		animated: Bool,
 		scrollPosition: UITableView.ScrollPosition
+	)
+
+}
+
+protocol BaseCellVMCollectionDelegate: AnyObject {
+
+	func cell(
+		_ cell: BaseCellVM,
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UICollectionView.ScrollPosition
 	)
 
 }

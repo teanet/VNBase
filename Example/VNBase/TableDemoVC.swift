@@ -11,7 +11,7 @@ final class TableDemoVC: BaseTableVC<TableDemoVM> {
 
 		self.tableView.isUpdateAnimated = true
 		self.tableView.updateAnimation = .fade
-		self.tableView.shouldDeselectRowAutomaticly = false
+		self.tableView.shouldDeselectRowAutomatically = false
 		self.tableView.allowsMultipleSelection = true
 
 		let segmentedControl = UISegmentedControl(items: self.viewModel.sections.enumerated().map({ "\($0.offset)" }))

@@ -4,7 +4,7 @@ open class BaseTableView: UITableView {
 
 	public let viewModel: BaseTableViewVM
 	public var isUpdateAnimated = false
-	public var shouldDeselectRowAutomaticly = true
+	public var shouldDeselectRowAutomatically = true
 	public var updateAnimation = UITableView.RowAnimation.none
 
 	private var identifierToCellMap = [String: IHaveHeight.Type]()
@@ -112,7 +112,7 @@ extension BaseTableView: UITableViewDataSource {
 extension BaseTableView: UITableViewDelegate {
 
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if self.shouldDeselectRowAutomaticly {
+		if self.shouldDeselectRowAutomatically {
 			tableView.deselectRow(at: indexPath, animated: true)
 		}
 		self.viewModel.didSelect(at: indexPath)

@@ -4,6 +4,7 @@ open class BaseCollectionViewVM: BaseVM {
 		willSet {
 			self.sections.forEach {
 				$0.onRowsChange = nil
+				$0.rows.forEach { $0.collectionDelegate = nil }
 			}
 		}
 		didSet {
@@ -12,6 +13,7 @@ open class BaseCollectionViewVM: BaseVM {
 				self.sections = oldValue
 			} else {
 				self.sections.forEach {
+					$0.rows.forEach { $0.collectionDelegate = self }
 					$0.onRowsChange = {
 						[weak self] in
 						self?.updateDataModel()
@@ -37,7 +39,7 @@ open class BaseCollectionViewVM: BaseVM {
 	var isUpdating = false
 	let indexpathController: IndexPathController
 	var onTableUpdated: VoidBlock?
-
+	weak var collectionDelegate: BaseCollectionViewVMDelegate?
 	private let loadingRow: BaseCellVM?
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
@@ -96,6 +98,38 @@ open class BaseCollectionViewVM: BaseVM {
 		let section = self.sections.first ?? TableSectionVM()
 		section.rows = items
 		self.sections = [ section ]
+	}
+
+}
+
+protocol BaseCollectionViewVMDelegate: AnyObject {
+
+	func collectionView(
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UICollectionView.ScrollPosition,
+		at indexPath: IndexPath
+	)
+
+}
+
+extension BaseCollectionViewVM: BaseCellVMCollectionDelegate {
+
+	func cell(
+		_ cell: BaseCellVM,
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UICollectionView.ScrollPosition
+	) {
+		guard let indexPath = self.dataModel.indexPaths(for: [cell]).first else {
+			assertionFailure(""); return
+		}
+		self.collectionDelegate?.collectionView(
+			didChangeSelection: isSelected,
+			animated: animated,
+			scrollPosition: scrollPosition,
+			at: indexPath
+		)
 	}
 
 }

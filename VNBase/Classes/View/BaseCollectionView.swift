@@ -6,16 +6,9 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
-	public var viewModel: TViewModel {
-		didSet {
-			guard self.viewModel !== oldValue else { return }
-			oldValue.indexpathController.delegate = nil
-			self.viewModel.indexpathController.delegate = self
-			self.viewModel.updateDataModel()
-			self.viewModelChanged()
-		}
-	}
+	public let viewModel: TViewModel
 	public var isUpdateAnimated = false
+	public var shouldDeselectRowAutomatically = true
 	public var cellSize: CGSize = CGSize(width: 100, height: 100)
 	public var forUpdatingAction: VoidBlock?
 
@@ -37,6 +30,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 		self.delegate = self
 		self.dataSource = self
 		self.viewModel.indexpathController.delegate = self
+		self.viewModel.collectionDelegate = self
 	}
 
 	@available(*, unavailable)
@@ -115,6 +109,9 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
+		if self.shouldDeselectRowAutomatically {
+			collectionView.deselectItem(at: indexPath, animated: true)
+		}
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -171,6 +168,23 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
 	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
 	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
+
+}
+
+extension BaseCollectionView: BaseCollectionViewVMDelegate {
+
+	func collectionView(
+		didChangeSelection isSelected: Bool,
+		animated: Bool,
+		scrollPosition: UICollectionView.ScrollPosition,
+		at indexPath: IndexPath
+	) {
+		if isSelected {
+			self.selectItem(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+		} else {
+			self.deselectItem(at: indexPath, animated: animated)
+		}
+	}
 
 }
 
