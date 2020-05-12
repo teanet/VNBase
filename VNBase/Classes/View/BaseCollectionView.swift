@@ -203,11 +203,11 @@ extension BaseCollectionView: IndexPathControllerDelegate {
 	func controller(_ controller: IndexPathController, didUpdateDataModel updates: IndexPathUpdates) {
 		self.viewModel.isUpdating = true
 		let completion = { [weak self] in
-			guard let this = self else { return }
+			guard let self = self else { return }
 
-			this.forUpdatingAction?()
-			this.viewModel.isUpdating = false
-			this.viewModel.onTableUpdated?()
+			self.forUpdatingAction?()
+			self.viewModel.isUpdating = false
+			self.viewModel.onTableUpdated?()
 		}
 
 		if self.isDecelerating || !self.isUpdateAnimated {

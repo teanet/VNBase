@@ -212,12 +212,12 @@ extension BaseTableView: IndexPathControllerDelegate {
 
 	func controller(_ controller: IndexPathController, didUpdateDataModel updates: IndexPathUpdates) {
 		let block = { [weak self] in
-			guard let this = self else { return }
+			guard let self = self else { return }
 
-			this.viewModel.isUpdating = false
-			this.loadNextPageIfNeeded()
+			self.viewModel.isUpdating = false
+			self.loadNextPageIfNeeded()
 		}
-
+		self.viewModel.isUpdating = true
 		if self.isDecelerating || !self.isUpdateAnimated {
 			self.reloadData()
 			block()

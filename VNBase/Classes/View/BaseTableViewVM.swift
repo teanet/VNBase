@@ -3,28 +3,31 @@ import Foundation
 open class BaseTableViewVM: BaseVM {
 
 	public var sections: [TableSectionVM] {
-		willSet {
-			self.sections.forEach {
-				$0.onRowsChange = nil
-				$0.rows.forEach { $0.tableDelegate = nil }
-			}
-		}
 		didSet {
-			self.sections.forEach {
-				$0.onRowsChange = {
-					[weak self] in
-					self?.updateDataModel()
+			if self.isUpdating {
+				self.scheduledSections = self.sections
+				self.sections = oldValue
+			} else {
+				oldValue.forEach {
+					$0.onRowsChange = nil
+					$0.rows.forEach { $0.tableDelegate = nil }
 				}
-				$0.rows.forEach { $0.tableDelegate = self }
+				self.sections.forEach {
+					$0.onRowsChange = {
+						[weak self] in
+						self?.updateDataModel()
+					}
+					$0.rows.forEach { $0.tableDelegate = self }
+				}
+				if let rows = self.sections.last?.rows {
+					self.indexPathToStartLoading = IndexPath(
+						row: max(rows.count - 3, 0),
+						section: self.sections.count - 1
+					)
+				}
+				self.updateDataModel()
 			}
-			self.isUpdating = true
-			if let rows = self.sections.last?.rows {
-				self.indexPathToStartLoading = IndexPath(
-					row: max(rows.count - 3, 0),
-					section: self.sections.count - 1
-				)
-			}
-			self.updateDataModel()
+
 		}
 	}
 
@@ -46,11 +49,19 @@ open class BaseTableViewVM: BaseVM {
 	public private(set) var isPrefetching = false
 
 	private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
-	var isUpdating = false
+	var isUpdating = false {
+		didSet {
+			if !self.isUpdating, let scheduledSections = self.scheduledSections {
+				self.scheduledSections = nil
+				self.sections = scheduledSections
+			}
+		}
+	}
 	let indexpathController: IndexPathController
 	weak var tableDelegate: BaseTableViewVMDelegate?
 	public var prefetchBlock: DidFetchItemsBlock?
 	private let loadingRow: BaseCellVM?
+	private var scheduledSections: [TableSectionVM]?
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
 		self.dataModel = IndexPathModel(sections: sections)
