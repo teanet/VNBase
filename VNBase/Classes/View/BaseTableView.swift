@@ -112,10 +112,10 @@ extension BaseTableView: UITableViewDataSource {
 extension BaseTableView: UITableViewDelegate {
 
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.viewModel.didSelect(at: indexPath)
 		if self.shouldDeselectRowAutomatically {
 			tableView.deselectRow(at: indexPath, animated: true)
 		}
-		self.viewModel.didSelect(at: indexPath)
 	}
 
 	public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
