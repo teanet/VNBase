@@ -47,7 +47,9 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 		super.viewWillAppear(animated)
 		self.viewModel.appear()
 		self.updateNavigationBarStyleIfNeeded()
-		self.navigationController?.setNavigationBarHidden(self.navigationBarStyle == nil, animated: animated)
+		if self.parent === self.navigationController {
+			self.navigationController?.setNavigationBarHidden(self.navigationBarStyle == nil, animated: animated)
+		}
 
 		assert(self.supportedInterfaceOrientations.contains(self.preferredInterfaceOrientationForPresentation.mask))
 
