@@ -21,6 +21,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	public var shouldDeselectRowAutomatically = true
 	public var cellSize: CGSize = CGSize(width: 100, height: 100)
 	public var forUpdatingAction: VoidBlock?
+	public var onScroll: ((BaseCollectionView) -> Void)?
 
 	private var identifierToCellMap = [ String: IHaveSize.Type ]()
 	private var identifierToCellClassMap = [String: UICollectionViewCell.Type]()
@@ -161,6 +162,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 			self.lastOffset = self.contentOffset.x
 			self.processVisibleCellsInWindow()
 		}
+		self.onScroll?(self)
 	}
 
 	public func processVisibleCellsInWindow() {

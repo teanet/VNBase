@@ -6,6 +6,7 @@ open class BaseTableView: UITableView {
 	public var isUpdateAnimated = false
 	public var shouldDeselectRowAutomatically = true
 	public var updateAnimation = UITableView.RowAnimation.none
+	public var onScroll: ((BaseTableView) -> Void)?
 
 	private var identifierToCellMap = [String: IHaveHeight.Type]()
 	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
@@ -206,6 +207,9 @@ extension BaseTableView: UITableViewDelegate {
 	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
 	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
 	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
+	open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		self.onScroll?(self)
+	}
 }
 
 extension BaseTableView: IndexPathControllerDelegate {
