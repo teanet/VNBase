@@ -1,6 +1,6 @@
 class TableSectionId: Id<String> {}
 
-open class TableSectionVM: Equatable {
+open class TableSectionVM: Equatable, Hashable {
 
 	public static func == (lhs: TableSectionVM, rhs: TableSectionVM) -> Bool {
 		return lhs.uniqueIdentifier == rhs.uniqueIdentifier
@@ -20,6 +20,10 @@ open class TableSectionVM: Equatable {
 		self.header = header
 		self.uniqueIdentifier = NSUUID().uuidString
 		self.identifier = TableSectionId(self.uniqueIdentifier)
+	}
+
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(self.identifier)
 	}
 
 	open func set(rows: [BaseCellVM], updateTableView: Bool) {

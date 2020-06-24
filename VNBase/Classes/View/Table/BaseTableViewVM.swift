@@ -71,9 +71,14 @@ open class BaseTableViewVM: BaseVM {
 		super.init()
 	}
 
-	var dataModel: IndexPathModel {
+	private var dataModel: IndexPathModel {
 		didSet {
-			self.indexpathController.dataModel = self.dataModel
+			if #available(iOS 13.0, *) {
+				let snapshot = self.sections.diffableDataSourceSnapshot()
+				self.tableDelegate?.didChangeSnapshot(snapshot)
+			} else {
+				self.indexpathController.dataModel = self.dataModel
+			}
 		}
 	}
 
@@ -177,9 +182,24 @@ open class BaseTableViewVM: BaseVM {
 
 }
 
+extension Array where Element: TableSectionVM {
+
+	@available(iOS 13.0, *)
+	func diffableDataSourceSnapshot() -> NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM> {
+		var snapshot = NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>()
+		snapshot.appendSections(self)
+		for section in self {
+			snapshot.appendItems(section.rows, toSection: section)
+		}
+		return snapshot
+	}
+
+}
+
 extension BaseTableViewVM: BaseCellVMTableDelegate {
 
 	func cell(_ cell: BaseCellVM, didChangeSelection isSelected: Bool, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
+
 		guard let indexPath = self.dataModel.indexPaths(for: [cell]).first else {
 			assertionFailure(""); return
 		}
@@ -201,5 +221,8 @@ protocol BaseTableViewVMDelegate: AnyObject {
 		scrollPosition: UITableView.ScrollPosition,
 		at indexPath: IndexPath
 	)
+
+	@available(iOS 13.0, *)
+	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>)
 
 }

@@ -14,7 +14,7 @@ final class TableDemoVM: BaseTableVM {
 			[TableSectionVM(rows: [])],
 			[TableSectionVM(rows: self.rows)],
 		]
-		super.init(tableVM: BaseTableViewVM())
+		super.init(tableVM: BaseTableViewVM(sections: self.sections[1], loadingRow: nil))
 		self.rows[2].select()
 	}
 

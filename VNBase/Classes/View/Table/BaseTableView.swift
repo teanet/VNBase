@@ -1,15 +1,54 @@
 open class BaseTableView: UITableView {
 
-	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
+	private static let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
 	public let viewModel: BaseTableViewVM
 	public var isUpdateAnimated = false
 	public var shouldDeselectRowAutomatically = true
-	public var updateAnimation = UITableView.RowAnimation.none
+	public var updateAnimation = UITableView.RowAnimation.none {
+		didSet {
+			if #available(iOS 13.0, *) {
+				self.diffableDataSource.defaultRowAnimation = self.updateAnimation
+			}
+		}
+	}
 	public var onScroll: ((BaseTableView) -> Void)?
 
 	private var identifierToCellMap = [String: IHaveHeight.Type]()
 	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
+
+	@available(iOS 13.0, *)
+	private lazy var diffableDataSource: UITableViewDiffableDataSource<TableSectionVM, BaseCellVM> = {
+		UITableViewDiffableDataSource<TableSectionVM, BaseCellVM>(
+			tableView: self,
+			cellProvider: { [weak self] (tv, indexPath, _) -> UITableViewCell? in
+				guard let self = self else { return nil }
+
+				let row = self.viewModel.item(at: indexPath)
+				let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
+				if self.identifierToCellClassMap[reuseIdentifier] == nil {
+
+					let registerableCell: IRegisterableCell? = row
+					if let cellClass = registerableCell?.cellClass?() {
+						self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
+					} else {
+						assertionFailure("You should register cell")
+					}
+				}
+				let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+				if let cell = cell as? IHaveViewModel {
+					cell.viewModelObject = row
+				}
+				if let vm = row {
+					if vm.isSelected {
+						tv.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+					} else {
+						tv.deselectRow(at: indexPath, animated: false)
+					}
+				}
+				return cell
+			})
+	}()
 
 	deinit {
 		self.delegate = nil
@@ -19,17 +58,22 @@ open class BaseTableView: UITableView {
 	public required init(style: UITableView.Style = .plain, viewModel: BaseTableViewVM) {
 		self.viewModel = viewModel
 		super.init(frame: .zero, style: style)
-		self.register(UITableViewCell.self, forCellReuseIdentifier: kDefaultReuseIdentifier)
+		self.register(UITableViewCell.self, forCellReuseIdentifier: BaseTableView.kDefaultReuseIdentifier)
 		self.tableFooterView = UIView()
 		self.estimatedRowHeight = 100
 		self.estimatedSectionHeaderHeight = 40
 		self.rowHeight = UITableView.automaticDimension
 		self.cellLayoutMarginsFollowReadableWidth = false
 		self.delegate = self
-		self.dataSource = self
 		self.allowsMultipleSelection = false
-		self.viewModel.indexpathController.delegate = self
 		self.viewModel.tableDelegate = self
+		if #available(iOS 13.0, *) {
+			self.diffableDataSource.defaultRowAnimation = self.updateAnimation
+			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
+		} else {
+			self.viewModel.indexpathController.delegate = self
+			self.dataSource = self
+		}
 	}
 
 	@available(*, unavailable)
@@ -84,7 +128,7 @@ extension BaseTableView: UITableViewDataSource {
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let row = self.viewModel.item(at: indexPath)
 
-		let reuseIdentifier = row?.reuseIdentifier ?? kDefaultReuseIdentifier
+		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
 		if self.identifierToCellClassMap[reuseIdentifier] == nil {
 
 			let registerableCell: IRegisterableCell? = row
@@ -235,6 +279,15 @@ extension BaseTableView: IndexPathControllerDelegate {
 }
 
 extension BaseTableView: BaseTableViewVMDelegate {
+
+	@available(iOS 13.0, *)
+	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>) {
+		self.diffableDataSource.apply(
+			snapShot,
+			animatingDifferences: self.isUpdateAnimated) {
+
+			}
+	}
 
 	func tableViewVM(
 		didChangeSelection isSelected: Bool,
