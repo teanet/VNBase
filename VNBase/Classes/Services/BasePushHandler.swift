@@ -24,17 +24,18 @@ open class BasePushHandler: NSObject {
 		self.provider = provider
 		super.init()
 		self.userNC.delegate = self
-		self.userNC.getNotificationSettings { (settings) in
-			self.isRespondedToNotificationsRequestAlert =
-				settings.soundSetting == .enabled ||
-				settings.badgeSetting == .enabled ||
-				settings.alertSetting == .enabled
+		self.getNotificationSettings()
+	}
+
+	open func getNotificationSettings(_ granted: BoolBlock? = nil) {
+		self.userNC.getNotificationSettings { [weak self] (settings) in
+			let isEnabled = settings.isEnabled
+			self?.isRespondedToNotificationsRequestAlert = isEnabled
+			granted?(isEnabled)
 		}
 	}
 
-	open func shouldShowMessage(for notification: UNNotification) -> UNNotificationPresentationOptions {
-		return [.alert]
-	}
+	open func shouldShowMessage(for notification: UNNotification) -> UNNotificationPresentationOptions { [.alert] }
 
 	public func registerForRemote() {
 		UIApplication.shared.registerForRemoteNotifications()
@@ -125,4 +126,15 @@ public extension UNNotification {
 	func message() -> PushMessage {
 		return PushMessage(push: self.request.content.userInfo)
 	}
+}
+
+extension UNNotificationSettings {
+
+	var isEnabled: Bool {
+		return
+			self.soundSetting == .enabled ||
+			self.badgeSetting == .enabled ||
+			self.alertSetting == .enabled
+	}
+
 }
