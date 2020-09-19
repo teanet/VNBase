@@ -159,7 +159,7 @@ extension BaseTableView: UITableViewDelegate {
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
 		if self.shouldDeselectRowAutomatically {
-			tableView.deselectRow(at: indexPath, animated: true)
+			self.viewModel.item(at: indexPath)?.deselect(animated: true)
 		}
 	}
 

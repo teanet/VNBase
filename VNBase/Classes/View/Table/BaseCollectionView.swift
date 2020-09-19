@@ -121,7 +121,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
 		if self.shouldDeselectRowAutomatically {
-			collectionView.deselectItem(at: indexPath, animated: true)
+			self.viewModel.item(at: indexPath)?.deselect(animated: true)
 		}
 	}
 
