@@ -40,7 +40,8 @@ open class BaseTableViewVM: BaseVM {
 		}
 	}
 
-	public typealias DidFetchItemsBlock = ((( @escaping ([BaseCellVM], Bool) -> Void)) -> Void)
+	public typealias ItemsCompletionBlock = ([BaseCellVM], Bool) -> Void
+	public typealias PrefetchBlock = (_ reload: Bool, _ offset: Int, _ completion: @escaping ItemsCompletionBlock) -> Void
 	public var isAutoPrefetchEnabled = false
 	public var onSelect: ((BaseCellVM) -> Void)?
 	public var onCommit: ((BaseCellVM, UITableViewCell.EditingStyle) -> Void)?
@@ -59,7 +60,7 @@ open class BaseTableViewVM: BaseVM {
 	}
 	let indexpathController: IndexPathController
 	weak var tableDelegate: BaseTableViewVMDelegate?
-	public var prefetchBlock: DidFetchItemsBlock?
+	public var prefetchBlock: PrefetchBlock?
 	private let loadingRow: BaseCellVM?
 	private var scheduledSections: [TableSectionVM]?
 
@@ -89,11 +90,11 @@ open class BaseTableViewVM: BaseVM {
 		if !reload && ( self.isPrefetching || !self.shouldLoadNextPage ) { return }
 
 		self.isPrefetching = true
+		let offset = reload ? 0 : self.rows.count
 		if self.rows.isEmpty || reload {
 			self.set(rows: [], addLoadingCell: true)
 		}
-
-		prefetchBlock({ [weak self] items, finished in
+		prefetchBlock(reload, offset, { [weak self] items, finished in
 			guard let this = self else { return }
 
 			this.isPrefetching = false
