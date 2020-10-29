@@ -78,8 +78,13 @@ class IndexPathModel {
 	}
 
 	func numberOfItems(in section: Int) -> Int {
-		assert(self.sections.isIndexValid(index: section), "Invalid section index")
-		return self.sections.safeObject(at: section)?.rows.count ?? 0
+		if self.sections.isEmpty {
+			return 0
+		} else if self.sections.isIndexValid(index: section) {
+			return self.sections[section].rows.count
+		}
+		assertionFailure("Invalid section index")
+		return 0
 	}
 
 	func item(at indexPath: IndexPath) -> BaseCellVM? {
