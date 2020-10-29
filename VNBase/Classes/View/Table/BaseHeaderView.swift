@@ -1,7 +1,7 @@
-public class BaseHeaderViewVM: BaseCellVM {
+open class BaseHeaderViewVM: BaseCellVM {
 }
 
-public class BaseHeaderView<TViewModel: BaseHeaderViewVM>: UITableViewHeaderFooterView,
+open class BaseHeaderView<TViewModel: BaseHeaderViewVM>: UITableViewHeaderFooterView,
 	Registerable,
 	IHaveHeight,
 	ViewModelChangedDelegate,
