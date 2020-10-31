@@ -83,42 +83,44 @@ open class BaseTableViewVM: BaseVM {
 		}
 	}
 
-	public func loadNextPage(reload: Bool = false) {
-
+	public func loadNextPage(
+		reload: Bool = false,
+		shouldClearRowsOnReload: Bool = true
+	) {
 		guard let prefetchBlock = self.prefetchBlock else { return }
 
 		if !reload && ( self.isPrefetching || !self.shouldLoadNextPage ) { return }
 
 		self.isPrefetching = true
 		let offset = reload ? 0 : self.rows.count
-		if self.rows.isEmpty || reload {
-			self.set(rows: [], addLoadingCell: true)
-		}
+		let reloadRows = shouldClearRowsOnReload ? [] : self.rows
+		self.set(rows: reloadRows, addLoadingCell: true)
+
 		prefetchBlock(reload, offset, { [weak self] items, finished in
 			guard let this = self else { return }
 
 			this.isPrefetching = false
 			this.shouldLoadNextPage = !finished
-			let rows = this.rows + items
+			let rows = reloadRows + items
 			let addLoadingCell = !finished
 			this.set(rows: rows, addLoadingCell: addLoadingCell)
 		})
 	}
 
 	public var sectionsCount: Int {
-		return self.dataModel.sections.count
+		self.dataModel.sections.count
 	}
 
 	public func numberOfRows(in sectionIndex: Int) -> Int {
-		return self.dataModel.numberOfItems(in: sectionIndex)
+		self.dataModel.numberOfItems(in: sectionIndex)
 	}
 
 	public func section(at index: Int) -> TableSectionVM? {
-		return self.sections.safeObject(at: index)
+		self.sections.safeObject(at: index)
 	}
 
 	public func item(at indexPath: IndexPath) -> BaseCellVM? {
-		return self.dataModel.item(at: indexPath)
+		self.dataModel.item(at: indexPath)
 	}
 
 	open func didSelect(at indexPath: IndexPath) {
