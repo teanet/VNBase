@@ -11,8 +11,8 @@ open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModel
 		}
 	}
 
-	public required init() {
-		super.init(frame: .zero)
+	public override init(frame: CGRect = .zero) {
+		super.init(frame: frame)
 	}
 
 	@available(*, unavailable)
@@ -29,7 +29,6 @@ open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModel
 		}
 	}
 
-	open func viewModelChanged() {
-	}
+	open func viewModelChanged() {}
 
 }
