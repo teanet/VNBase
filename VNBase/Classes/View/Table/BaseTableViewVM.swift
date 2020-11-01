@@ -94,6 +94,7 @@ open class BaseTableViewVM: BaseVM {
 		self.isPrefetching = true
 		let offset = reload ? 0 : self.rows.count
 		let reloadRows = shouldClearRowsOnReload ? [] : self.rows
+		let prefix = reload ? [] : self.rows
 		self.set(rows: reloadRows, addLoadingCell: true)
 
 		prefetchBlock(reload, offset, { [weak self] items, finished in
@@ -101,7 +102,7 @@ open class BaseTableViewVM: BaseVM {
 
 			this.isPrefetching = false
 			this.shouldLoadNextPage = !finished
-			let rows = reloadRows + items
+			let rows = prefix + items
 			let addLoadingCell = !finished
 			this.set(rows: rows, addLoadingCell: addLoadingCell)
 		})
