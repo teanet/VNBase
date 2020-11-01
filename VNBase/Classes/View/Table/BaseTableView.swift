@@ -26,15 +26,7 @@ open class BaseTableView: UITableView {
 
 				let row = self.viewModel.item(at: indexPath)
 				let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
-				if self.identifierToCellClassMap[reuseIdentifier] == nil {
-
-					let registerableCell: IRegisterableCell? = row
-					if let cellClass = registerableCell?.cellClass?() {
-						self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
-					} else {
-						assertionFailure("You should register cell")
-					}
-				}
+				_ = self.cellClass(at: indexPath)
 				let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 				if let cell = cell as? IHaveViewModel {
 					cell.viewModelObject = row
@@ -129,15 +121,7 @@ extension BaseTableView: UITableViewDataSource {
 		let row = self.viewModel.item(at: indexPath)
 
 		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
-		if self.identifierToCellClassMap[reuseIdentifier] == nil {
-
-			let registerableCell: IRegisterableCell? = row
-			if let cellClass = registerableCell?.cellClass?() {
-				self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
-			} else {
-				assertionFailure("You should register cell")
-			}
-		}
+		_ = self.cellClass(at: indexPath)
 		let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row
@@ -211,11 +195,8 @@ extension BaseTableView: UITableViewDelegate {
 	}
 
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		guard
-			let vm = self.viewModel.item(at: indexPath),
-			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else {
-				return UITableView.automaticDimension
-			}
+		guard let vm = self.viewModel.item(at: indexPath),
+			  let cellClass = self.cellClass(at: indexPath) else { return UITableView.automaticDimension }
 		var width = tableView.frame.width
 		if #available(iOS 11.0, *) {
 			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
@@ -223,9 +204,26 @@ extension BaseTableView: UITableViewDelegate {
 		return cellClass.internalHeight(with: vm, width: tableView.frame.width)
 	}
 
+	private func cellClass(at indexPath: IndexPath) -> IHaveHeight.Type? {
+		guard let vm = self.viewModel.item(at: indexPath) else { return nil }
+
+		let reuseIdentifier = vm.reuseIdentifier
+		if self.identifierToCellClassMap[reuseIdentifier] == nil {
+			let registerableCell: IRegisterableCell? = vm
+			if let cellClass = registerableCell?.cellClass?() {
+				self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
+			} else {
+				assertionFailure("You should register cell")
+				return nil
+			}
+		}
+		let cellClass = self.identifierToCellMap[vm.reuseIdentifier]
+		return cellClass
+	}
+
 	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		guard let vm = self.viewModel.item(at: indexPath),
-			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return 100 }
+			  let cellClass = self.cellClass(at: indexPath) else { return 100 }
 		return cellClass.internalEstimatedHeight(with: vm)
 	}
 

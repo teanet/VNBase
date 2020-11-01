@@ -85,16 +85,18 @@ open class BaseTableViewVM: BaseVM {
 
 	public func loadNextPage(
 		reload: Bool = false,
-		shouldClearRowsOnReload: Bool = true
+		shouldClearRowsOnReload: Bool = false
 	) {
 		guard let prefetchBlock = self.prefetchBlock else { return }
 
 		if !reload && ( self.isPrefetching || !self.shouldLoadNextPage ) { return }
 
 		self.isPrefetching = true
-		let offset = reload ? 0 : self.rows.count
-		let reloadRows = shouldClearRowsOnReload ? [] : self.rows
-		let prefix = reload ? [] : self.rows
+
+		let rows = self.rows.filter { $0 !== self.loadingRow }
+		let offset = reload ? 0 : rows.count
+		let reloadRows = shouldClearRowsOnReload ? [] : rows
+		let prefix = reload ? [] : rows
 		self.set(rows: reloadRows, addLoadingCell: true)
 
 		prefetchBlock(reload, offset, { [weak self] items, finished in
@@ -166,17 +168,17 @@ open class BaseTableViewVM: BaseVM {
 
 	private func set(rows: [BaseCellVM], addLoadingCell: Bool) {
 		let section = self.sections.first ?? TableSectionVM()
-		var rows = rows
+		var newRows = rows
 
 		if let loadingRow = self.loadingRow {
 			if let index = rows.firstIndex(of: loadingRow) {
-				rows.remove(at: index)
+				newRows.remove(at: index)
 			}
 			if addLoadingCell {
-				rows.append(loadingRow)
+				newRows.append(loadingRow)
 			}
 		}
-		section.rows = rows
+		section.rows = newRows
 		self.sections = [ section ]
 	}
 
