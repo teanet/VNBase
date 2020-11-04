@@ -85,7 +85,8 @@ open class BaseTableViewVM: BaseVM {
 
 	public func loadNextPage(
 		reload: Bool = false,
-		shouldClearRowsOnReload: Bool = false
+		shouldClearRowsOnReload: Bool = false,
+		addLoadingCell: Bool = true
 	) {
 		guard let prefetchBlock = self.prefetchBlock else { return }
 
@@ -97,7 +98,7 @@ open class BaseTableViewVM: BaseVM {
 		let offset = reload ? 0 : rows.count
 		let reloadRows = shouldClearRowsOnReload ? [] : rows
 		let prefix = reload ? [] : rows
-		self.set(rows: reloadRows, addLoadingCell: true)
+		self.set(rows: reloadRows, addLoadingCell: addLoadingCell)
 
 		prefetchBlock(reload, offset, { [weak self] items, finished in
 			guard let this = self else { return }

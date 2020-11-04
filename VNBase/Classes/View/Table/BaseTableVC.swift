@@ -42,11 +42,7 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 	}
 
 	public func setupRefreshControl() {
-		if #available(iOS 10.0, *) {
-			self.tableView.refreshControl = self.refresh
-		} else {
-			self.tableView.addSubview(self.refresh)
-		}
+		self.tableView.refreshControl = self.refresh
 		self.viewModel.onLoading.add(self) { [weak self] (loading) in
 			guard let this = self else { return }
 
