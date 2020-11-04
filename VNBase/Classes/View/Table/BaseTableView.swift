@@ -280,11 +280,11 @@ extension BaseTableView: BaseTableViewVMDelegate {
 
 	@available(iOS 13.0, *)
 	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>) {
-		self.diffableDataSource.apply(
-			snapShot,
-			animatingDifferences: self.isUpdateAnimated) {
-
-			}
+		OperationQueue.main.addOperation {
+			self.diffableDataSource.apply(
+				snapShot,
+				animatingDifferences: self.isUpdateAnimated) {}
+		}
 	}
 
 	func tableViewVM(
