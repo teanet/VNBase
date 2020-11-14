@@ -175,12 +175,15 @@ public extension UIImage {
 	}
 
 	/// Рисует поверх картинки переданную в параметр картинку
-	func withOverdraw(image: UIImage?) -> UIImage {
+	func withOverdraw(
+		image: UIImage?,
+		offset: CGPoint = .zero
+	) -> UIImage {
 		guard let image = image else { return self }
 
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 		self.draw(at: .zero)
-		image.draw(at: .zero)
+		image.draw(at: offset)
 		let resultImage = UIGraphicsGetImageFromCurrentImageContext()!
 		UIGraphicsEndImageContext()
 		return resultImage
