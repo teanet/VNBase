@@ -16,6 +16,7 @@ open class BaseTableView: UITableView {
 
 	private var identifierToCellMap = [String: IHaveHeight.Type]()
 	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
+	private var didSetup = false
 
 	@available(iOS 13.0, *)
 	private lazy var diffableDataSource: UITableViewDiffableDataSource<TableSectionVM, BaseCellVM> = {
@@ -59,13 +60,6 @@ open class BaseTableView: UITableView {
 		self.delegate = self
 		self.allowsMultipleSelection = false
 		self.viewModel.tableDelegate = self
-		if #available(iOS 13.0, *) {
-			self.diffableDataSource.defaultRowAnimation = self.updateAnimation
-			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
-		} else {
-			self.viewModel.indexpathController.delegate = self
-			self.dataSource = self
-		}
 	}
 
 	@available(*, unavailable)
@@ -74,6 +68,11 @@ open class BaseTableView: UITableView {
 	}
 
 	open func viewModelChanged() {
+	}
+
+	open override func didMoveToWindow() {
+		super.didMoveToWindow()
+		self.setupIfNeeded()
 	}
 
 	private func loadNextPageIfNeeded() {
@@ -85,6 +84,18 @@ open class BaseTableView: UITableView {
 	private func autoLoadNextPage() {
 		if self.viewModel.isAutoPrefetchEnabled {
 			self.viewModel.loadNextPage()
+		}
+	}
+
+	private func setupIfNeeded() {
+		guard self.window != nil && !self.didSetup else { return }
+		self.didSetup = true
+		if #available(iOS 13.0, *) {
+			self.diffableDataSource.defaultRowAnimation = self.updateAnimation
+			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
+		} else {
+			self.viewModel.indexpathController.delegate = self
+			self.dataSource = self
 		}
 	}
 
