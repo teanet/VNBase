@@ -59,7 +59,7 @@ open class BaseTableView: UITableView {
 		self.cellLayoutMarginsFollowReadableWidth = false
 		self.delegate = self
 		self.allowsMultipleSelection = false
-		self.viewModel.tableDelegate = self
+		self.viewModel.tableDelegate = self	
 	}
 
 	@available(*, unavailable)
