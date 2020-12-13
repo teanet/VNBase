@@ -1,7 +1,7 @@
 PODS:
   - SnapKit (5.0.1)
   - SwiftLint (0.39.2)
-  - VNBase (0.4.38):
+  - VNBase (0.4.49):
     - SnapKit (~> 5.0.0)
 
 DEPENDENCIES:
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
-  VNBase: 51238b949c89ed291769cc4726cbc0ba376b2009
+  VNBase: 500c519ab316a60f7cd3b8dbeebb60729b0eed9e
 
 PODFILE CHECKSUM: bb4b7c8712c51db0585f2dead2e00dc6bf11d7c6
 
