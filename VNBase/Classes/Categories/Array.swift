@@ -49,6 +49,7 @@ public extension Array where Element : AnyObject {
 
 }
 
+infix operator ++= : AdditionPrecedence
 public extension Array {
 
 	func insert(separator: Element) -> [Element] {
@@ -129,6 +130,10 @@ public extension Array {
 		func generate() -> IndexingIterator<[Item]> {
 			return items.makeIterator()
 		}
+	}
+
+	static func ++= (left: inout [Element], right: Element) {
+		left.append(right)
 	}
 
 }
