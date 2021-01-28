@@ -110,6 +110,12 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 			}
 		}
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+		if row?.isSelected == true {
+			DispatchQueue.main.async {
+				// если зовем синхронно, то выделение выставляется криво, и вместо deselect на эту ячеку прилетает select
+				collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+			}
+		}
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row
 		}
