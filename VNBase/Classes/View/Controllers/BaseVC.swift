@@ -95,7 +95,8 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	public func updateNavigationBarStyleIfNeeded() {
 		// Защита от childviewcontrollers
 		guard let nc = self.navigationController else { return }
-		guard nc.viewControllers.contains(self) else { return }
+		let viewControllers = nc.viewControllers
+		guard viewControllers.contains(where: { $0 === self }) else { return }
 		guard let style = self.navigationBarStyle else { return }
 
 		nc.navigationBar.apply(style)
