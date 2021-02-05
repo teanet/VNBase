@@ -19,6 +19,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 	}
 	public var isUpdateAnimated = false
 	public var shouldDeselectRowAutomatically = true
+	public var shouldDeselectSelectedRowOnTap = false
 	public var cellSize: CGSize = CGSize(width: 100, height: 100)
 	public var forUpdatingAction: VoidBlock?
 	public var onScroll: ((BaseCollectionView) -> Void)?
@@ -124,10 +125,18 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	// MARK: UICollectionViewDelegate
 
+	public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+		if self.shouldDeselectSelectedRowOnTap,
+		   collectionView.cellForItem(at: indexPath)?.isSelected == true {
+			self.viewModel.didDeselect(at: indexPath, animated: true)
+			return false
+		}
+		return true
+	}
 	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
 		if self.shouldDeselectRowAutomatically {
-			self.viewModel.item(at: indexPath)?.deselect(animated: true)
+			self.viewModel.didSelect(at: indexPath, animated: true)
 		}
 	}
 

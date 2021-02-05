@@ -77,16 +77,16 @@ open class BaseCollectionViewVM: BaseVM {
 		return self.dataModel.item(at: indexPath)
 	}
 
-	open func didSelect(at indexPath: IndexPath) {
+	open func didSelect(at indexPath: IndexPath, animated: Bool = false) {
 		if let item = self.item(at: indexPath) {
-			item.select()
+			item.customSelect(animated: animated)
 			self.onSelect?(item)
 		}
 	}
 
-	open func didDeselect(at indexPath: IndexPath) {
+	open func didDeselect(at indexPath: IndexPath, animated: Bool = false) {
 		if let item = self.item(at: indexPath) {
-			item.deselect()
+			item.deselect(animated: animated)
 		}
 	}
 
