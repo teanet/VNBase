@@ -12,8 +12,8 @@ platform :ios do
 
     swiftlint(
       mode: :lint,      # SwiftLint mode: :lint (default) or :autocorrect
-      path: "./VNBase",       # Specify path to lint (optional)
-      executable: "./Pods/SwiftLint/swiftlint",
+      # path: '../VNBase',       # Specify path to lint (optional)
+      executable: "Pods/SwiftLint/swiftlint",
       config_file: ".swiftlint.yml",     # The path of the configuration file (optional)
       strict: true,
       raise_if_swiftlint_error: true,      # Allow fastlane to raise an error if swiftlint fails
