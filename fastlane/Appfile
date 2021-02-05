@@ -1,3 +1,3 @@
 app_identifier "xyzzy.nazabore.vnbase" # The bundle identifier of your app
 apple_id "e.tyutyuev@gmail.com" # Your Apple email address
-
+ENV["FASTLANE_HIDE_CHANGELOG"] = "true"

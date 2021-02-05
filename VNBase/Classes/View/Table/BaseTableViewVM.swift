@@ -32,12 +32,8 @@ open class BaseTableViewVM: BaseVM {
 	}
 
 	public var rows: [BaseCellVM] {
-		set {
-			self.set(rows: newValue, addLoadingCell: true)
-		}
-		get {
-			return self.sections.first?.rows ?? []
-		}
+		get { self.sections.first?.rows ?? [] }
+		set { self.set(rows: newValue, addLoadingCell: true) }
 	}
 
 	public typealias ItemsCompletionBlock = ([BaseCellVM], Bool) -> Void

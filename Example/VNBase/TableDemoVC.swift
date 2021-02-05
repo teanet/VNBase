@@ -40,7 +40,7 @@ final class TableDemoVC: BaseTableVC<TableDemoVM> {
 	}
 
 	@objc private func selectRandom() {
-		self.viewModel.rows[Int.random(in: 0..<self.viewModel.rows.count)].customSelect(
+		self.viewModel.rows[Int.random(in: 0..<self.viewModel.rows.count)].select(
 			animated: true,
 			scrollPosition: .middle
 		)

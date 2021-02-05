@@ -2,9 +2,9 @@ class IndexPathController {
 
 	var dataModel: IndexPathModel? {
 		didSet {
-			//data model may get set multiple times during batch udpates,
-			//so make sure we remember the initial old data model (which will
-			//get cleared in `performUpdates` when the batch updates complete).
+			// data model may get set multiple times during batch udpates,
+			// so make sure we remember the initial old data model (which will
+			// get cleared in `performUpdates` when the batch updates complete).
 			if self.oldDataModel == nil {
 				self.oldDataModel = oldValue
 			}

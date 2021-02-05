@@ -216,18 +216,18 @@ class IndexPathUpdates {
 			return
 		}
 
-		//TODO this entire block of code seems to be unnecessary as of iOS 6.1.3 (it is
-		//here to work around a crash on the first batch update when the collection view is
-		//starting with zero items). Need to do more testing before removing.
+		// TODO this entire block of code seems to be unnecessary as of iOS 6.1.3 (it is
+		// here to work around a crash on the first batch update when the collection view is
+		// starting with zero items). Need to do more testing before removing.
 		if self.old?.items.isEmpty == true {
 			collectionView.reloadData()
-			//asking the collection view how many items it has in each section
-			//resolves a bug where the collection view can sometimes be confused
-			//about the number of items it has after reloadData, leading to an
-			//internal inconsistency exception on subsequent batch updates. (The scenario
-			//that this fixed for me was when the first insert had only 1 item. On the next
-			//insert, however many items were being inserted, the collection view thought
-			//it already had that many items, causing the next insert to crash.)
+			// asking the collection view how many items it has in each section
+			// resolves a bug where the collection view can sometimes be confused
+			// about the number of items it has after reloadData, leading to an
+			// internal inconsistency exception on subsequent batch updates. (The scenario
+			// that this fixed for me was when the first insert had only 1 item. On the next
+			// insert, however many items were being inserted, the collection view thought
+			// it already had that many items, causing the next insert to crash.)
 			for i in 0..<collectionView.numberOfSections {
 				collectionView.numberOfItems(inSection: i)
 			}

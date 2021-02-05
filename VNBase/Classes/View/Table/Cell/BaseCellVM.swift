@@ -65,12 +65,14 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open func appearFirstTime() {
 	}
 
-	open func select() {
-		self.customSelect(animated: false)
+	open func handleSelection(animated: Bool) {
 	}
 
-	open func customSelect(
-		animated: Bool,
+	open func handleDeselection(animated: Bool) {
+	}
+
+	public func select(
+		animated: Bool = false,
 		scrollPosition: UITableView.ScrollPosition = .none,
 		collectionScrollPosition: UICollectionView.ScrollPosition = []
 	) {
@@ -78,14 +80,16 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 			self.isSelected = true
 			self.tableDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: scrollPosition)
 			self.collectionDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: collectionScrollPosition)
+			self.handleSelection(animated: animated)
 		}
 	}
 
-	open func deselect(animated: Bool = false) {
+	public func deselect(animated: Bool = false) {
 		if self.isSelected {
 			self.isSelected = false
 			self.tableDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: .none)
 			self.collectionDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: [])
+			self.handleDeselection(animated: animated)
 		}
 	}
 

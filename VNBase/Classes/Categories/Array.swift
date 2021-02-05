@@ -108,7 +108,7 @@ public extension Array {
 			}
 
 			group.append(item: element)
-			map[key] = group //always copy back struct
+			map[key] = group // always copy back struct
 		}
 
 		return map.values.map { $0 as Group<Key,Item> }

@@ -26,11 +26,11 @@ open class BaseCollectionViewVM: BaseVM {
 	private var scheduledSections = [TableSectionVM]()
 
 	open var items: [BaseCellVM] {
-		set {
-			self.set(items: newValue)
-		}
 		get {
 			return self.sections.first?.rows ?? []
+		}
+		set {
+			self.set(items: newValue)
 		}
 	}
 
@@ -79,7 +79,7 @@ open class BaseCollectionViewVM: BaseVM {
 
 	open func didSelect(at indexPath: IndexPath, animated: Bool = false) {
 		if let item = self.item(at: indexPath) {
-			item.customSelect(animated: animated)
+			item.select(animated: animated)
 			self.onSelect?(item)
 		}
 	}

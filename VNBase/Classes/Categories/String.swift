@@ -55,7 +55,7 @@ public extension Optional where Wrapped == String {
 	func isNilOrEmptyOrAllWhitespace() -> Bool {
 		guard let string = self,
 			!string.isEmpty,
-			//удаляем все пробелы
+			// удаляем все пробелы
 			!string.components(separatedBy: .whitespaces).joined().isEmpty
 			else { return true }
 
