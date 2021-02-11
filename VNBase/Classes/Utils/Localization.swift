@@ -2,6 +2,7 @@ public class Testing {
 	public static var isUnitTest = false
 }
 
+// swiftlint:disable:next identifier_name
 public func L10N(_ string: String) -> String {
 	if Testing.isUnitTest {
 		return string
@@ -10,6 +11,7 @@ public func L10N(_ string: String) -> String {
 	}
 }
 
+// swiftlint:disable:next identifier_name
 public func L18N(_ format: String, value: Int) -> String {
 	if Testing.isUnitTest {
 		return format

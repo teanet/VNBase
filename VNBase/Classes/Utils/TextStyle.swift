@@ -5,17 +5,20 @@ public struct TextStyle {
 	public var interLetterSpacing: CGFloat
 	public var color: UIColor
 	public var lineHeight: CGFloat = 0
+	public var underlineStyle: NSUnderlineStyle
 
 	public init(
 		font: UIFont,
 		color: UIColor = .white,
 		interLetterSpacing: CGFloat = 0,
-		lineHeight: CGFloat = 0
+		lineHeight: CGFloat = 0,
+		underlineStyle: NSUnderlineStyle = NSUnderlineStyle(rawValue: 0)
 	) {
 		self.font = font
 		self.color = color
 		self.interLetterSpacing = interLetterSpacing
 		self.lineHeight = lineHeight
+		self.underlineStyle = underlineStyle
 	}
 
 }
@@ -31,9 +34,14 @@ public extension TextStyle {
 	func attributedString(
 		_ text: String,
 		textAlignment: NSTextAlignment = .left,
-		lineHeightMultiple: CGFloat? = nil
+		lineHeightMultiple: CGFloat? = nil,
+		lineBreakMode: NSLineBreakMode = .byTruncatingTail
 	) -> NSMutableAttributedString {
-		let attributes = self.attributes(textAlignment: textAlignment, lineHeightMultiple: lineHeightMultiple)
+		let attributes = self.attributes(
+			textAlignment: textAlignment,
+			lineHeightMultiple: lineHeightMultiple,
+			lineBreakMode: lineBreakMode
+		)
 		let attributedText = NSMutableAttributedString(string: text, attributes: attributes)
 		return attributedText
 	}
@@ -42,23 +50,20 @@ public extension TextStyle {
 		textAlignment: NSTextAlignment = .left,
 		lineHeightMultiple: CGFloat? = nil,
 		lineBreakMode: NSLineBreakMode = .byTruncatingTail
-	) -> [NSAttributedString.Key : Any] {
+	) -> [NSAttributedString.Key: Any] {
 		let paragraphStyle = NSMutableParagraphStyle()
-		if self.lineHeight > 0 {
-			paragraphStyle.minimumLineHeight = self.lineHeight
-			paragraphStyle.maximumLineHeight = self.lineHeight
-		}
+		paragraphStyle.minimumLineHeight = self.lineHeight
+		paragraphStyle.maximumLineHeight = self.lineHeight
 		paragraphStyle.alignment = textAlignment
 		paragraphStyle.lineBreakMode = lineBreakMode
-		if let lineHeightMultiple = lineHeightMultiple {
-			paragraphStyle.lineHeightMultiple = lineHeightMultiple
-		}
-		let attributes: [NSAttributedString.Key : Any] = [
-			.font : self.font,
-			.paragraphStyle : paragraphStyle,
+		let attributes: [NSAttributedString.Key: Any] = [
+			.font: self.font,
+			.paragraphStyle: paragraphStyle,
 			.kern: NSNumber(value: Float(self.font.pointSize * self.interLetterSpacing)),
 			.foregroundColor: self.color,
+			.underlineStyle: self.underlineStyle.rawValue,
 		]
+
 		return attributes
 	}
 
