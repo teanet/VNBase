@@ -25,21 +25,7 @@ open class BaseTableView: UITableView {
 			cellProvider: { [weak self] (tv, indexPath, _) -> UITableViewCell? in
 				guard let self = self else { return nil }
 
-				let row = self.viewModel.item(at: indexPath)
-				let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
-				_ = self.cellClass(at: indexPath)
-				let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-				if let cell = cell as? IHaveViewModel {
-					cell.viewModelObject = row
-				}
-				if let vm = row {
-					if vm.isSelected {
-						tv.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-					} else {
-						tv.deselectRow(at: indexPath, animated: false)
-					}
-				}
-				return cell
+				return self.configureCell(at: tv, indexPath: indexPath)
 			})
 	}()
 
@@ -94,7 +80,7 @@ open class BaseTableView: UITableView {
 			self.diffableDataSource.defaultRowAnimation = self.updateAnimation
 			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
 		} else {
-			self.viewModel.indexpathController.delegate = self
+			self.viewModel.indexPathController.delegate = self
 			self.dataSource = self
 		}
 	}
@@ -116,6 +102,25 @@ open class BaseTableView: UITableView {
 		super.register(cellClass, forCellReuseIdentifier: identifier)
 	}
 
+	private func configureCell(at tv: UITableView, indexPath: IndexPath) -> UITableViewCell {
+		let row = self.viewModel.item(at: indexPath)
+		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
+		_ = self.cellClass(at: indexPath)
+		let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+		if let cell = cell as? IHaveViewModel {
+			cell.viewModelObject = row
+		}
+		if let vm = row {
+			let selectedRows = tv.indexPathsForSelectedRows ?? []
+			if vm.isSelected, !selectedRows.contains(indexPath) {
+				tv.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+			} else if !vm.isSelected && selectedRows.contains(indexPath) {
+				tv.deselectRow(at: indexPath, animated: false)
+			}
+		}
+		return cell
+	}
+
 }
 
 extension BaseTableView: UITableViewDataSource {
@@ -129,22 +134,7 @@ extension BaseTableView: UITableViewDataSource {
 	}
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let row = self.viewModel.item(at: indexPath)
-
-		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
-		_ = self.cellClass(at: indexPath)
-		let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-		if let cell = cell as? IHaveViewModel {
-			cell.viewModelObject = row
-		}
-		if let vm = row {
-			if vm.isSelected {
-				tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-			} else {
-				tableView.deselectRow(at: indexPath, animated: false)
-			}
-		}
-		return cell
+		return self.configureCell(at: tableView, indexPath: indexPath)
 	}
 
 }

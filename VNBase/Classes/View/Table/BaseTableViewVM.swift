@@ -54,7 +54,7 @@ open class BaseTableViewVM: BaseVM {
 			}
 		}
 	}
-	let indexpathController: IndexPathController
+	let indexPathController: IndexPathController
 	weak var tableDelegate: BaseTableViewVMDelegate?
 	public var prefetchBlock: PrefetchBlock?
 	private let loadingRow: BaseCellVM?
@@ -62,7 +62,7 @@ open class BaseTableViewVM: BaseVM {
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
 		self.dataModel = IndexPathModel(sections: sections)
-		self.indexpathController = IndexPathController(dataModel: self.dataModel)
+		self.indexPathController = IndexPathController(dataModel: self.dataModel)
 		self.loadingRow = loadingRow
 		self.sections = sections
 		super.init()
@@ -74,7 +74,7 @@ open class BaseTableViewVM: BaseVM {
 				let snapshot = self.sections.diffableDataSourceSnapshot()
 				self.tableDelegate?.didChangeSnapshot(snapshot)
 			} else {
-				self.indexpathController.dataModel = self.dataModel
+				self.indexPathController.dataModel = self.dataModel
 			}
 		}
 	}
