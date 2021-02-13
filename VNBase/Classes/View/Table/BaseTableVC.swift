@@ -37,7 +37,7 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 		super.viewWillAppear(animated)
 		if self.clearsSelectionOnViewWillAppear,
 			let indexPath = self.tableView.indexPathForSelectedRow {
-			self.tableView.deselectRow(at: indexPath, animated: animated)
+			self.tableView.viewModel.item(at: indexPath)?.deselect(animated: animated)
 		}
 	}
 
