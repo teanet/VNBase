@@ -2,7 +2,7 @@ import SnapKit
 
 open class BaseHeaderCell<TVM: BaseHeaderCellVM>: BaseCell<TVM> {
 
-	private let header = MultilineLabel()
+	public let header = MultilineLabel()
 	private var constraint = [Constraint]()
 
 	public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
