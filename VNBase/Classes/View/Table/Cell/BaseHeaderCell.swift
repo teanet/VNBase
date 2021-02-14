@@ -5,7 +5,7 @@ open class BaseHeaderCell<TVM: BaseHeaderCellVM>: BaseCell<TVM> {
 	private let header = MultilineLabel()
 	private var constraint = [Constraint]()
 
-	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+	public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
 		let insets = UIEdgeInsets.zero
