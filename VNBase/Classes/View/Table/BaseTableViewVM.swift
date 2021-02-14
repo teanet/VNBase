@@ -44,6 +44,7 @@ open class BaseTableViewVM: BaseVM {
 
 	public var shouldLoadNextPage = true
 	public private(set) var isPrefetching = false
+	public var prefetchBlock: PrefetchBlock?
 
 	private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
 	var isUpdating = false {
@@ -55,8 +56,9 @@ open class BaseTableViewVM: BaseVM {
 		}
 	}
 	let indexPathController: IndexPathController
+	var onHeightChanged: VoidBlock?
 	weak var tableDelegate: BaseTableViewVMDelegate?
-	public var prefetchBlock: PrefetchBlock?
+
 	private let loadingRow: BaseCellVM?
 	private var scheduledSections: [TableSectionVM]?
 
@@ -77,6 +79,10 @@ open class BaseTableViewVM: BaseVM {
 				self.indexPathController.dataModel = self.dataModel
 			}
 		}
+	}
+
+	public func reloadHeight() {
+		self.onHeightChanged?()
 	}
 
 	public func loadNextPage(

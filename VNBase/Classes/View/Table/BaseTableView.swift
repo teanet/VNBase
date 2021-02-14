@@ -46,6 +46,11 @@ open class BaseTableView: UITableView {
 		self.delegate = self
 		self.allowsMultipleSelection = false
 		self.viewModel.tableDelegate = self
+		self.viewModel.onHeightChanged = { [weak self] in
+			guard let self = self else { return }
+			self.beginUpdates()
+			self.endUpdates()
+		}
 	}
 
 	@available(*, unavailable)
