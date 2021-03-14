@@ -3,7 +3,7 @@ public enum UIMode {
 	case night
 }
 
-extension UITraitCollection {
+public extension UITraitCollection {
 
 	static var currentMode: UIMode {
 		#if compiler(>=5.1)
