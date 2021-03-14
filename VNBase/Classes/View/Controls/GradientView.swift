@@ -1,6 +1,6 @@
 open class GradientView: UIView {
 
-	public typealias ColorWithLocaction = (color: UIColor, location: CGFloat)
+	public typealias ColorWithLocation = (color: UIColor, location: CGFloat)
 	public struct Points {
 		let start: CGPoint
 		let end: CGPoint
@@ -38,17 +38,31 @@ open class GradientView: UIView {
 
 	public init(
 		frame: CGRect = .zero,
-		colorsWithLocactions: [ColorWithLocaction] = [],
+		colorsWithLocations: [ColorWithLocation] = [],
 		points: Points = .horisontal,
 		gradientType: CAGradientLayerType = .axial
 	) {
 		self.points = points
-		self.colors = colorsWithLocactions.map({ $0.color })
-		self.locations = colorsWithLocactions.map({ NSNumber(value: Double($0.location)) })
+		self.colors = colorsWithLocations.map({ $0.color })
+		self.locations = colorsWithLocations.map({ NSNumber(value: Double($0.location)) })
 		self.gradientType = gradientType
 		super.init(frame: frame)
 		self.layer.needsDisplayOnBoundsChange = true
 		self.reload()
+	}
+
+	public convenience init(
+		frame: CGRect = .zero,
+		colors: [UIColor] = [],
+		points: Points = .horisontal,
+		gradientType: CAGradientLayerType = .axial
+	) {
+		self.init(
+			frame: frame,
+			colorsWithLocations: colors.colorsWithLocations(),
+			points: points,
+			gradientType: gradientType
+		)
 	}
 
 	@available(*, unavailable)
@@ -56,20 +70,25 @@ open class GradientView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func updateColorsWithLocations(_ colors: [ColorWithLocaction]) {
+	open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		super.traitCollectionDidChange(previousTraitCollection)
+		self.reload()
+	}
+
+	public func updateColorsWithLocations(_ colors: [ColorWithLocation]) {
 		self.colors = colors.map({ $0.color })
 		self.locations = colors.map({ NSNumber(value: Double($0.location)) })
 		self.reload()
 	}
 
 	public func updateColors(colors: [UIColor]) {
-		self.updateColorsWithLocations(colors.colorsWithLocactions())
+		self.updateColorsWithLocations(colors.colorsWithLocations())
 	}
 
 	private func reload() {
 		let gradientLayer = self.gradientLayer
 		gradientLayer.type = self.gradientType
-		gradientLayer.colors = self.colors.map({ $0.cgColor })
+		gradientLayer.colors = self.colors.map({ $0.cgColor(with: self.traitCollection) })
 		gradientLayer.locations = self.locations
 		gradientLayer.startPoint = self.points.start
 		gradientLayer.endPoint = self.points.end
@@ -79,14 +98,14 @@ open class GradientView: UIView {
 
 public extension Array where Element == UIColor {
 
-	func colorsWithLocactions() -> [GradientView.ColorWithLocaction] {
+	func colorsWithLocations() -> [GradientView.ColorWithLocation] {
 		guard !self.isEmpty else { return [] }
 		guard self.count > 1 else {
 			return [(self[0], 0)]
 		}
 		let count = CGFloat(self.count)
 		return self.enumerated().map {
-			GradientView.ColorWithLocaction(
+			GradientView.ColorWithLocation(
 				color: $0.element,
 				location: CGFloat($0.offset) / (count - 1)
 			)
