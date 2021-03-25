@@ -35,6 +35,15 @@ open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChang
 	}
 
 	open func viewModelChanged() {
+		guard let vm = self.viewModel else { return }
+		switch vm.viewState {
+			case .other:
+				break
+			case .hidden(let isHidden):
+				self.isHidden = isHidden
+			case .transparent(alpha: let alpha):
+				self.alpha = alpha
+		}
 	}
 
 	public init() {
