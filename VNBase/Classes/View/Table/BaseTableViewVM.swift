@@ -12,13 +12,7 @@ open class BaseTableViewVM: BaseVM {
 					$0.onRowsChange = nil
 					$0.tableDelegate = nil
 				}
-				self.sections.forEach {
-					$0.onRowsChange = {
-						[weak self] in
-						self?.updateDataModel()
-					}
-					$0.tableDelegate = self
-				}
+				self.setupSections()
 				if let rows = self.sections.last?.rows {
 					self.indexPathToStartLoading = IndexPath(
 						row: max(rows.count - 3, 0),
@@ -68,6 +62,7 @@ open class BaseTableViewVM: BaseVM {
 		self.loadingRow = loadingRow
 		self.sections = sections
 		super.init()
+		self.setupSections()
 	}
 
 	private var dataModel: IndexPathModel {
@@ -187,6 +182,16 @@ open class BaseTableViewVM: BaseVM {
 
 	private func updateDataModel() {
 		self.dataModel = IndexPathModel(sections: self.sections)
+	}
+
+	private func setupSections() {
+		self.sections.forEach {
+			$0.onRowsChange = {
+				[weak self] in
+				self?.updateDataModel()
+			}
+			$0.tableDelegate = self
+		}
 	}
 
 }
