@@ -10,14 +10,14 @@ open class BaseTableViewVM: BaseVM {
 			} else {
 				oldValue.forEach {
 					$0.onRowsChange = nil
-					$0.rows.forEach { $0.tableDelegate = nil }
+					$0.tableDelegate = nil
 				}
 				self.sections.forEach {
 					$0.onRowsChange = {
 						[weak self] in
 						self?.updateDataModel()
 					}
-					$0.rows.forEach { $0.tableDelegate = self }
+					$0.tableDelegate = self
 				}
 				if let rows = self.sections.last?.rows {
 					self.indexPathToStartLoading = IndexPath(

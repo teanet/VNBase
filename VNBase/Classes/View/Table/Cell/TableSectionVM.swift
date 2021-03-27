@@ -12,7 +12,11 @@ open class TableSectionVM: Equatable, Hashable {
 	public let uniqueIdentifier: String
 	let identifier: TableSectionId
 	public var header: BaseHeaderViewVM?
-
+	weak var tableDelegate: BaseCellVMTableDelegate? {
+		didSet {
+			self.rows.forEach { $0.tableDelegate = self.tableDelegate }
+		}
+	}
 	var onRowsChange: VoidBlock?
 
 	public init(rows: [BaseCellVM] = [], header: BaseHeaderViewVM? = nil) {
@@ -28,6 +32,9 @@ open class TableSectionVM: Equatable, Hashable {
 
 	open func set(rows: [BaseCellVM], updateTableView: Bool) {
 		self.rows = rows
+		rows.forEach {
+			$0.tableDelegate = self.tableDelegate
+		}
 		if updateTableView {
 			self.onRowsChange?()
 		}
