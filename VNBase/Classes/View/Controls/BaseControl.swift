@@ -13,6 +13,7 @@ open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModel
 
 	public override init(frame: CGRect = .zero) {
 		super.init(frame: frame)
+		self.addTarget(self, action: #selector(self.handleSelection), for: .touchUpInside)
 	}
 
 	@available(*, unavailable)
@@ -30,5 +31,7 @@ open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModel
 	}
 
 	open func viewModelChanged() {}
+
+	@objc open func handleSelection() {}
 
 }
