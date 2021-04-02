@@ -6,19 +6,25 @@ public struct TextStyle {
 	public var color: UIColor
 	public var lineHeight: CGFloat = 0
 	public var underlineStyle: NSUnderlineStyle
+	public var strikethroughStyle: NSUnderlineStyle?
+	public var strikethroughColor: UIColor?
 
 	public init(
 		font: UIFont,
 		color: UIColor = .white,
 		interLetterSpacing: CGFloat = 0,
 		lineHeight: CGFloat = 0,
-		underlineStyle: NSUnderlineStyle = NSUnderlineStyle(rawValue: 0)
+		underlineStyle: NSUnderlineStyle = NSUnderlineStyle(rawValue: 0),
+		strikethroughStyle: NSUnderlineStyle? = nil,
+		strikethroughColor: UIColor? = nil
 	) {
 		self.font = font
 		self.color = color
 		self.interLetterSpacing = interLetterSpacing
 		self.lineHeight = lineHeight
 		self.underlineStyle = underlineStyle
+		self.strikethroughStyle = strikethroughStyle
+		self.strikethroughColor = strikethroughColor
 	}
 
 }
@@ -56,14 +62,19 @@ public extension TextStyle {
 		paragraphStyle.maximumLineHeight = self.lineHeight
 		paragraphStyle.alignment = textAlignment
 		paragraphStyle.lineBreakMode = lineBreakMode
-		let attributes: [NSAttributedString.Key: Any] = [
+		var attributes: [NSAttributedString.Key: Any] = [
 			.font: self.font,
 			.paragraphStyle: paragraphStyle,
 			.kern: NSNumber(value: Float(self.font.pointSize * self.interLetterSpacing)),
 			.foregroundColor: self.color,
 			.underlineStyle: self.underlineStyle.rawValue,
 		]
-
+		if let strikethroughColor = self.strikethroughColor {
+			attributes[.strikethroughColor] = strikethroughColor
+		}
+		if let strikethroughStyle = self.strikethroughStyle {
+			attributes[.strikethroughStyle] = strikethroughStyle.rawValue
+		}
 		return attributes
 	}
 
