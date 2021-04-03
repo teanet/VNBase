@@ -8,8 +8,12 @@ public extension UIImageView {
 		return UIImageView(image: image)
 	}
 
-	static func templatedNamed(_ name: String?) -> UIImageView {
-		return self.named(name, renderingMode: .alwaysTemplate)
+	static func templatedNamed(_ name: String?, tint: UIColor? = nil) -> UIImageView {
+		let iv = self.named(name, renderingMode: .alwaysTemplate)
+		if let tint = tint {
+			iv.tintColor = tint
+		}
+		return iv
 	}
 
 }
