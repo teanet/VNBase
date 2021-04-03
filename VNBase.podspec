@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'VNBase'
-  s.version          = '0.4.58'
+  s.version          = '0.4.59'
   s.summary          = 'Simple MVVM helper'
   s.swift_version 	 = '5.0'
   s.description      = <<-DESC
