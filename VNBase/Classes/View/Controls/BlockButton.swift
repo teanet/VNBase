@@ -2,8 +2,20 @@ public typealias ButtonBlock = ((UIButton) -> Swift.Void)
 
 open class BlockButton: UIButton {
 	public var onTap: ButtonBlock?
-	public init(block: ButtonBlock? = nil) {
+	public var fadeOnHighlighted: Bool
+	open override var isHighlighted: Bool {
+		didSet {
+			if self.fadeOnHighlighted {
+				self.alpha = self.isHighlighted.highlightedAlpha
+			}
+		}
+	}
+	public init(
+		block: ButtonBlock? = nil,
+		fadeOnHighlighted: Bool = false
+	) {
 		self.onTap = block
+		self.fadeOnHighlighted = fadeOnHighlighted
 		super.init(frame: .zero)
 		self.addTarget(self, action: #selector(self.onTap(_:)), for: .touchUpInside)
 	}
