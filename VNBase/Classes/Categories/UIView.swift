@@ -8,6 +8,10 @@ public extension UIView {
 		return view
 	}
 
+	var boundsCenter: CGPoint {
+		self.bounds.boundsCenter
+	}
+
 	func addSubview(_ subview: UIView, withConstraints closure: (_ make: ConstraintMaker) -> Void) {
 		subview.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(subview)
@@ -37,7 +41,7 @@ public extension UIView {
 }
 
 public protocol Buildable {}
-public extension Buildable where Self: UIView {
+public extension Buildable where Self: NSObject {
 	@discardableResult
 	func with(_ closure: (Self) -> Void) -> Self {
 		closure(self)
@@ -45,6 +49,7 @@ public extension Buildable where Self: UIView {
 	}
 }
 extension UIView: Buildable {}
+extension CALayer: Buildable {}
 
 public extension CALayer {
 
