@@ -1,6 +1,10 @@
 import Foundation
 
-open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewModelChangedDelegate {
+open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewModelChangedDelegate, IHaveViewModel {
+	public var viewModelObject: BaseVM? {
+		get { self.viewModel }
+		set { _ = newValue }
+	}
 
 	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 	open override var shouldAutorotate: Bool { true }
