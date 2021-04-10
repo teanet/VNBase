@@ -48,6 +48,7 @@ open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChang
 
 	public init() {
 		super.init(frame: .zero)
+		self.updateColors()
 	}
 
 	@available(*, unavailable)
@@ -55,7 +56,12 @@ open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChang
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	open func createConstraints() {
-
+	open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		super.traitCollectionDidChange(previousTraitCollection)
+		self.updateColors()
 	}
+
+	open func createConstraints() {}
+	open func updateColors() {}
+
 }
