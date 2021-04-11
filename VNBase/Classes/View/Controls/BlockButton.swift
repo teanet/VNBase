@@ -1,6 +1,7 @@
 public typealias ButtonBlock = ((UIButton) -> Swift.Void)
 
 open class BlockButton: UIButton {
+	open override var intrinsicContentSize: CGSize { .height(self.height) }
 	public var onTap: ButtonBlock?
 	public var fadeOnHighlighted: Bool
 	open override var isHighlighted: Bool {
@@ -10,12 +11,20 @@ open class BlockButton: UIButton {
 			}
 		}
 	}
+	public var height: CGFloat {
+		didSet {
+			self.invalidateIntrinsicContentSize()
+		}
+	}
+
 	public init(
 		block: ButtonBlock? = nil,
-		fadeOnHighlighted: Bool = false
+		fadeOnHighlighted: Bool = false,
+		height: CGFloat = UIView.noIntrinsicMetric
 	) {
 		self.onTap = block
 		self.fadeOnHighlighted = fadeOnHighlighted
+		self.height = height
 		super.init(frame: .zero)
 		self.addTarget(self, action: #selector(self.onTap(_:)), for: .touchUpInside)
 	}
