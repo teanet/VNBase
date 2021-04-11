@@ -6,6 +6,14 @@ public extension UIStackView {
 		}
 	}
 
+	func removeAllArrangedSubviews() {
+		let subviews = self.arrangedSubviews
+		subviews.forEach {
+			self.removeArrangedSubview($0)
+			$0.removeFromSuperview()
+		}
+	}
+
 	static func stack(
 		views: [UIView] = [],
 		axis: NSLayoutConstraint.Axis = .vertical,
