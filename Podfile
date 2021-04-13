@@ -1,14 +1,21 @@
 use_modular_headers!
-platform :ios, '10.0'
 
 target 'VNBase_Example' do
-  project 'Example/VNBase.xcodeproj'
+	platform :ios, '10.0'
+	project 'Example/VNBase.xcodeproj'
   pod 'VNBase', :path => './'
   pod 'SwiftLint'
+	pod 'SnapKit'
 
   target 'VNBase_Tests' do
     inherit! :search_paths
   end
+end
+
+target 'DemoWatch Extension' do
+	platform :watchos, '5.0'
+	project 'Example/VNBase.xcodeproj'
+	pod 'VNBase', :path => './'
 end
 
 post_install do |installer|

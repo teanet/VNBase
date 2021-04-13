@@ -22,15 +22,16 @@ TODO: I should add some description later =)
   s.social_media_url = 'https://twitter.com/teanet'
 
   s.ios.deployment_target = '10.0'
-  s.source_files = 'VNBase/Classes/**/*'
-  
+  s.ios.source_files = 'VNBase/Classes/**/*'
+  s.watchos.deployment_target = '5.0'
+  s.watchos.source_files = 'VNBase/Classes/Watch/**/*'
   # s.resource_bundles = {
   #   'VNBase' => ['VNBase/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit'
-  s.dependency 'SnapKit', '~> 5.0.0'
+  s.ios.frameworks = 'UIKit'
+  s.ios.dependency 'SnapKit'
 
 end
 

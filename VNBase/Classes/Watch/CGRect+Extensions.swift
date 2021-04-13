@@ -1,3 +1,5 @@
+import CoreGraphics.CGGeometry
+
 public extension CGRect {
 
 	var maxSize: CGFloat {
