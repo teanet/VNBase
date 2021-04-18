@@ -189,8 +189,10 @@ public extension UIImage {
 		return resultImage
 	}
 
-	static func rectImage(colored color: UIColor) -> UIImage? {
-		let size = CGSize(width: 20, height: 20)
+	static func rectImage(
+		colored color: UIColor,
+		size: CGSize = CGSize(width: 20, height: 20)
+	) -> UIImage? {
 		UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
 		guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
 		ctx.saveGState()
