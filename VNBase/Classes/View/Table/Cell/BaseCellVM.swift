@@ -71,6 +71,9 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	open func handleDeselection(animated: Bool) {
 	}
 
+	open func handleSelection(isSelected: Bool, animated: Bool) {
+	}
+
 	public func select(
 		animated: Bool = false,
 		scrollPosition: UITableView.ScrollPosition = .none,
@@ -81,6 +84,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 			self.tableDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: scrollPosition)
 			self.collectionDelegate?.cell(self, didChangeSelection: true, animated: animated, scrollPosition: collectionScrollPosition)
 			self.handleSelection(animated: animated)
+			self.handleSelection(isSelected: true, animated: animated)
 		}
 	}
 
@@ -90,6 +94,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 			self.tableDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: .none)
 			self.collectionDelegate?.cell(self, didChangeSelection: false, animated: animated, scrollPosition: [])
 			self.handleDeselection(animated: animated)
+			self.handleSelection(isSelected: false, animated: animated)
 		}
 	}
 
