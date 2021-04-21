@@ -1,7 +1,13 @@
 public typealias ButtonBlock = ((UIButton) -> Swift.Void)
 
 open class BlockButton: UIButton {
-	open override var intrinsicContentSize: CGSize { .height(self.height) }
+	open override var intrinsicContentSize: CGSize {
+		if self.height == UIView.noIntrinsicMetric {
+			return super.intrinsicContentSize
+		} else {
+			return .height(self.height)
+		}
+	}
 	public var onTap: ButtonBlock?
 	public var fadeOnHighlighted: Bool
 	open override var isHighlighted: Bool {
