@@ -2,6 +2,8 @@ import Foundation
 
 open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChangedDelegate {
 
+	public var shouldPassOverTouches = false
+
 	open var viewModelObject: BaseVM? {
 		didSet {
 			if oldValue?.didChangeDelegate === self {
@@ -22,6 +24,16 @@ open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChang
 		set {
 			self.viewModelObject = newValue
 		}
+	}
+
+	open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+		let resultView = super.hitTest(point, with: event)
+		if self.shouldPassOverTouches {
+			if resultView === self {
+				return nil
+			}
+		}
+		return resultView
 	}
 
 	open override func updateConstraints() {
