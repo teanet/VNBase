@@ -4,7 +4,6 @@ public final class HeightCell: BaseCell<HeightCellVM> {
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		self.makeClearBackground()
 		self.selectionStyle = .none
 		self.contentView.addSubview(self.separator)
 	}
@@ -14,6 +13,7 @@ public final class HeightCell: BaseCell<HeightCellVM> {
 		guard let vm = self.viewModel else { return }
 		self.separator.backgroundColor = vm.separatorColor
 		self.separator.isHidden = vm.separatorInset == .dgs_invisibleSeparator
+		self.makeClearBackground(color: vm.backgroundColor)
 		self.setNeedsLayout()
 	}
 
@@ -40,17 +40,20 @@ public final class HeightCellVM: BaseCellVM {
 	let separatorColor: UIColor
 	let separatorInset: UIEdgeInsets
 	let separatorHeight: CGFloat
+	let backgroundColor: UIColor
 
 	public init(
 		height: CGFloat,
 		separatorColor: UIColor = .clear,
 		separatorInset: UIEdgeInsets = .dgs_invisibleSeparator,
-		separatorHeight: CGFloat = .pixel
+		separatorHeight: CGFloat = .pixel,
+		backgroundColor: UIColor = .clear
 	) {
 		self.separatorColor = separatorColor
 		self.separatorInset = separatorInset
 		self.separatorHeight = separatorHeight
 		self.height = height
+		self.backgroundColor = backgroundColor
 	}
 
 }
