@@ -58,7 +58,7 @@ public extension IHaveAttributedText {
 	}
 }
 
-extension IHaveAttributedText where Self: UIView {
+public extension IHaveAttributedText where Self: UIView {
 	init(style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
 		self.init()
 		self.apply(style, text: text, textAlignment: textAlignment)
