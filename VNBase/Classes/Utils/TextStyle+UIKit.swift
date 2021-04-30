@@ -52,6 +52,13 @@ public extension UILabel {
 	func apply(_ style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
 		self.attributedText = style.attributedString(text, textAlignment: textAlignment)
 	}
+
+	static func label(style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) -> Self {
+		let l = Self()
+		l.apply(style, text: text, textAlignment: textAlignment)
+		return l
+	}
+
 }
 
 public extension UIBarItem {
