@@ -58,6 +58,13 @@ public extension IHaveAttributedText {
 	}
 }
 
+extension IHaveAttributedText where Self: UIView {
+	init(style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
+		self.init()
+		self.apply(style, text: text, textAlignment: textAlignment)
+	}
+}
+
 extension UILabel: IHaveAttributedText {
 	public func update(_ attributedText: NSAttributedString) {
 		self.attributedText = attributedText
