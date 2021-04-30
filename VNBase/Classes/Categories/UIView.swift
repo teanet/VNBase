@@ -34,8 +34,8 @@ public extension UIView {
 		return self.findSubview { $0 is T } as? T
 	}
 
-	func setCornerRadius(_ radius: CGFloat) {
-		self.layer.setCornerRadius(radius)
+	func setCornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask? = nil) {
+		self.layer.setCornerRadius(radius, maskedCorners: maskedCorners)
 	}
 
 }
@@ -51,11 +51,18 @@ public extension Buildable where Self: NSObject {
 extension UIView: Buildable {}
 extension CALayer: Buildable {}
 
+public extension CACornerMask {
+	static let top: CACornerMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+}
+
 public extension CALayer {
 
-	func setCornerRadius(_ radius: CGFloat) {
+	func setCornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask? = nil) {
 		self.cornerRadius = radius
 		self.masksToBounds = true
+		if #available(iOS 11.0, *), let maskedCorners = maskedCorners {
+			self.maskedCorners = maskedCorners
+		}
 	}
 
 }
