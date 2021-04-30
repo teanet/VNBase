@@ -48,17 +48,37 @@ public extension UIButton {
 
 }
 
-public extension UILabel {
+public protocol IHaveAttributedText {
+	func update(_ attributedText: NSAttributedString)
+}
+public extension IHaveAttributedText {
 	func apply(_ style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
-		self.attributedText = style.attributedString(text, textAlignment: textAlignment)
+		let attributedText = style.attributedString(text, textAlignment: textAlignment)
+		self.update(attributedText)
 	}
+}
 
+extension UILabel: IHaveAttributedText {
+	public func update(_ attributedText: NSAttributedString) {
+		self.attributedText = attributedText
+	}
+}
+extension UITextField: IHaveAttributedText {
+	public func update(_ attributedText: NSAttributedString) {
+		self.attributedText = attributedText
+	}
+}
+extension UITextView: IHaveAttributedText {
+	public func update(_ attributedText: NSAttributedString) {
+		self.attributedText = attributedText
+	}
+}
+public extension UILabel {
 	static func label(style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) -> Self {
 		let l = Self()
 		l.apply(style, text: text, textAlignment: textAlignment)
 		return l
 	}
-
 }
 
 public extension UIBarItem {
