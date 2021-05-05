@@ -42,7 +42,7 @@ open class BaseCollectionViewVM: BaseVM {
 	weak var collectionDelegate: BaseCollectionViewVMDelegate?
 	private let loadingRow: BaseCellVM?
 
-	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
+	public init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
 		self.dataModel = IndexPathModel(sections: sections)
 		self.indexpathController = IndexPathController(dataModel: self.dataModel)
 		self.loadingRow = loadingRow
