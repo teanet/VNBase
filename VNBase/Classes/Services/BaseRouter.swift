@@ -60,28 +60,54 @@ open class BaseRouter: NSObject {
 
 public extension UINavigationController {
 
-	func push(_ vc: UIViewController, animated: Bool = true, config: PushConfig = .push) {
+	func push(
+		_ vc: UIViewController,
+		animated: Bool = true,
+		config: PushConfig = .push,
+		completion: VoidBlock? = nil
+	) {
 		switch config {
 			case .push:
-				self.pushViewController(vc, animated: animated)
+				self.pushViewController(vc, animated: animated, completion: completion)
 			case .replaceCurrent:
-				self._replaceCurrent(vc, animated: animated)
+				self._replaceCurrent(vc, animated: animated, completion: completion)
 			case .popToRoot:
-				self._popToRoot(vc, animated: animated)
+				self._popToRoot(vc, animated: animated, completion: completion)
 		}
 	}
 
-	private func _replaceCurrent(_ vc: UIViewController, animated: Bool) {
+	private func pushViewController(_ viewController: UIViewController, animated: Bool, completion: VoidBlock?) {
+		self.pushViewController(viewController, animated: animated)
+		guard animated, let coordinator = self.transitionCoordinator else {
+			DispatchQueue.main.async {
+				completion?()
+			}
+			return
+		}
+		coordinator.animate(alongsideTransition: nil) { _ in completion?() }
+	}
+
+	func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, completion: VoidBlock?) {
+		self.setViewControllers(viewControllers, animated: animated)
+		guard animated, let coordinator = self.transitionCoordinator else {
+			DispatchQueue.main.async {
+				completion?()
+			}
+			return
+		}
+		coordinator.animate(alongsideTransition: nil) { _ in completion?() }
+	}
+
+	private func _replaceCurrent(_ vc: UIViewController, animated: Bool, completion: VoidBlock?) {
 		var vcs = self.viewControllers
 		vcs.removeLast()
 		vcs.append(vc)
-		self.setViewControllers(vcs, animated: animated)
+		self.setViewControllers(vcs, animated: animated, completion: completion)
 	}
 
-	private func _popToRoot(_ vc: UIViewController, animated: Bool) {
+	private func _popToRoot(_ vc: UIViewController, animated: Bool, completion: VoidBlock?) {
 		var vcs = Array(self.viewControllers.prefix(1))
 		vcs.append(vc)
-		self.setViewControllers(vcs, animated: animated)
+		self.setViewControllers(vcs, animated: animated, completion: completion)
 	}
-
 }
