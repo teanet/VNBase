@@ -76,7 +76,7 @@ public extension UINavigationController {
 		}
 	}
 
-	private func pushViewController(_ viewController: UIViewController, animated: Bool, completion: VoidBlock?) {
+	func pushViewController(_ viewController: UIViewController, animated: Bool, completion: VoidBlock?) {
 		self.pushViewController(viewController, animated: animated)
 		guard animated, let coordinator = self.transitionCoordinator else {
 			DispatchQueue.main.async {
@@ -89,6 +89,17 @@ public extension UINavigationController {
 
 	func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, completion: VoidBlock?) {
 		self.setViewControllers(viewControllers, animated: animated)
+		guard animated, let coordinator = self.transitionCoordinator else {
+			DispatchQueue.main.async {
+				completion?()
+			}
+			return
+		}
+		coordinator.animate(alongsideTransition: nil) { _ in completion?() }
+	}
+
+	func popViewController(animated: Bool, completion: VoidBlock?) {
+		self.popViewController(animated: animated)
 		guard animated, let coordinator = self.transitionCoordinator else {
 			DispatchQueue.main.async {
 				completion?()
