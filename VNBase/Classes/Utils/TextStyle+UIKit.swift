@@ -52,16 +52,26 @@ public protocol IHaveAttributedText {
 	func update(_ attributedText: NSAttributedString)
 }
 public extension IHaveAttributedText {
-	func apply(_ style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
-		let attributedText = style.attributedString(text, textAlignment: textAlignment)
+	func apply(
+		_ style: TextStyle,
+		text: String,
+		textAlignment: NSTextAlignment = .left,
+		lineBreakMode: NSLineBreakMode = .byTruncatingTail
+	) {
+		let attributedText = style.attributedString(text, textAlignment: textAlignment, lineBreakMode: lineBreakMode)
 		self.update(attributedText)
 	}
 }
 
 public extension IHaveAttributedText where Self: UIView {
-	init(style: TextStyle, text: String, textAlignment: NSTextAlignment = .left) {
+	init(
+		style: TextStyle,
+		text: String,
+		textAlignment: NSTextAlignment = .left,
+		lineBreakMode: NSLineBreakMode = .byTruncatingTail
+	) {
 		self.init()
-		self.apply(style, text: text, textAlignment: textAlignment)
+		self.apply(style, text: text, textAlignment: textAlignment, lineBreakMode: lineBreakMode)
 	}
 }
 
