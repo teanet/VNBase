@@ -9,15 +9,15 @@ let package = Package(
 		.watchOS(.v5),
 	],
 	products: [
-		.library(name: "VNBase", targets: ["VNBase", "VNBaseWatch"]),
-		.library(name: "VNBaseWatch", targets: ["VNBaseWatch"]),
+		.library(name: "VNBase", targets: ["VNBase", "VNEssential"]),
+		.library(name: "VNEssential", targets: ["VNEssential"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
 	],
 	targets: [
 		.target(name: "VNBase", path: "VNBase/Classes"),
-		.target(name: "VNBaseWatch",  path: "VNBase/Watch"),
+		.target(name: "VNEssential",  path: "VNBase/Essential"),
 	],
 	swiftLanguageVersions: [
 		.v5
