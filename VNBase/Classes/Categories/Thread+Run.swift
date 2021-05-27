@@ -1,3 +1,5 @@
+import Foundation
+
 public extension Thread {
 
 	static func runOnMain(withAssert: Bool = true, block: @escaping VoidBlock) {

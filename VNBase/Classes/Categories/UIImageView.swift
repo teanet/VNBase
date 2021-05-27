@@ -1,3 +1,5 @@
+import UIKit
+
 public extension UIImageView {
 
 	static func named(

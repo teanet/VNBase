@@ -1,3 +1,5 @@
+import Foundation
+
 extension DateFormatter {
 
 	static let dMMMM: DateFormatter = {

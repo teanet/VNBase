@@ -1,3 +1,5 @@
+import UIKit
+
 public extension UIImage {
 
 	/// Возвращает картинку нарисованную на прямоугольнике цвета color с заданным размером

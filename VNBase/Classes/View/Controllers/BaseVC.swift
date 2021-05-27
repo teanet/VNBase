@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewModelChangedDelegate, IHaveViewModel {
 	public var viewModelObject: BaseVM? {

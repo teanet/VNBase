@@ -1,3 +1,5 @@
+import UIKit
+
 @objc protocol IHaveNavigationBarStyle {
 
 	@objc optional var navigationBarStyle: NavigationBarStyle? { get }

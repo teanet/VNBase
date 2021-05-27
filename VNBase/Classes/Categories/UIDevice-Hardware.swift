@@ -1,3 +1,5 @@
+import UIKit
+
 public struct UIDeviceHardware {
 	public static func platformModelString() -> String {
 		if let key = "hw.machine".cString(using: String.Encoding.utf8) {

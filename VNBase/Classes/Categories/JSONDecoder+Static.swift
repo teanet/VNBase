@@ -1,3 +1,5 @@
+import Foundation
+
 extension JSONDecoder {
 
 	static let unwrap = JSONDecoder()

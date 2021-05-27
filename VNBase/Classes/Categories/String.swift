@@ -1,3 +1,5 @@
+import Foundation
+
 extension String { // + HTML
 
 	var html: NSAttributedString {

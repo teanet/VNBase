@@ -1,3 +1,5 @@
+import UIKit
+
 public extension UIAlertAction {
 
 	static let cancel = UIAlertAction(title: L10N("button.cancel"), style: .cancel, handler: nil)

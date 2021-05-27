@@ -1,3 +1,5 @@
+import UIKit
+
 public extension UITableViewCell {
 
 	func makeClearBackground(

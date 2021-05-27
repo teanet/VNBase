@@ -1,3 +1,5 @@
+import CoreGraphics
+
 public extension CGSize {
 
 	static func height(_ height: CGFloat) -> CGSize {

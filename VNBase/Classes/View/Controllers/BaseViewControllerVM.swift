@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseViewControllerVM: BaseVM {
 
 	public enum State {

@@ -1,3 +1,5 @@
+import Foundation
+
 public extension FileManager { // ApplicationSettings
 
 	static func documentsDirectory() -> String {
