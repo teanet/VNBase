@@ -1,4 +1,4 @@
-import VNBase
+import VNEssential
 
 final class SessionId: Id<String> {}
 final class UserId: Id<Int> {}

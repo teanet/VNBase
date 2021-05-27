@@ -1,4 +1,5 @@
 import Foundation
+import VNEssential
 
 public final class Lazy<T>: IInvalidating {
 

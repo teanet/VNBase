@@ -4,6 +4,7 @@ target 'VNBase_Example' do
 	platform :ios, '10.0'
 	project 'Example/VNBase.xcodeproj'
   pod 'VNBase', :path => './'
+	pod 'VNEssential', :path => './'
   pod 'SwiftLint'
 	pod 'SnapKit'
 
@@ -15,7 +16,7 @@ end
 target 'DemoWatch Extension' do
 	platform :watchos, '5.0'
 	project 'Example/VNBase.xcodeproj'
-	pod 'VNBase', :path => './'
+	pod 'VNEssential', :path => './'
 end
 
 post_install do |installer|

@@ -1,6 +1,6 @@
 import WatchKit
 import Foundation
-import VNBase
+import VNEssential
 
 class InterfaceController: WKInterfaceController {
 

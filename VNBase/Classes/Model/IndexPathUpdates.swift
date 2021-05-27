@@ -1,4 +1,5 @@
 import Foundation
+import VNEssential
 
 class IndexPathUpdates {
 

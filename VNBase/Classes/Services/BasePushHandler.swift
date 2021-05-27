@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 public protocol IBackgroundPushHandler {
 	func handle(message: PushMessage, completion: @escaping (UIBackgroundFetchResult) -> Void)

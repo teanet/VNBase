@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 public extension NSMutableAttributedString {
 	@discardableResult func imagified(with image: UIImage?, bounds: CGRect) -> NSAttributedString {

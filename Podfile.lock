@@ -3,11 +3,14 @@ PODS:
   - SwiftLint (0.42.0)
   - VNBase (0.4.62):
     - SnapKit
+    - VNEssential
+  - VNEssential (0.4.62)
 
 DEPENDENCIES:
   - SnapKit
   - SwiftLint
   - VNBase (from `./`)
+  - VNEssential (from `./`)
 
 SPEC REPOS:
   trunk:
@@ -17,12 +20,15 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   VNBase:
     :path: "./"
+  VNEssential:
+    :path: "./"
 
 SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
-  VNBase: f0e7a18ded010271bd945fa8f4e5cba3378b9400
+  VNBase: caa61bddf58999bfc8b37417a71b0da9d8570da7
+  VNEssential: 00eec0a20bd2dad30efa446f664345fe815eab17
 
-PODFILE CHECKSUM: 489c8f289fe5b57a7c224e9ea6d4e8be47295eca
+PODFILE CHECKSUM: 0ceccba8f811203fce965e8a51b784fc067701e0
 
 COCOAPODS: 1.10.1

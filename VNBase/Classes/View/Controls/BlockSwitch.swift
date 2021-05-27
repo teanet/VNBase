@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 open class BlockSwitch: UISwitch {
 	public var onSwitch: BoolBlock?

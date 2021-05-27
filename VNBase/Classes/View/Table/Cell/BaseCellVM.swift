@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 /**
 Базовая вьюмодель ячейки.

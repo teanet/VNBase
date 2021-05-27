@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView,
 	UICollectionViewDelegate,
