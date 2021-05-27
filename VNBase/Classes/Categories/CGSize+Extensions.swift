@@ -1,4 +1,4 @@
-import CoreGraphics
+import UIKit
 
 public extension CGSize {
 

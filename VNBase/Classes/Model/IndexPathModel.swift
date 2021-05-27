@@ -1,3 +1,5 @@
+import Foundation
+
 class IndexPathModel {
 
 	struct Section {
