@@ -9,7 +9,7 @@ let package = Package(
 		.watchOS(.v5),
 	],
 	products: [
-		.library(name: "VNBase", targets: ["VNBase"]),
+		.library(name: "VNBase", targets: ["VNBase", "VNBaseWatch"]),
 		.library(name: "VNBaseWatch", targets: ["VNBaseWatch"]),
 	],
 	dependencies: [
