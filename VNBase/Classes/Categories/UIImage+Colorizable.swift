@@ -209,4 +209,16 @@ public extension UIImage {
 		return resultImage
 	}
 
+	static func image(from color: UIColor, size: CGSize) -> UIImage {
+		UIGraphicsImageRenderer(size: size).image { ctx in
+			color.setFill()
+			ctx.fill(CGRect(origin: .zero, size: size))
+		}
+	}
+
+	static func stretchableImage(from color: UIColor) -> UIImage {
+		self.image(from: color, size: CGSize(width: 1, height: 1))
+			.stretchableImage(withLeftCapWidth: 0, topCapHeight: 0)
+	}
+
 }
