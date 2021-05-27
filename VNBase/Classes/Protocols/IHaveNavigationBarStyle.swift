@@ -7,21 +7,8 @@
 
 @objc public class NavigationBarStyle: NSObject {
 
-	public static let daySeparatorImage: UIImage = UIImage.dgs_newImage(
-		from: .black,
-		of: CGSize(
-			width: 1.0,
-			height: 1.0 / UIScreen.main.scale
-		)
-	)
-
-	public static let nightSeparatorImage: UIImage = UIImage.dgs_newImage(
-		from: .black,
-		of: CGSize(
-			width: 1.0,
-			height: 1.0 / UIScreen.main.scale
-		)
-	)
+	public static let daySeparatorImage: UIImage = UIImage.image(from: .black, size: CGSize(width: 1, height: .pixel))
+	public static let nightSeparatorImage = UIImage.image(from: .black, size: CGSize(width: 1, height: .pixel))
 
 	@objc public let tintColor: UIColor?
 	@objc public let barTintColor: UIColor?
@@ -38,6 +25,7 @@
 		backgroundImage: UIImage? = nil,
 		shadowImage: UIImage? = nil
 	) {
+
 		self.tintColor = tintColor
 		self.barTintColor = barTintColor
 		self.translucent = translucent
