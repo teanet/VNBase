@@ -1,3 +1,5 @@
+import Foundation
+
 open class Id<T: Hashable&Codable>:
 	RawRepresentable,
 	Hashable,

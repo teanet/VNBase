@@ -1,3 +1,5 @@
+import Foundation
+
 public extension Array where Element: Equatable {
 
 	var isContainsSameElements: Bool {

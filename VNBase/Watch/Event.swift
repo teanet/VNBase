@@ -1,3 +1,5 @@
+import Foundation
+
 private struct LockWrapper {
 	fileprivate static let lockQueue = DispatchQueue(label: "com.grymmobile.vncommon.event.lockqueue")
 }

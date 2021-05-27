@@ -1,3 +1,5 @@
+import Foundation
+
 public class Testing {
 	public static var isUnitTest = false
 }
