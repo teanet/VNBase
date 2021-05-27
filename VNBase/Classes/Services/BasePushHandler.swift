@@ -1,3 +1,5 @@
+import UIKit
+
 public protocol IBackgroundPushHandler {
 	func handle(message: PushMessage, completion: @escaping (UIBackgroundFetchResult) -> Void)
 }

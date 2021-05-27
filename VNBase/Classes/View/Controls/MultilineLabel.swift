@@ -1,3 +1,5 @@
+import UIKit
+
 open class MultilineLabel: UILabel {
 
 	override open var bounds: CGRect {

@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseTableVM: BaseViewControllerVM {
 
 	public let tableVM: BaseTableViewVM

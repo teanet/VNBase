@@ -1,3 +1,5 @@
+import Foundation
+
 class IndexPathController {
 
 	var dataModel: IndexPathModel? {

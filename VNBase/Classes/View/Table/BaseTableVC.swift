@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 
 	open override var navigationBarStyle: NavigationBarStyle? { nil }

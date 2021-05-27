@@ -1,3 +1,5 @@
+import UIKit
+
 public enum UIMode {
 	case day
 	case night

@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView,
 	UICollectionViewDelegate,
 	UICollectionViewDataSource,

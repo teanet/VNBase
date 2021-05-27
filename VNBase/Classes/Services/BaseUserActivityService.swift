@@ -1,3 +1,5 @@
+import UIKit
+
 public protocol IUserActivityRestoring: AnyObject {
 	func application(
 		_ application: UIApplication,

@@ -1,3 +1,5 @@
+import UIKit
+
 public typealias ButtonBlock = ((UIButton) -> Swift.Void)
 
 open class BlockButton: UIButton {

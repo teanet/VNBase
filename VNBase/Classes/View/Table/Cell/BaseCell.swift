@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 public typealias RegisterableClass = Registerable.Type
 public typealias SizeableClass = Sizeable.Type

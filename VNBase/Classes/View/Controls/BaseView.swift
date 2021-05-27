@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 open class BaseView<TViewModel: BaseVM> : UIView, IHaveViewModel, ViewModelChangedDelegate {
 

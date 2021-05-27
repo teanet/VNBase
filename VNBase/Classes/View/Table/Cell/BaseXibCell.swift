@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseXibCell<TViewModel: BaseCellVM> : BaseCell<TViewModel> {
 
 	open override class func nib() -> UINib? {

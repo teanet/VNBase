@@ -1,3 +1,5 @@
+import UIKit
+
 extension CAMediaTimingFunction {
 
 	func value(at progress: Float) -> Float {

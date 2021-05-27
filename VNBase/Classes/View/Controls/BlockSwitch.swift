@@ -1,3 +1,5 @@
+import UIKit
+
 open class BlockSwitch: UISwitch {
 	public var onSwitch: BoolBlock?
 	public init(block: BoolBlock? = nil) {

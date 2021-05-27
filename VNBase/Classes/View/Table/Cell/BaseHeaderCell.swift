@@ -1,4 +1,5 @@
 import SnapKit
+import UIKit
 
 open class BaseHeaderCell<TVM: BaseHeaderCellVM>: BaseCell<TVM> {
 

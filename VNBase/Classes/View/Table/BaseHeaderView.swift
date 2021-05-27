@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseHeaderViewVM: BaseCellVM {
 }
 

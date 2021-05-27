@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
 	public let operation: UINavigationController.Operation

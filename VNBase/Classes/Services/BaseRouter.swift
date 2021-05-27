@@ -1,3 +1,5 @@
+import UIKit
+
 public enum PushConfig {
 	case push
 	case replaceCurrent

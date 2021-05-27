@@ -1,3 +1,5 @@
+import Foundation
+
 public struct PushMessage {
 
 	public enum C {

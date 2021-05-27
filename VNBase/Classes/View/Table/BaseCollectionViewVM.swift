@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseCollectionViewVM: BaseVM {
 
 	open var sections: [TableSectionVM] {

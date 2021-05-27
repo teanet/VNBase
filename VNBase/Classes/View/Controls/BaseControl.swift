@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseControl<TViewModel: BaseVM>: UIControl, IHaveViewModel, ViewModelChangedDelegate {
 
 	public var viewModelObject: BaseVM? {

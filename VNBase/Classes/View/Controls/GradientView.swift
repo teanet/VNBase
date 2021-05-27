@@ -1,3 +1,5 @@
+import UIKit
+
 open class GradientView: UIView {
 
 	public typealias ColorWithLocation = (color: UIColor, location: CGFloat)

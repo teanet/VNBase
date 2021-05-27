@@ -1,3 +1,5 @@
+import Foundation
+
 @propertyWrapper
 // swiftlint:disable:next type_name
 public struct UD<T: Codable> {

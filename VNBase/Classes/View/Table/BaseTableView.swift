@@ -1,3 +1,5 @@
+import UIKit
+
 open class BaseTableView: UITableView {
 
 	private static let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"

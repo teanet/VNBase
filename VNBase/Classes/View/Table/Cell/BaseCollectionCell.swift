@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 public protocol IHaveSize: AnyObject {
 	static func internalSize(with viewModel: BaseCellVM, size: CGSize) -> CGSize

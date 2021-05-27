@@ -1,3 +1,5 @@
+import UIKit
+
 public extension UICollectionView {
 
 	func register(headerClasses classes: RegisterableClass...) {

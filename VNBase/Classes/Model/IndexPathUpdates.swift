@@ -1,3 +1,5 @@
+import Foundation
+
 class IndexPathUpdates {
 
 	private let old: IndexPathModel?

@@ -1,3 +1,5 @@
+import UIKit
+
 class TableSectionId: Id<String> {}
 
 open class TableSectionVM: Equatable, Hashable {

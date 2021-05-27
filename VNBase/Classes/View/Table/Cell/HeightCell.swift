@@ -1,3 +1,5 @@
+import UIKit
+
 public final class HeightCell: BaseCell<HeightCellVM> {
 
 	private let separator = UIView()
