@@ -26,7 +26,7 @@ open class BaseRouter: NSObject {
 		self.present(ac)
 	}
 
-	public func present(
+	open func present(
 		_ vc: UIViewController,
 		style: UIModalPresentationStyle = .fullScreen,
 		animated: Bool = true,
@@ -41,7 +41,7 @@ open class BaseRouter: NSObject {
 		}
 	}
 
-	public func dismiss(animated: Bool = true, _ completion: VoidBlock? = nil) {
+	open func dismiss(animated: Bool = true, _ completion: VoidBlock? = nil) {
 		let topVC = self.topPresentedVC()
 		if let presentingViewController = topVC?.presentingViewController {
 			presentingViewController.dismiss(animated: animated, completion: completion)
