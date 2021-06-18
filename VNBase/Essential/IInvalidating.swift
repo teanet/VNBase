@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol IInvalidating {
+public protocol IInvalidating: AnyObject {
 	func invalidate()
 }
