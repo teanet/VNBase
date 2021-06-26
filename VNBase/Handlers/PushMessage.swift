@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 public struct PushMessage {
 
@@ -29,4 +29,16 @@ public struct PushMessage {
 		}
 	}
 
+}
+
+public extension UNNotificationResponse {
+	func message() -> PushMessage {
+		return self.notification.message()
+	}
+}
+
+public extension UNNotification {
+	func message() -> PushMessage {
+		return PushMessage(push: self.request.content.userInfo)
+	}
 }

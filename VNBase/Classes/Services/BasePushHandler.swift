@@ -1,19 +1,6 @@
 import UIKit
 import VNEssential
-
-public protocol IBackgroundPushHandler {
-	func handle(message: PushMessage, completion: @escaping (UIBackgroundFetchResult) -> Void)
-}
-
-@objc public protocol INotificationResponseHandler {
-	func handle(response: UNNotificationResponse, completion: @escaping () -> Void)
-	@objc optional func willPresentNotification(_ notification: UNNotification)
-}
-
-public protocol IPushHandlersProvider: AnyObject {
-	func backgroundPushHandlers() -> [IBackgroundPushHandler]
-	func notificationResponseHandlers() -> [INotificationResponseHandler]
-}
+import VNHandlers
 
 open class BasePushHandler: NSObject {
 
@@ -117,18 +104,6 @@ extension BasePushHandler: UNUserNotificationCenterDelegate {
 		}
 	}
 
-}
-
-public extension UNNotificationResponse {
-	func message() -> PushMessage {
-		return self.notification.message()
-	}
-}
-
-public extension UNNotification {
-	func message() -> PushMessage {
-		return PushMessage(push: self.request.content.userInfo)
-	}
 }
 
 extension UNNotificationSettings {
