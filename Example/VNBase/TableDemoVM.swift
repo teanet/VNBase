@@ -20,9 +20,10 @@ final class TableDemoVM: BaseTableVM {
 
 	override func reload() {
 		self.onLoading.raise(true)
+		let rows = self.tableVM.rows
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 			self.onLoading.raise(false)
-			self.tableVM.rows = []
+			self.tableVM.rows = rows
 		}
 	}
 

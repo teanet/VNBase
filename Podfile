@@ -3,14 +3,15 @@ use_modular_headers!
 target 'VNBase_Example' do
 	platform :ios, '10.0'
 	project 'Example/VNBase.xcodeproj'
-  pod 'VNBase', :path => './'
+	pod 'VNBase', :path => './'
 	pod 'VNEssential', :path => './'
-  pod 'SwiftLint'
+	pod 'VNHandlers', :path => './'
+	pod 'SwiftLint'
 	pod 'SnapKit'
 
-  target 'VNBase_Tests' do
-    inherit! :search_paths
-  end
+	target 'VNBase_Tests' do
+		inherit! :search_paths
+	end
 end
 
 target 'DemoWatch Extension' do

@@ -11,7 +11,11 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	open override var preferredStatusBarStyle: UIStatusBarStyle { .default }
 
 	public let viewModel: TViewModel
-	public private(set) lazy var refresh = UIRefreshControl()
+	public private(set) lazy var refresh: UIRefreshControl = {
+		let refresh = UIRefreshControl()
+		refresh.addTarget(self, action: #selector(self.onReload), for: .valueChanged)
+		return refresh
+	}()
 
 	private var constraintsCreated = false
 
@@ -35,12 +39,13 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.backgroundColor = .white
-		self.refresh.addTarget(self.viewModel, action: #selector(self.viewModel.reload), for: .valueChanged)
+
 		self.viewModel.onLoading.add(self) { [weak self] (loading) in
-			if loading {
-				self?.refresh.beginRefreshing()
-			} else {
-				self?.refresh.endRefreshing()
+			guard let self = self else { return }
+			if loading && !self.refresh.isRefreshing {
+				self.refresh.beginRefreshing()
+			} else if !loading && self.refresh.isRefreshing {
+				self.refresh.endRefreshing()
 			}
 		}
 		self.viewModel.load()
@@ -109,6 +114,11 @@ open class BaseVC<TViewModel: BaseViewControllerVM> : UIViewController, ViewMode
 	open func createConstraints() {}
 	open func updateConstraints() {}
 	open func viewModelChanged() {}
+
+	// MARK: - Private
+	@objc private func onReload() {
+		self.viewModel.reload()
+	}
 
 }
 

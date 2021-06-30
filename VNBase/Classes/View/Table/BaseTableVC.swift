@@ -45,27 +45,16 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 
 	public func setupRefreshControl() {
 		self.tableView.refreshControl = self.refresh
-		self.viewModel.onLoading.add(self) { [weak self] (loading) in
-			guard let this = self else { return }
+		self.viewModel.onLoading.add(self) { [weak self] isLoading in
+			guard let self = self else { return }
 
 			var zeroOffset: CGFloat = 0
 			if #available(iOS 11.0, *) {
-				zeroOffset = this.tableView.contentInset.top - this.tableView.adjustedContentInset.top
+				zeroOffset = self.tableView.contentInset.top - self.tableView.adjustedContentInset.top
 			}
-			if loading, this.tableView.contentOffset.y == zeroOffset {
-				let offset = CGPoint(x: 0, y: -this.refresh.frame.height + zeroOffset)
-				this.tableView.setContentOffset(offset, animated: true)
-			}
-		}
-		let refresh = self.refresh
-		self.contentOffsetObservation = self.tableView.observe(\.contentOffset) { [weak self] (tableView, _) in
-			if tableView.contentOffset.y < -110, !refresh.isRefreshing, self?.toggleRefresh == false {
-				self?.toggleRefresh = true
-				refresh.beginRefreshing()
-				self?.viewModel.reload()
-			}
-			if tableView.contentOffset.y >= 0 {
-				self?.toggleRefresh = false
+			if isLoading, self.tableView.contentOffset.y == zeroOffset {
+				let offset = CGPoint(x: 0, y: -self.refresh.frame.height + zeroOffset)
+				self.tableView.setContentOffset(offset, animated: true)
 			}
 		}
 	}

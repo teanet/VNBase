@@ -7,10 +7,10 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'VNBase'
+  s.name             = 'VNHandlers'
   s.version          = '0.4.62'
   s.summary          = 'Simple MVVM helper'
-  s.swift_version 	 = '5.0'
+  s.swift_version    = '5.0'
   s.description      = <<-DESC
 TODO: I should add some description later =)
                        DESC
@@ -22,15 +22,13 @@ TODO: I should add some description later =)
   s.social_media_url = 'https://twitter.com/teanet'
 
   s.ios.deployment_target = '10.0'
-  s.ios.source_files = 'VNBase/Classes/**/*'
+  s.watchos.deployment_target = '5.0'
+  s.source_files = 'VNBase/Handlers/**/*'
   # s.resource_bundles = {
   #   'VNBase' => ['VNBase/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.ios.frameworks = 'UIKit'
-  s.ios.dependency 'SnapKit'
-  s.ios.dependency 'VNEssential'
-  s.ios.dependency 'VNHandlers'
 
 end
