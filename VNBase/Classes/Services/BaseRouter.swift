@@ -51,11 +51,11 @@ open class BaseRouter: NSObject {
 	}
 
 	public func topVC() -> UIViewController? {
-		UIApplication.shared.keyWindow?.rootViewController?.topVC()
+		UIApplication.keyWindow()?.rootViewController?.topVC()
 	}
 
 	public func topPresentedVC() -> UIViewController? {
-		UIApplication.shared.keyWindow?.rootViewController?.topPresentedVC()
+		UIApplication.keyWindow()?.rootViewController?.topPresentedVC()
 	}
 }
 

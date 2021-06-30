@@ -11,7 +11,7 @@ public extension UIViewController {
 		}
 	}
 
-	var viewHeight: CGFloat { return self.view.bounds.height }
+	var viewHeight: CGFloat { self.view.bounds.height }
 
 	func topVC() -> UIViewController {
 		if let tabVC = self as? UITabBarController, let selectedViewController = tabVC.selectedViewController {
