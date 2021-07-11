@@ -12,10 +12,17 @@ public extension UIImage {
 			!name.isEmpty else { return nil }
 
 		let image: UIImage?
-		if #available(iOS 13.0, *) {
+		if #available(iOS 13.0, watchOS 6.0, *) {
 			image = UIImage(named: name, in: bundle, with: nil)
 		} else {
+			#if os(iOS)
 			image = UIImage(named: name, in: bundle, compatibleWith: nil)
+			#elseif os(watchOS)
+			image = UIImage(named: name)
+			#else
+			image = nil
+			#endif
+
 		}
 
 		if let renderingMode = renderingMode {
