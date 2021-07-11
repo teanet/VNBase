@@ -9,11 +9,17 @@ public extension UIImage {
 	) -> UIImage? {
 		guard
 			let name = name,
-			!name.isEmpty,
-			let image = UIImage(named: name, in: bundle, compatibleWith: nil) else { return nil }
+			!name.isEmpty else { return nil }
+
+		let image: UIImage?
+		if #available(iOS 13.0, *) {
+			image = UIImage(named: name, in: bundle, with: nil)
+		} else {
+			image = UIImage(named: name, in: bundle, compatibleWith: nil)
+		}
 
 		if let renderingMode = renderingMode {
-			return image.withRenderingMode(renderingMode)
+			return image?.withRenderingMode(renderingMode)
 		} else {
 			return image
 		}
