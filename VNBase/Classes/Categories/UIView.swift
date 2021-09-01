@@ -56,6 +56,12 @@ public extension CACornerMask {
 	static let bottom: CACornerMask = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 	static let left: CACornerMask = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
 	static let right: CACornerMask = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+	static let all: CACornerMask = [
+		.layerMinXMinYCorner,
+		.layerMinXMaxYCorner,
+		.layerMaxXMinYCorner,
+		.layerMaxXMaxYCorner,
+	]
 }
 
 public extension CALayer {
