@@ -53,6 +53,9 @@ extension CALayer: Buildable {}
 
 public extension CACornerMask {
 	static let top: CACornerMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+	static let bottom: CACornerMask = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+	static let left: CACornerMask = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+	static let right: CACornerMask = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
 }
 
 public extension CALayer {
