@@ -22,7 +22,6 @@ public extension UIImage {
 			#else
 			image = nil
 			#endif
-
 		}
 
 		if let renderingMode = renderingMode {
