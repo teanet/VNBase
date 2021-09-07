@@ -18,6 +18,15 @@ final class TableDemoVM: BaseTableVM {
 		self.rows[2].select()
 	}
 
+	override func load() {
+		super.load()
+		self.tableVM.onCommit = { [weak self] vm, style in
+			self?.tableVM.rows.removeAll(where: {
+				vm.uniqueIdentifier == $0.uniqueIdentifier
+			})
+		}
+	}
+
 	override func reload() {
 		self.onLoading.raise(true)
 		let rows = self.tableVM.rows

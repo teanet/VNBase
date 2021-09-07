@@ -2,7 +2,7 @@ import UIKit
 
 open class BaseTableView: UITableView {
 
-	private static let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
+	static let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
 
 	public let viewModel: BaseTableViewVM
 	public var isUpdateAnimated = false
@@ -16,20 +16,15 @@ open class BaseTableView: UITableView {
 	}
 	public var onScroll: ((BaseTableView) -> Void)?
 
-	private var identifierToCellMap = [String: IHaveHeight.Type]()
-	private var identifierToCellClassMap = [String: UITableViewCell.Type]()
 	private var didSetup = false
 
 	@available(iOS 13.0, *)
-	private lazy var diffableDataSource: UITableViewDiffableDataSource<TableSectionVM, BaseCellVM> = {
-		UITableViewDiffableDataSource<TableSectionVM, BaseCellVM>(
-			tableView: self,
-			cellProvider: { [weak self] (tv, indexPath, _) -> UITableViewCell? in
-				guard let self = self else { return nil }
-
-				return self.configureCell(at: tv, indexPath: indexPath)
-			})
-	}()
+	private lazy var diffableDataSource = DiffableDataSource(
+		table: self,
+		tableVM: self.viewModel,
+		dataSource: self.internalDataSource
+	)
+	private lazy var internalDataSource = BaseDataSource(viewModel: self.viewModel)
 
 	deinit {
 		self.delegate = nil
@@ -88,23 +83,23 @@ open class BaseTableView: UITableView {
 			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
 		} else {
 			self.viewModel.indexPathController.delegate = self
-			self.dataSource = self
+			self.dataSource = self.dataSource
 		}
 	}
 
 	open override func register(_ aClass: AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) {
 		if let headerClass = aClass as? IHaveHeight.Type {
-			self.identifierToCellMap[identifier] = headerClass
+			self.viewModel.identifierToCellMap[identifier] = headerClass
 		}
 		super.register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
 	}
 
 	open override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
 		if let cellClass = cellClass as? IHaveHeight.Type {
-			self.identifierToCellMap[identifier] = cellClass
+			self.viewModel.identifierToCellMap[identifier] = cellClass
 		}
 		if let cellClass = cellClass as? UITableViewCell.Type {
-			self.identifierToCellClassMap[identifier] = cellClass
+			self.viewModel.identifierToCellClassMap[identifier] = cellClass
 		}
 		super.register(cellClass, forCellReuseIdentifier: identifier)
 	}
@@ -112,7 +107,7 @@ open class BaseTableView: UITableView {
 	private func configureCell(at tv: UITableView, indexPath: IndexPath) -> UITableViewCell {
 		let row = self.viewModel.item(at: indexPath)
 		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
-		_ = self.cellClass(at: indexPath)
+		_ = self.viewModel.cellClass(at: indexPath)
 		let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 		if let cell = cell as? IHaveViewModel {
 			cell.viewModelObject = row
@@ -130,23 +125,16 @@ open class BaseTableView: UITableView {
 
 }
 
-extension BaseTableView: UITableViewDataSource {
-
-	public func numberOfSections(in tableView: UITableView) -> Int {
-		return self.viewModel.sectionsCount
-	}
-
-	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.viewModel.numberOfRows(in: section)
-	}
-
-	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return self.configureCell(at: tableView, indexPath: indexPath)
-	}
-
-}
-
 extension BaseTableView: UITableViewDelegate {
+	public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+		let style = self.viewModel.editingStyle(for: indexPath)
+		return style
+	}
+
+	public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let actions = self.viewModel.editingActions(for: indexPath)
+		return actions
+	}
 
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.viewModel.didSelect(at: indexPath)
@@ -183,7 +171,7 @@ extension BaseTableView: UITableViewDelegate {
 		let section = self.viewModel.section(at: section)
 		if section?.title != nil { return UITableView.automaticDimension }
 		guard let vm = section?.header,
-			let headerClass = self.identifierToCellMap[vm.reuseIdentifier] else { return 0 }
+			  let headerClass = self.viewModel.identifierToCellMap[vm.reuseIdentifier] else { return 0 }
 		var width = tableView.frame.width
 		if #available(iOS 11.0, *) {
 			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
@@ -204,7 +192,7 @@ extension BaseTableView: UITableViewDelegate {
 
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		guard let vm = self.viewModel.item(at: indexPath),
-			  let cellClass = self.cellClass(at: indexPath) else { return UITableView.automaticDimension }
+			  let cellClass = self.viewModel.cellClass(at: indexPath) else { return UITableView.automaticDimension }
 		var width = tableView.frame.width
 		if #available(iOS 11.0, *) {
 			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
@@ -212,46 +200,10 @@ extension BaseTableView: UITableViewDelegate {
 		return cellClass.internalHeight(with: vm, width: tableView.frame.width)
 	}
 
-	private func cellClass(at indexPath: IndexPath) -> IHaveHeight.Type? {
-		guard let vm = self.viewModel.item(at: indexPath) else { return nil }
-
-		let reuseIdentifier = vm.reuseIdentifier
-		if self.identifierToCellClassMap[reuseIdentifier] == nil {
-			let registerableCell: IRegisterableCell? = vm
-			if let cellClass = registerableCell?.cellClass?() {
-				self.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
-			} else {
-				assertionFailure("You should register cell")
-				return nil
-			}
-		}
-		let cellClass = self.identifierToCellMap[vm.reuseIdentifier]
-		return cellClass
-	}
-
 	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		guard let vm = self.viewModel.item(at: indexPath),
-			  let cellClass = self.cellClass(at: indexPath) else { return 100 }
+			  let cellClass = self.viewModel.cellClass(at: indexPath) else { return 100 }
 		return cellClass.internalEstimatedHeight(with: vm)
-	}
-
-	public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-		let canEdit = self.viewModel.canEditRow(at: indexPath)
-		return canEdit
-	}
-
-	public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let actions = self.viewModel.editingActions(for: indexPath)
-		return actions
-	}
-
-	public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-		let style = self.viewModel.editingStyle(for: indexPath)
-		return style
-	}
-
-	public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		self.viewModel.commit(editingStyle: editingStyle, for: indexPath)
 	}
 
 	open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}

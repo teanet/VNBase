@@ -56,6 +56,8 @@ open class BaseTableViewVM: BaseVM {
 
 	private let loadingRow: BaseCellVM?
 	private var scheduledSections: [TableSectionVM]?
+	var identifierToCellMap = [String: IHaveHeight.Type]()
+	var identifierToCellClassMap = [String: UITableViewCell.Type]()
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
 		self.dataModel = IndexPathModel(sections: sections)
@@ -165,6 +167,42 @@ open class BaseTableViewVM: BaseVM {
 		self.sections[destinationIndexPath.section].rows.insert(cellVM, at: destinationIndexPath.row)
 	}
 
+	func cellClass(at indexPath: IndexPath) -> IHaveHeight.Type? {
+		guard let vm = self.item(at: indexPath) else { return nil }
+
+		let reuseIdentifier = vm.reuseIdentifier
+		if self.identifierToCellClassMap[reuseIdentifier] == nil {
+			let registerableCell: IRegisterableCell? = vm
+			if let cellClass = registerableCell?.cellClass?() {
+				self.tableDelegate?.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
+			} else {
+				assertionFailure("You should register cell")
+				return nil
+			}
+		}
+		let cellClass = self.identifierToCellMap[vm.reuseIdentifier]
+		return cellClass
+	}
+
+	func configureCell(at tv: UITableView, indexPath: IndexPath) -> UITableViewCell {
+		let row = self.item(at: indexPath)
+		let reuseIdentifier = row?.reuseIdentifier ?? BaseTableView.kDefaultReuseIdentifier
+		_ = self.cellClass(at: indexPath)
+		let cell = tv.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+		if let cell = cell as? IHaveViewModel {
+			cell.viewModelObject = row
+		}
+		if let vm = row {
+			let selectedRows = tv.indexPathsForSelectedRows ?? []
+			if vm.isSelected, !selectedRows.contains(indexPath) {
+				tv.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+			} else if !vm.isSelected && selectedRows.contains(indexPath) {
+				tv.deselectRow(at: indexPath, animated: false)
+			}
+		}
+		return cell
+	}
+
 	private func set(rows: [BaseCellVM], addLoadingCell: Bool) {
 		let section = self.sections.first ?? TableSectionVM()
 		var newRows = rows
@@ -240,4 +278,5 @@ protocol BaseTableViewVMDelegate: AnyObject {
 	@available(iOS 13.0, *)
 	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>)
 
+	func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String)
 }

@@ -18,9 +18,12 @@ final class DemoCellVM: BaseCellVM {
 
 	func cellClass() -> UITableViewCell.Type { DemoCell.self }
 	let index: Int
+	override var editingStyle: UITableViewCell.EditingStyle { .delete }
+
 	init(index: Int) {
 		self.index = index
 		super.init()
+		self.isEditable = true
 	}
 
 }
