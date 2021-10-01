@@ -14,7 +14,7 @@ let package = Package(
 		.library(name: "VNHandlers", targets: ["VNHandlers"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
+		.package(url: "https://github.com/teanet/SnapKit", .branch("develop")),
 	],
 	targets: [
 		.target(name: "VNBase", dependencies: [
