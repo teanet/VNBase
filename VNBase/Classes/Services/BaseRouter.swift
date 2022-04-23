@@ -109,7 +109,9 @@ public extension UINavigationController {
 
 	private func _replaceCurrent(_ vc: UIViewController, animated: Bool, completion: VoidBlock?) {
 		var vcs = self.viewControllers
-		vcs.removeLast()
+		if !vcs.isEmpty {
+			vcs.removeLast()
+		}
 		vcs.append(vc)
 		self.setViewControllers(vcs, animated: animated, completion: completion)
 	}
