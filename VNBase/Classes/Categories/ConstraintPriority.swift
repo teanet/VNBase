@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-public extension ConstraintMakerPriortizable {
+public extension ConstraintMakerPrioritizable {
 
 	@discardableResult
 	func dgs_priority250() -> ConstraintMakerFinalizable {
