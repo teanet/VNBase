@@ -18,6 +18,7 @@ import UIKit
 	@objc public let barTintColor: UIColor?
 	@objc public let translucent: Bool
 	@objc public let titleTextAttributes: [NSAttributedString.Key : Any]
+	@objc public let largeTitleTextAttributes: [NSAttributedString.Key : Any]
 	@objc public let backgroundImage: UIImage?
 	@objc public let shadowImage: UIImage?
 
@@ -26,6 +27,7 @@ import UIKit
 		barTintColor: UIColor? = nil,
 		translucent: Bool = false,
 		titleTextAttributes: [NSAttributedString.Key : Any] = [:],
+		largeTitleTextAttributes: [NSAttributedString.Key : Any] = [:],
 		backgroundImage: UIImage? = nil,
 		shadowImage: UIImage? = nil
 	) {
@@ -34,6 +36,7 @@ import UIKit
 		self.barTintColor = barTintColor
 		self.translucent = translucent
 		self.titleTextAttributes = titleTextAttributes
+		self.largeTitleTextAttributes = largeTitleTextAttributes
 		self.backgroundImage = backgroundImage
 		self.shadowImage = shadowImage
 
@@ -55,9 +58,13 @@ extension UINavigationBar {
 			appearance.shadowColor = .clear
 			appearance.backgroundImage = style.backgroundImage
 			appearance.titleTextAttributes = style.titleTextAttributes
+			appearance.largeTitleTextAttributes = style.largeTitleTextAttributes
 			self.standardAppearance = appearance
 			self.scrollEdgeAppearance = appearance
 		} else {
+			if #available(iOS 11.0, *) {
+				self.largeTitleTextAttributes = style.largeTitleTextAttributes
+			}
 			self.titleTextAttributes = style.titleTextAttributes
 			self.setBackgroundImage(style.backgroundImage, for: .default)
 			self.shadowImage = style.shadowImage
