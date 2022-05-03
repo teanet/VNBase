@@ -34,6 +34,24 @@ final class EventHandler<TArgs>: Hashable {
 
 }
 
+public struct Dispatcher: IDispatcher {
+	public func async(_ block: @escaping VoidBlock) {
+		self.queue.async(execute: block)
+	}
+
+	public func sync(_ block: VoidBlock) {
+		self.queue.sync(execute: block)
+	}
+
+	private let queue: DispatchQueue
+
+	public init(queue: DispatchQueue) {
+		self.queue = queue
+	}
+
+	public static let main = Dispatcher(queue: DispatchQueue.main)
+}
+
 public class Event<TArgs> {
 
 	public typealias Action = (TArgs) -> Void
@@ -52,7 +70,19 @@ public class Event<TArgs> {
 
 	// MARK: - Public
 
-	public func add(_ target: AnyObject, action: @escaping Action) {
+	public func add(
+		_ target: AnyObject,
+		dispatcher: IDispatcher = Dispatcher.main,
+		action: @escaping Action
+	) {
+		self.add(target) { (args) in
+			dispatcher.async {
+				action(args)
+			}
+		}
+	}
+
+	private func add(_ target: AnyObject, action: @escaping Action) {
 		self.add(handler: (target: target, action: action))
 	}
 
@@ -86,7 +116,7 @@ public class Event<TArgs> {
 		}
 	}
 
-	public func add(handler: Element) {
+	private func add(handler: Element) {
 		LockWrapper.lockQueue.sync {
 			self.removeDeadHandlers()
 			var eventHandler = self.eventHandler(by: handler.target)
