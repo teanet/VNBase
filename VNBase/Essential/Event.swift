@@ -70,13 +70,23 @@ public class Event<TArgs> {
 
 	// MARK: - Public
 
+	/// Подписаться на событие
+	/// - Parameters:
+	///   - target: тот, на ком завязана эта подписка, в случае смерти, будет автоматически отписан и сообщения посылаться не будут
+	///   - dispatcher: очередь, на которой будем стрелять action блоком,
+	///   если передать nil будет вызвано на том же потоке что и была подписка
+	///   - action: блок иполнения
 	public func add(
 		_ target: AnyObject,
-		dispatcher: IDispatcher = Dispatcher.main,
+		dispatcher: IDispatcher? = Dispatcher.main,
 		action: @escaping Action
 	) {
 		self.add(target) { (args) in
-			dispatcher.async {
+			if let dispatcher = dispatcher {
+				dispatcher.async {
+					action(args)
+				}
+			} else {
 				action(args)
 			}
 		}
