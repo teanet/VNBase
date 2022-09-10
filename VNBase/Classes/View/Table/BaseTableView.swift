@@ -83,7 +83,7 @@ open class BaseTableView: UITableView {
 			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
 		} else {
 			self.viewModel.indexPathController.delegate = self
-			self.dataSource = self.dataSource
+			self.dataSource = self.internalDataSource
 		}
 	}
 
