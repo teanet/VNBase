@@ -1,26 +1,26 @@
 import SnapKit
 import UIKit
 
-public extension ConstraintMakerPrioritizable {
+public extension ConstraintMakerPriortizable {
 
 	@discardableResult
 	func dgs_priority250() -> ConstraintMakerFinalizable {
-		return self.priority(ConstraintPriority(floatLiteral: 250))
+		self.priority(ConstraintPriority(floatLiteral: 250))
 	}
 
 	@discardableResult
 	func dgs_priority749() -> ConstraintMakerFinalizable {
-		return self.priority(ConstraintPriority(floatLiteral: 749))
+		self.priority(ConstraintPriority(floatLiteral: 749))
 	}
 
 	@discardableResult
 	func dgs_priority750() -> ConstraintMakerFinalizable {
-		return self.priority(ConstraintPriority(floatLiteral: 750))
+		self.priority(ConstraintPriority(floatLiteral: 750))
 	}
 
 	@discardableResult
 	func dgs_priority751() -> ConstraintMakerFinalizable {
-		return self.priority(ConstraintPriority(floatLiteral: 751))
+		self.priority(ConstraintPriority(floatLiteral: 751))
 	}
 
 }

@@ -1,7 +1,7 @@
 import UIKit
 import VNEssential
 
-class TableSectionId: Id<String> {}
+final class TableSectionId: Id<String> {}
 
 open class TableSectionVM: Equatable, Hashable {
 
@@ -9,7 +9,11 @@ open class TableSectionVM: Equatable, Hashable {
 		return lhs.uniqueIdentifier == rhs.uniqueIdentifier
 	}
 
-	public var rows: [BaseCellVM]
+	public var rows: [BaseCellVM] {
+		didSet {
+			self.updateDelegates()
+		}
+	}
 	public var title: String?
 	public var footer: String?
 	public let uniqueIdentifier: String
@@ -17,7 +21,7 @@ open class TableSectionVM: Equatable, Hashable {
 	public var header: BaseHeaderViewVM?
 	weak var tableDelegate: BaseCellVMTableDelegate? {
 		didSet {
-			self.rows.forEach { $0.tableDelegate = self.tableDelegate }
+			self.updateDelegates()
 		}
 	}
 	var onRowsChange: VoidBlock?
@@ -35,12 +39,13 @@ open class TableSectionVM: Equatable, Hashable {
 
 	open func set(rows: [BaseCellVM], updateTableView: Bool) {
 		self.rows = rows
-		rows.forEach {
-			$0.tableDelegate = self.tableDelegate
-		}
 		if updateTableView {
 			self.onRowsChange?()
 		}
+	}
+
+	private func updateDelegates() {
+		self.rows.forEach { $0.tableDelegate = self.tableDelegate }
 	}
 
 }
