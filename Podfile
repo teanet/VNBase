@@ -7,7 +7,7 @@ target 'VNBase_Example' do
 	pod 'VNEssential', :path => './'
 	pod 'VNHandlers', :path => './'
 	pod 'SwiftLint'
-	pod 'SnapKit'
+	pod 'SnapKit', :git => 'https://github.com/teanet/SnapKit', :branch => 'develop'
 
 	target 'VNBase_Tests' do
 		inherit! :search_paths
