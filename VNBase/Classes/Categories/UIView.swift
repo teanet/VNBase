@@ -12,7 +12,7 @@ public extension UIView {
 		self.bounds.boundsCenter
 	}
 
-	func addSubview(_ subview: UIView, withConstraints closure: (_ make: ConstraintMaker) -> Void) {
+	func addSubview(_ subview: UIView, withConstraints closure: (ConstraintMaker) -> Void) {
 		subview.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(subview)
 		subview.snp.makeConstraints(closure)
