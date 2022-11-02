@@ -23,8 +23,28 @@ final class BaseDataSource: NSObject, UITableViewDataSource {
 		let canEdit = self.viewModel.canEditRow(at: indexPath)
 		return canEdit
 	}
-
+	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		self.viewModel.moveRowAt(sourceIndexPath: sourceIndexPath, to: destinationIndexPath)
+	}
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		self.viewModel.commit(editingStyle: editingStyle, for: indexPath)
 	}
+	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+		self.viewModel.indexTitles
+	}
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		self.viewModel.section(at: section)?.title
+	}
+	func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+		self.viewModel.section(at: section)?.footer
+	}
+
+	func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+		tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: .top , animated: false)
+		if let sectionIndex = self.viewModel.indexTitles?.firstIndex(of: title) {
+			return sectionIndex
+		}
+		return 0
+	}
+
 }

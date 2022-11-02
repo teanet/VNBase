@@ -149,7 +149,7 @@ extension BaseTableView: UITableViewDelegate {
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		if let cell = cell as? IHaveViewModel,
-			let cellvm = cell.viewModelObject as? BaseCellVM {
+		   let cellvm = cell.viewModelObject as? BaseCellVM {
 			cellvm.appear()
 		}
 		if indexPath == self.viewModel.indexPathToStartLoading {
@@ -172,20 +172,12 @@ extension BaseTableView: UITableViewDelegate {
 		if section?.title != nil { return UITableView.automaticDimension }
 		guard let vm = section?.header,
 			  let headerClass = self.viewModel.identifierToCellMap[vm.reuseIdentifier] else { return 0 }
-		var width = tableView.frame.width
-		if #available(iOS 11.0, *) {
-			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
-		}
 		return headerClass.internalHeight(with: vm, width: tableView.frame.width)
-	}
-
-	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return self.viewModel.section(at: section)?.title
 	}
 
 	public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		if let cell = cell as? IHaveViewModel,
-			let cellvm = cell.viewModelObject as? BaseCellVM {
+		   let cellvm = cell.viewModelObject as? BaseCellVM {
 			cellvm.disappear()
 		}
 	}
@@ -193,10 +185,6 @@ extension BaseTableView: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		guard let vm = self.viewModel.item(at: indexPath),
 			  let cellClass = self.viewModel.cellClass(at: indexPath) else { return UITableView.automaticDimension }
-		var width = tableView.frame.width
-		if #available(iOS 11.0, *) {
-			width -= (tableView.safeAreaInsets.left + tableView.safeAreaInsets.right)
-		}
 		return cellClass.internalHeight(with: vm, width: tableView.frame.width)
 	}
 

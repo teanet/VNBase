@@ -30,10 +30,10 @@ public extension String {
 
 	static func isNilOrEmptyOrAllWhitespaces(string: String?) -> Bool {
 		guard let string = string,
-			!string.isEmpty,
-			// удаляем все пробелы
-			!string.components(separatedBy: .whitespaces).joined().isEmpty
-			else { return true }
+			  !string.isEmpty,
+			  // удаляем все пробелы
+			  !string.components(separatedBy: .whitespaces).joined().isEmpty
+		else { return true }
 
 		return false
 	}
@@ -56,10 +56,10 @@ public extension Optional where Wrapped == String {
 
 	func isNilOrEmptyOrAllWhitespace() -> Bool {
 		guard let string = self,
-			!string.isEmpty,
-			// удаляем все пробелы
-			!string.components(separatedBy: .whitespaces).joined().isEmpty
-			else { return true }
+			  !string.isEmpty,
+			  // удаляем все пробелы
+			  !string.components(separatedBy: .whitespaces).joined().isEmpty
+		else { return true }
 
 		return false
 	}
@@ -68,7 +68,7 @@ public extension Optional where Wrapped == String {
 		constrainedHeight height: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGFloat {
+	) -> CGFloat {
 		guard let this = self else { return 0.0 }
 
 		let value = this.width(constrainedHeight: height, drawingOptions: drawingOptions, font: font)
@@ -80,7 +80,7 @@ public extension Optional where Wrapped == String {
 		constrainedWidth width: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGFloat {
+	) -> CGFloat {
 		guard let this = self, !this.isEmpty else { return 0.0 }
 
 		let value = this.height(constrainedWidth: width, drawingOptions: drawingOptions, font: font)
@@ -92,7 +92,7 @@ public extension Optional where Wrapped == String {
 		constrainedSize size: CGSize,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGRect {
+	) -> CGRect {
 		guard let this = self else { return .zero }
 
 		let value = this.size(constrainedSize: size, drawingOptions: drawingOptions, font: font)
@@ -108,7 +108,7 @@ public extension String {
 		constrainedHeight height: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGFloat {
+	) -> CGFloat {
 
 		let constraintSize = CGSize(width: .greatestFiniteMagnitude, height: height)
 		let boundingBox = self.size(
@@ -124,7 +124,7 @@ public extension String {
 		constrainedWidth width: CGFloat,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGFloat {
+	) -> CGFloat {
 
 		let constraintSize = CGSize(width: width, height: .greatestFiniteMagnitude)
 		let boundingBox = self.size(
@@ -140,7 +140,7 @@ public extension String {
 		constrainedSize size: CGSize,
 		drawingOptions: NSStringDrawingOptions = .usesLineFragmentOrigin,
 		font: UIFont
-		) -> CGRect {
+	) -> CGRect {
 
 		let boundingBox = self.boundingRect(
 			with: size,

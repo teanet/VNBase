@@ -22,29 +22,19 @@ public extension ConstraintMakerPrioritizable {
 	func dgs_priority751() -> ConstraintMakerFinalizable {
 		self.priority(ConstraintPriority(floatLiteral: 751))
 	}
-
+	@discardableResult
+	func dgs_priority999() -> ConstraintMakerFinalizable {
+		self.priority(ConstraintPriority(floatLiteral: 999))
+	}
 }
 
 public extension UILayoutPriority {
 
-	static var priority250: UILayoutPriority {
-		return UILayoutPriority(250)
-	}
-
-	static var priority251: UILayoutPriority {
-		return UILayoutPriority(251)
-	}
-
-	static var priority749: UILayoutPriority {
-		return UILayoutPriority(749)
-	}
-
-	static var priority750: UILayoutPriority {
-		return UILayoutPriority(750)
-	}
-
-	static var priority751: UILayoutPriority {
-		return UILayoutPriority(751)
-	}
+	static var priority250: UILayoutPriority { UILayoutPriority(250) }
+	static var priority251: UILayoutPriority { UILayoutPriority(251) }
+	static var priority749: UILayoutPriority { UILayoutPriority(749) }
+	static var priority750: UILayoutPriority { UILayoutPriority(750) }
+	static var priority751: UILayoutPriority { UILayoutPriority(751) }
+	static var priority999: UILayoutPriority { UILayoutPriority(999) }
 
 }

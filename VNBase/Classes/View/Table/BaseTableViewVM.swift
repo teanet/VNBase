@@ -40,6 +40,7 @@ open class BaseTableViewVM: BaseVM {
 	public var shouldLoadNextPage = true
 	public private(set) var isPrefetching = false
 	public var prefetchBlock: PrefetchBlock?
+	public var indexTitles: [String]?
 
 	private(set) var indexPathToStartLoading = IndexPath(row: 0, section: 0)
 	var isUpdating = false {
@@ -160,6 +161,9 @@ open class BaseTableViewVM: BaseVM {
 			item.commit(editingStyle: editingStyle)
 			self.onCommit?(item, editingStyle)
 		}
+	}
+
+	open func moveRowAt(sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 	}
 
 	open func move(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

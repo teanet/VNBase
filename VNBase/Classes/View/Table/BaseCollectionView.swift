@@ -2,9 +2,9 @@ import UIKit
 import VNEssential
 
 open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionView,
-	UICollectionViewDelegate,
-	UICollectionViewDataSource,
-	UICollectionViewDelegateFlowLayout {
+																 UICollectionViewDelegate,
+																 UICollectionViewDataSource,
+																 UICollectionViewDelegateFlowLayout {
 
 	private var lastOffset = CGFloat(0.0)
 	private let kDefaultReuseIdentifier = "kDefaultReuseIdentifier"
@@ -149,7 +149,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		if let cell = cell as? IHaveViewModel,
-			let cellvm = cell.viewModelObject as? BaseCellVM {
+		   let cellvm = cell.viewModelObject as? BaseCellVM {
 			cellvm.appear()
 		}
 		self.checkIfCellIsMostVisible(cell: cell)
@@ -157,7 +157,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		if let cell = cell as? IHaveViewModel,
-			let cellvm = cell.viewModelObject as? BaseCellVM {
+		   let cellvm = cell.viewModelObject as? BaseCellVM {
 			cellvm.disappear()
 		}
 	}
@@ -166,7 +166,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		guard let vm = self.viewModel.item(at: indexPath),
-			let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return self.cellSize }
+			  let cellClass = self.identifierToCellMap[vm.reuseIdentifier] else { return self.cellSize }
 
 		return cellClass.internalSize(with: vm, size: collectionView.frame.size)
 	}
