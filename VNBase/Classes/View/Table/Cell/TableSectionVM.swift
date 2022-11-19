@@ -3,7 +3,7 @@ import VNEssential
 
 final class TableSectionId: Id<String> {}
 
-open class TableSectionVM: Equatable, Hashable {
+open class TableSectionVM: Hashable, CustomDebugStringConvertible {
 
 	public static func == (lhs: TableSectionVM, rhs: TableSectionVM) -> Bool {
 		return lhs.uniqueIdentifier == rhs.uniqueIdentifier
@@ -31,10 +31,12 @@ open class TableSectionVM: Equatable, Hashable {
 		self.header = header
 		self.uniqueIdentifier = NSUUID().uuidString
 		self.identifier = TableSectionId(self.uniqueIdentifier)
+		self.updateDelegates()
 	}
 
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(self.identifier)
+		hasher.combine(self.uniqueIdentifier)
+		hasher.combine(self.rows)
 	}
 
 	open func set(rows: [BaseCellVM], updateTableView: Bool) {
@@ -42,6 +44,10 @@ open class TableSectionVM: Equatable, Hashable {
 		if updateTableView {
 			self.onRowsChange?()
 		}
+	}
+
+	open var debugDescription: String {
+		"\(self.uniqueIdentifier): \(self.rows)"
 	}
 
 	private func updateDelegates() {

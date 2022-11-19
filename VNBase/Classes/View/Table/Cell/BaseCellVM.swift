@@ -37,6 +37,12 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	weak var tableDelegate: BaseCellVMTableDelegate?
 	weak var collectionDelegate: BaseCellVMCollectionDelegate?
 
+	open override var hash: Int {
+		var hasher = Hasher()
+		hasher.combine(self.uniqueIdentifier)
+		return hasher.finalize()
+	}
+
 	public override init() {
 		self.uniqueIdentifier = UUID().uuidString
 		self.identifier = BaseCellId(self.uniqueIdentifier)

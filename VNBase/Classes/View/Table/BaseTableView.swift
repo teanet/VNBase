@@ -1,4 +1,5 @@
 import UIKit
+import VNEssential
 
 open class BaseTableView: UITableView {
 
@@ -80,7 +81,8 @@ open class BaseTableView: UITableView {
 		self.didSetup = true
 		if #available(iOS 13.0, *) {
 			self.diffableDataSource.defaultRowAnimation = self.updateAnimation
-			self.diffableDataSource.apply(self.viewModel.sections.diffableDataSourceSnapshot(), animatingDifferences: false)
+			let snapshot = self.viewModel.sections.diffableDataSourceSnapshot()
+			self.didChangeSnapshot(snapshot, animated: false)
 		} else {
 			self.viewModel.indexPathController.delegate = self
 			self.dataSource = self.internalDataSource
@@ -227,11 +229,20 @@ extension BaseTableView: IndexPathControllerDelegate {
 extension BaseTableView: BaseTableViewVMDelegate {
 
 	@available(iOS 13.0, *)
-	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>) {
-		OperationQueue.main.addOperation {
+	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>, animated: Bool?) {
+		self.viewModel.isUpdating = true
+		let animated = animated ?? self.isUpdateAnimated
+		let completion: VoidBlock = {
+			self.viewModel.isUpdating = false
+		}
+		if #available(iOS 15.0, *), !animated {
+			self.diffableDataSource.applySnapshotUsingReloadData(snapShot, completion: completion)
+		} else {
 			self.diffableDataSource.apply(
 				snapShot,
-				animatingDifferences: self.isUpdateAnimated) {}
+				animatingDifferences: animated,
+				completion: completion
+			)
 		}
 	}
 

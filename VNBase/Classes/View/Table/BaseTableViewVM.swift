@@ -22,7 +22,6 @@ open class BaseTableViewVM: BaseVM {
 				}
 				self.updateDataModel()
 			}
-
 		}
 	}
 
@@ -51,7 +50,7 @@ open class BaseTableViewVM: BaseVM {
 			}
 		}
 	}
-	let indexPathController: IndexPathController
+	private(set) lazy var indexPathController = IndexPathController(dataModel: self.dataModel)
 	var onHeightChanged: VoidBlock?
 	weak var tableDelegate: BaseTableViewVMDelegate?
 
@@ -62,7 +61,6 @@ open class BaseTableViewVM: BaseVM {
 
 	public required init(sections: [TableSectionVM] = [], loadingRow: BaseCellVM? = nil) {
 		self.dataModel = IndexPathModel(sections: sections)
-		self.indexPathController = IndexPathController(dataModel: self.dataModel)
 		self.loadingRow = loadingRow
 		self.sections = sections
 		super.init()
@@ -73,7 +71,7 @@ open class BaseTableViewVM: BaseVM {
 		didSet {
 			if #available(iOS 13.0, *) {
 				let snapshot = self.sections.diffableDataSourceSnapshot()
-				self.tableDelegate?.didChangeSnapshot(snapshot)
+				self.tableDelegate?.didChangeSnapshot(snapshot, animated: nil)
 			} else {
 				self.indexPathController.dataModel = self.dataModel
 			}
@@ -244,8 +242,8 @@ extension Array where Element: TableSectionVM {
 	@available(iOS 13.0, *)
 	func diffableDataSourceSnapshot() -> NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM> {
 		var snapshot = NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>()
-		snapshot.appendSections(self)
 		for section in self {
+			snapshot.appendSections([section])
 			snapshot.appendItems(section.rows, toSection: section)
 		}
 		return snapshot
@@ -280,7 +278,7 @@ protocol BaseTableViewVMDelegate: AnyObject {
 	)
 
 	@available(iOS 13.0, *)
-	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>)
+	func didChangeSnapshot(_ snapShot: NSDiffableDataSourceSnapshot<TableSectionVM, BaseCellVM>, animated: Bool?)
 
 	func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String)
 }

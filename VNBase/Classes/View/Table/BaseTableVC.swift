@@ -38,7 +38,7 @@ open class BaseTableVC<TViewModel: BaseTableVM>: BaseVC<TViewModel> {
 	open override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if self.clearsSelectionOnViewWillAppear,
-			let indexPath = self.tableView.indexPathForSelectedRow {
+		   let indexPath = self.tableView.indexPathForSelectedRow {
 			self.tableView.viewModel.item(at: indexPath)?.deselect(animated: animated)
 		}
 	}
