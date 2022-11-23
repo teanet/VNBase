@@ -238,11 +238,15 @@ extension BaseTableView: BaseTableViewVMDelegate {
 		if #available(iOS 15.0, *), !animated {
 			self.diffableDataSource.applySnapshotUsingReloadData(snapShot, completion: completion)
 		} else {
+			let animatingDifferences = animated && !self.isDecelerating
+			CATransaction.begin()
+			CATransaction.setCompletionBlock(completion)
 			self.diffableDataSource.apply(
 				snapShot,
-				animatingDifferences: animated,
-				completion: completion
+				animatingDifferences: animatingDifferences,
+				completion: nil
 			)
+			CATransaction.commit()
 		}
 	}
 
