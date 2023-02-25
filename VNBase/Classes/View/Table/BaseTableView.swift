@@ -20,11 +20,22 @@ open class BaseTableView: UITableView {
 	private var didSetup = false
 
 	@available(iOS 13.0, *)
-	private lazy var diffableDataSource = DiffableDataSource(
-		table: self,
-		tableVM: self.viewModel,
-		dataSource: self.internalDataSource
-	)
+	private var diffableDataSource: DiffableDataSource {
+		self.diffableDataSourceAny as! DiffableDataSource
+	}
+
+	private lazy var diffableDataSourceAny: AnyObject? = {
+		if #available(iOS 13.0, *) {
+			return DiffableDataSource(
+				table: self,
+				tableVM: self.viewModel,
+				dataSource: self.internalDataSource
+			)
+		} else {
+			return nil
+		}
+	}()
+
 	private lazy var internalDataSource = BaseDataSource(viewModel: self.viewModel)
 
 	deinit {
