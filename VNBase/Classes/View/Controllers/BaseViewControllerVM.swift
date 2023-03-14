@@ -11,6 +11,10 @@ open class BaseViewControllerVM: BaseVM {
 		case didDissapear
 	}
 
+	open var screenName: String {
+		return NSStringFromClass(type(of: self))
+	}
+
 	public var title: String?
 	public private(set) var isAppearAtLeastOnce: Bool = false
 	public private(set) var viewModelState: State = .none
@@ -72,18 +76,6 @@ open class BaseViewControllerVM: BaseVM {
 	}
 
 	@objc open func reload() {
-	}
-
-}
-
-extension BaseViewControllerVM {
-
-	open var screenName: String {
-		return NSStringFromClass(type(of: self))
-	}
-
-	private var screenClass: String {
-		return NSStringFromClass(type(of: self))
 	}
 
 }
