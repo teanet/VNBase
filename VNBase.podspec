@@ -21,7 +21,7 @@ TODO: I should add some description later =)
   s.source           = { :git => 'https://github.com/teanet/VNBase.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/teanet'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.ios.source_files = 'VNBase/Classes/**/*'
   # s.resource_bundles = {
   #   'VNBase' => ['VNBase/Assets/*.png']
