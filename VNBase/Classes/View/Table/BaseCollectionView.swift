@@ -87,7 +87,7 @@ open class BaseCollectionView<TViewModel: BaseCollectionViewVM>: UICollectionVie
 
 	// MARK: UITableViewDataSource
 
-	open override var numberOfSections: Int {
+	public func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return self.viewModel.sectionsCount
 	}
 
