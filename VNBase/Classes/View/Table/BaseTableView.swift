@@ -21,6 +21,7 @@ open class BaseTableView: UITableView {
 
 	@available(iOS 13.0, *)
 	private var diffableDataSource: DiffableDataSource {
+		// swiftlint:disable:next force_cast
 		self.diffableDataSourceAny as! DiffableDataSource
 	}
 
@@ -144,6 +145,7 @@ extension BaseTableView: UITableViewDelegate {
 		return style
 	}
 
+	@available(iOS, introduced: 8.0, deprecated: 13.0)
 	public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		let actions = self.viewModel.editingActions(for: indexPath)
 		return actions

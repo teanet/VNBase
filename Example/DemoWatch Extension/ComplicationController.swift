@@ -9,6 +9,7 @@
 import ClockKit
 
 
+@available(watchOSApplicationExtension 7.0, *)
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Complication Configuration

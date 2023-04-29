@@ -1,7 +1,7 @@
 use_modular_headers!
 
 target 'VNBase_Example' do
-	platform :ios, '10.0'
+	platform :ios, '12.0'
 	project 'Example/VNBase.xcodeproj'
 	pod 'VNBase', :path => './'
 	pod 'VNEssential', :path => './'
@@ -25,8 +25,8 @@ post_install do |installer|
 		target.build_configurations.each do |config|
 
 			config.build_settings['SWIFT_VERSION'] = '5.0'
-			if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
-				config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+			if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+				config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
 			end
 		end
 	end

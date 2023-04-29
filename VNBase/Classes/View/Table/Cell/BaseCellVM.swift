@@ -21,6 +21,7 @@ open class BaseCellVM: BaseVM, IRegisterableCell {
 	public private(set) var isSelected: Bool = false
 
 	public var isEditable: Bool = false
+	@available(iOS, introduced: 8.0, deprecated: 13.0, message: "Use UIContextualAction and related APIs instead.")
 	public var editingActions: [UITableViewRowAction]?
 	public static var reuseIdentifier: String { NSStringFromClass(self) }
 

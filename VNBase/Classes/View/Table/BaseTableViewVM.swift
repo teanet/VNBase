@@ -140,6 +140,7 @@ open class BaseTableViewVM: BaseVM {
 		return canEdit ?? false
 	}
 
+	@available(iOS, introduced: 8.0, deprecated: 13.0, message: "Use UIContextualAction and related APIs instead.")
 	public func editingActions(for indexPath: IndexPath) -> [UITableViewRowAction]? {
 		let item = self.item(at: indexPath)
 		let actions = item?.editingActions
