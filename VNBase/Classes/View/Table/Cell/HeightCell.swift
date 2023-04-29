@@ -34,9 +34,9 @@ public final class HeightCell: BaseCell<HeightCellVM> {
 
 }
 
-public final class HeightCellVM: BaseCellVM {
+open class HeightCellVM: BaseCellVM {
 
-	func cellClass() -> UITableViewCell.Type { HeightCell.self }
+	open func cellClass() -> UITableViewCell.Type { HeightCell.self }
 
 	let height: CGFloat
 	let separatorColor: UIColor
